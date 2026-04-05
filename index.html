@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async></script>
 <style>
-/* ========== ВСЕ ВАШИ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ ========== */
 :root { --pine: #1B4332; --pine-deep: #143628; --pine-light: #2D6A4F; --ocean: #0B6E7A; --ocean-light: #0E8A9E; --ocean-bright: #10A5B8; --neon-blue: #00E5FF; --neon-green: #00FF88; --neon-purple: #A855F7; --bg-dark: #050D0A; --bg-card: rgba(18, 43, 31, 0.6); --bg-glass: rgba(10, 31, 22, 0.4); --text-white: #E8FFF5; --text-muted: #7BA88F; --text-dim: #4A7059; --border-glow: rgba(0, 229, 255, 0.15); --glow-cyan: rgba(0, 229, 255, 0.4); --glow-green: rgba(0, 255, 136, 0.3); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -248,328 +247,29 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dar
 </style>
 </head>
 <body>
-
-<div class="cyber-grid"></div>
-<div class="scanline"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
-
-<!-- Auth Overlay -->
-<div class="auth-overlay" id="authOverlay">
-  <div class="auth-card">
-    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
-    <h3>Авторизация через Google</h3>
-    <p>Войдите, чтобы мы запомнили вас</p>
-    <div id="googleLoginBtn" style="display: flex; justify-content: center;"></div>
-    <button class="auth-close" id="authClose" style="margin-top: 1rem;">Отмена</button>
-  </div>
-</div>
-
-<!-- Navigation -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <div class="nav-logo">KRISTINA.AI</div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#" data-page="home" class="active">Главная</a></li>
-      <li><a href="#" data-page="services">Услуги</a></li>
-      <li><a href="#" data-page="pricing">Стоимость</a></li>
-      <li><a href="#" data-page="reviews">Отзывы</a></li>
-      <li><a href="#" data-page="contacts">Контакты</a></li>
-      <li><a href="#" data-page="request" style="color: var(--neon-blue);">Заявка</a></li>
-    </ul>
-    <button class="burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#" data-page="home">// Главная</a>
-  <a href="#" data-page="services">// Услуги</a>
-  <a href="#" data-page="pricing">// Стоимость</a>
-  <a href="#" data-page="reviews">// Отзывы</a>
-  <a href="#" data-page="contacts">// Контакты</a>
-  <a href="#" data-page="request" style="color: var(--neon-blue); font-weight: 700;">// Оставить заявку</a>
-</div>
-
-<!-- HOME PAGE -->
-<section class="page-section active" id="page-home">
-  <div class="hero reveal">
-    <div class="hero-badge"><span class="dot"></span>AI-агенты и автономные бренды</div>
-    <h1>Ваш бренд будет<br>работать <span class="accent">самостоятельно</span></h1>
-    <p class="hero-subtitle">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия.</p>
-    <div class="hero-cta">
-      <button class="btn btn-primary" onclick="navigateTo('request')"><span>⚡</span> Оставить заявку</button>
-      <button class="btn btn-neon" onclick="navigateTo('services')"><span>→</span> Узнать больше</button>
-    </div>
-  </div>
-  <div class="path-map reveal reveal-delay-1">
-    <div class="path-map-inner" id="pathMap">
-      <div class="path-point active" data-page="home"><div class="path-dot"></div><span class="path-label">Главная</span></div>
-      <div class="path-line"></div>
-      <div class="path-point" data-page="services"><div class="path-dot"></div><span class="path-label">Услуги</span></div>
-      <div class="path-line"></div>
-      <div class="path-point" data-page="pricing"><div class="path-dot"></div><span class="path-label">Стоимость</span></div>
-      <div class="path-line"></div>
-      <div class="path-point" data-page="reviews"><div class="path-dot"></div><span class="path-label">Отзывы</span></div>
-      <div class="path-line"></div>
-      <div class="path-point" data-page="contacts"><div class="path-dot"></div><span class="path-label">Контакты</span></div>
-      <div class="path-line"></div>
-      <div class="path-point" data-page="request"><div class="path-dot"></div><span class="path-label">Заявка</span></div>
-    </div>
-  </div>
-  <div class="about-grid reveal reveal-delay-2">
-    <div class="about-text">
-      <h3>Кто я?</h3>
-      <p>Я — <strong>Кристина</strong>, эксперт по автономным брендам. Помогаю экспертам, предпринимателям и онлайн-проектам выйти из рутины через технологии и цифровую эстетику.</p>
-      <p>Я создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Мой козырь — маркетинговое мышление и опыт в продажах. Я создаю системы, которые привлекают, вовлекают и закрывают в доверие.</p>
-      <div class="terminal">
-        <div class="terminal-line"><span class="cmd">$</span> expert --name <span class="val">"Кристина"</span></div>
-        <div class="terminal-line"><span class="cmd">$</span> skills --list <span class="flag">[SMM, боты, AI-агенты]</span></div>
-        <div class="terminal-line"><span class="cmd">$</span> projects --count <span class="val">30+</span></div>
-        <div class="terminal-line"><span class="cmd">$</span> experience --years <span class="val">6</span></div>
-      </div>
-      <div class="about-stats">
-        <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">лет в маркетинге</div></div>
-        <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">года в ботах</div></div>
-        <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">AI-проектов</div></div>
-        <div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">публичных ботов</div></div>
-      </div>
-    </div>
-    <div>
-      <div class="glass about-avatar-card">
-        <div class="avatar-ring"><div class="avatar-inner">👩‍💻</div></div>
-        <h3 style="margin-bottom: 0.3rem;">Кристина</h3>
-        <p style="color: var(--text-dim); font-size: 0.82rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">@marketologdizayner</p>
-        <p style="color: var(--text-muted); font-size: 0.88rem; font-style: italic; line-height: 1.7;">«AI-агент — это вы в автономном режиме. Он должен чувствовать вашу энергию, а не просто выдавать текст.»</p>
-        <div class="social-links" style="margin-top: 1.5rem;">
-          <a href="https://t.me/marketologdizayner" target="_blank" class="social-link" title="Telegram">💬</a>
-          <a href="https://vk.ru/kristinavcifre" target="_blank" class="social-link" title="VK">🔵</a>
-          <a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="social-link" title="Instagram">📸</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mt-3">
-    <div class="section-header reveal"><span class="section-tag">// Что мы создаём</span><h2>Трансформируем бизнес</h2><p>Два направления, которые заставят ваш бренд работать на автопилоте</p></div>
-    <div class="grid-2">
-      <div class="glass reveal reveal-delay-1" onclick="navigateTo('services')" style="cursor: pointer;">
-        <div class="icon-box">🤖</div>
-        <h3>Чат-боты</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.7;">Сценарные автоворонки: выдача материалов, запись, анкеты, модерация, сбор отзывов.</p>
-        <p style="color: var(--neon-blue); font-weight: 700; font-size: 1.3rem;">от 4 500 ₽</p>
-      </div>
-      <div class="glass reveal reveal-delay-2" onclick="navigateTo('services')" style="cursor: pointer;">
-        <div class="icon-box">🧠</div>
-        <h3>AI-агенты</h3>
-        <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.7;">Цифровой двойник, обучается вашему стилю. Заменяет маркетолога, копирайтера, аналитика.</p>
-        <p style="color: var(--neon-blue); font-weight: 700; font-size: 1.3rem;">от 25 000 ₽</p>
-      </div>
-    </div>
-    <div class="text-center mt-2 reveal reveal-delay-3"><button class="btn btn-primary" onclick="navigateTo('request')">✨ Записаться на консультацию</button></div>
-  </div>
-  <footer class="footer">
-    <div class="footer-inner"><span>© 2025 Кристина — Эксперт по автономным брендам</span><div class="footer-links"><a href="https://t.me/marketologdizayner" target="_blank">Telegram</a><a href="https://vk.ru/kristinavcifre" target="_blank">VK</a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank">Instagram</a></div></div>
-  </footer>
-</section>
-
-<!-- SERVICES PAGE -->
-<section class="page-section" id="page-services">
-  <div class="section-header reveal"><span class="section-tag">// Услуги</span><h2>Что я делаю</h2><p>Три направления для автономного бренда</p></div>
-  <div class="service-block reveal reveal-delay-1">
-    <div class="glass">
-      <h3>🤖 Сценарные чат-боты <span class="tag">от 4 500 ₽</span></h3>
-      <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7;">Простые и эффективные автоворонки для автоматизации рутинных задач. Точка входа в ваш бизнес.</p>
-      <ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов</li><li>Автостатусы и антиспам-воронки</li><li>Сбор отзывов</li></ul>
-      <p style="color: var(--text-dim); font-size: 0.82rem; margin-top: 1rem; font-family: 'JetBrains Mono', monospace;">// любое усложнение +500 ₽</p>
-    </div>
-  </div>
-  <div class="service-block reveal reveal-delay-2">
-    <div class="glass">
-      <h3>🧠 AI-агенты (нейроассистенты) <span class="tag">от 25 000 ₽</span></h3>
-      <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7;">Это не просто бот — это ваш цифровой двойник. Обучается вашим ответам, стилю, тону. Заменяет целую команду.</p>
-      <ul class="service-features"><li>Обучение вашим паттернам, УТП и скриптам</li><li>Ведение клиента по воронке продаж</li><li>Ответы на частые вопросы в стиле бренда</li><li>Работа в Telegram и на сайте одновременно</li><li>Поддержка на 5 языках</li><li>Независимые от мессенджеров решения на коде</li></ul>
-      <div class="grid-2" style="margin-top: 1.5rem;">
-        <div class="mini-card"><h4>📋 Паттерн — 25 000 ₽</h4><ul class="service-features"><li>Агент в Telegram</li><li>Обучение стилю</li><li>Тестирование</li><li>3 месяца обновлений</li></ul></div>
-        <div class="mini-card"><h4>🌐 Система — 42 000 ₽</h4><ul class="service-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня</li><li>6 месяцев обновлений</li><li>Второй агент -15%</li></ul></div>
-      </div>
-    </div>
-  </div>
-  <div class="service-block reveal reveal-delay-3">
-    <div class="glass"><h3>🎨 Цифровая эстетика</h3><p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.7;">Нейрофотосессии, визуал, чтобы бренд выглядел цельно и приятно. Ваш бренд должен не только работать, но и вдохновлять.</p><ul class="service-features"><li>Нейрофотосессии для соцсетей и сайта</li><li>Единый визуальный стиль бренда</li><li>Создание контент-плана</li></ul></div>
-  </div>
-  <div class="reveal reveal-delay-4 mt-3">
-    <div class="section-header" style="margin-bottom: 2rem;"><span class="section-tag">// FAQ</span><h2 style="font-size: 1.8rem;">Частые вопросы</h2></div>
-    <div id="faqAccordion">
-      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Чем чат-бот отличается от AI-агента?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Чат-бот работает по заранее заданному сценарию — он отвечает на конкретные кнопки и команды. AI-агент обучается вашим данным и может вести свободный диалог, понимать контекст и отвечать как вы, даже на неожиданные вопросы.</p></div></div>
-      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Сколько времени занимает создание?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Простой чат-бот — от 2 до 5 дней. AI-агент «Паттерн» — от 5 до 10 дней. AI-агент «Система» с интеграцией на сайт — от 7 до 14 дней.</p></div></div>
-      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Нужны ли мне технические знания?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Нет! Я беру на себя всю техническую часть. Вам нужно лишь пройти консультацию, поделиться информацией о бизнесе, стиле общения и задачах.</p></div></div>
-      <div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Как происходит оплата?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Полная предоплата по договору. Гарантия возврата 50% при форс-мажоре. После сдачи — 7 дней бесплатной поддержки.</p></div></div>
-    </div>
-  </div>
-  <div class="text-center mt-2 reveal"><button class="btn btn-primary" onclick="navigateTo('pricing')">💰 Посмотреть стоимость</button><button class="btn btn-neon" onclick="navigateTo('request')" style="margin-left: 0.7rem;">🚀 Оставить заявку</button></div>
-</section>
-
-<!-- PRICING PAGE -->
-<section class="page-section" id="page-pricing">
-  <div class="section-header reveal"><span class="section-tag">// Стоимость</span><h2>Тарифы</h2><p>Прозрачные цены для каждого уровня задач</p></div>
-  <div class="grid-3">
-    <div class="pricing-card reveal reveal-delay-1"><div class="icon-box" style="margin: 0 auto 1rem;">🤖</div><h3>Чат-бот</h3><div class="pricing-desc">Сценарный бот-визитка</div><div class="pricing-price">4 500 ₽ <span>/ база</span></div><ul class="pricing-features"><li>Приветствие и выдача PDF</li><li>Запись на консультацию</li><li>Анкетирование клиентов</li><li>Модерирование чатов</li><li>Сбор отзывов</li></ul><p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); margin-top: 0.5rem;">// +500 ₽ за усложнение</p><button class="btn btn-neon btn-sm" style="width: 100%; margin-top: 1rem;" onclick="navigateTo('request')">Выбрать</button></div>
-    <div class="pricing-card featured reveal reveal-delay-2"><div class="icon-box" style="margin: 0 auto 1rem;">📋</div><h3>AI-агент «Паттерн»</h3><div class="pricing-desc">Цифровой двойник в Telegram</div><div class="pricing-price">25 000 ₽</div><ul class="pricing-features"><li>Агент в Telegram</li><li>Обучение вашему стилю</li><li>Тестирование</li><li>3 месяца обновлений</li><li>Маркетинговый аудит в подарок</li></ul><p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--neon-green); margin-top: 0.5rem;">// скидка 20% бот+агент</p><button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;" onclick="navigateTo('request')">Выбрать</button></div>
-    <div class="pricing-card reveal reveal-delay-3"><div class="icon-box" style="margin: 0 auto 1rem;">🌐</div><h3>AI-агент «Система»</h3><div class="pricing-desc">Полная экосистема с сайтом</div><div class="pricing-price">42 000 ₽</div><ul class="pricing-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня после сдачи</li><li>6 месяцев обновлений</li><li>Второй агент со скидкой 15%</li><li>Сайт с интегрированным ботом</li></ul><p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--neon-green); margin-top: 0.5rem;">// бот+агент = -20%</p><button class="btn btn-neon btn-sm" style="width: 100%; margin-top: 1rem;" onclick="navigateTo('request')">Выбрать</button></div>
-  </div>
-  <div class="discount-banner reveal"><h4>🔥 Спецпредложение</h4><p>Боты и AI-агенты на коде — не зависят от мессенджеров, с интеграциями и сайтом.<br><strong style="color: var(--neon-blue);">4 500 ₽</strong> — первым 3 клиентам, далее — <strong>25 000 ₽</strong>.</p></div>
-  <div class="text-center mt-2 reveal"><p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Точная цена — после бесплатной консультации</p><button class="btn btn-primary" onclick="navigateTo('request')">📞 Записаться на консультацию</button></div>
-</section>
-
-<!-- REVIEWS PAGE -->
-<section class="page-section" id="page-reviews">
-  <div class="section-header reveal"><span class="section-tag">// Отзывы</span><h2>Что говорят клиенты</h2><p>Реальные результаты от реальных людей</p></div>
-  <div class="grid-2">
-    <div class="review-card reveal reveal-delay-1"><div class="review-stars">★★★★★</div><p class="review-text">«Кристина создала мне AI-агента, который реально работает как мой цифровой двойник. Клиенты не отличают его от меня! Теперь я трачу на коммуникацию в 3 раза меньше времени.»</p><div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Ирина</div><div class="review-role">Парапсихолог</div></div></div></div>
-    <div class="review-card reveal reveal-delay-2"><div class="review-stars">★★★★★</div><p class="review-text">«Бот-визитка Кристины собирает заявки даже ночью. Я просыпаюсь и вижу, что за ночь бот уже записал 3 человека на консультацию. Это магия!»</p><div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Алексей</div><div class="review-role">Коуч, инфобизнес</div></div></div></div>
-    <div class="review-card reveal reveal-delay-3"><div class="review-stars">★★★★★</div><p class="review-text">«Очень порадовал маркетинговый подход. Кристина не просто "сделала бота", она разобралась в моей аудитории, провела аудит канала и предложила решение, которое реально конвертирует.»</p><div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Мария</div><div class="review-role">Бьюти-мастер</div></div></div></div>
-    <div class="review-card reveal reveal-delay-4"><div class="review-stars">★★★★★</div><p class="review-text">«Агент "Кира" — это шедевр. Он консультирует моих клиентов, помогает определиться с выбором услуги и записывает на приём. Я просто занимаюсь стратегией.»</p><div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-role">Туристическое агентство</div></div></div></div>
-  </div>
-  <div class="text-center mt-2 reveal"><p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Хотите оставить отзыв?</p><a href="https://t.me/otziyv_chatbota_kristina_bot" target="_blank" class="btn btn-neon">💬 Бот для отзывов</a></div>
-</section>
-
-<!-- CONTACTS PAGE -->
-<section class="page-section" id="page-contacts">
-  <div class="section-header reveal"><span class="section-tag">// Контакты</span><h2>Связаться со мной</h2><p>Выберите удобный канал связи</p></div>
-  <div class="contacts-grid reveal reveal-delay-1">
-    <a href="https://t.me/marketologdizayner" target="_blank" class="contact-item"><div class="contact-icon">💬</div><div class="contact-info"><h4>Telegram</h4><p>@marketologdizayner</p></div></a>
-    <a href="https://vk.ru/kristinavcifre" target="_blank" class="contact-item"><div class="contact-icon">🔵</div><div class="contact-info"><h4>ВКонтакте</h4><p>@kristinavcifre</p></div></a>
-    <a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="contact-item"><div class="contact-icon">📸</div><div class="contact-info"><h4>Instagram</h4><p>@gap_____ova_kristina</p></div></a>
-    <div class="contact-item" style="cursor: default;"><div class="contact-icon">🕐</div><div class="contact-info"><h4>Режим работы</h4><p style="font-family: 'JetBrains Mono', monospace;">Пн–Пт 10:00–19:00 МСК<br>AI-агенты работают 24/7 🤖</p></div></div>
-  </div>
-  <div class="text-center mt-2 reveal reveal-delay-2"><p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1.05rem; line-height: 1.7;">Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите.<br>Я создам вашего <span style="color: var(--neon-blue);">цифрового двойника</span>.</p><button class="btn btn-primary" onclick="navigateTo('request')" style="font-size: 1rem; padding: 1rem 2.5rem;">🚀 Оставить заявку</button></div>
-</section>
-
-<!-- REQUEST PAGE (Чат-бот) -->
-<section class="page-section" id="page-request">
-  <div class="section-header reveal">
-    <span class="section-tag">// Заявка</span>
-    <h2>Оставить заявку</h2>
-    <p>Общайтесь с AI-агентом Кристины — он соберёт заявку за вас</p>
-  </div>
-  <div class="chat-page reveal reveal-delay-1">
-    <div class="chat-container" id="chatContainer">
-      <div class="chat-header">
-        <div class="chat-avatar">🤖</div>
-        <div class="chat-header-info">
-          <h4>AI-Агент Кристины</h4>
-          <p>цифровой двойник • online</p>
-        </div>
-      </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input-area">
-        <input type="text" class="chat-input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off">
-        <button class="chat-send" id="chatSendBtn" aria-label="Send">➤</button>
-      </div>
-    </div>
-  </div>
-</section>
-
+<div class="cyber-grid"></div><div class="scanline"></div>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<div class="auth-overlay" id="authOverlay"><div class="auth-card"><div style="font-size:2.5rem;margin-bottom:1rem">🔐</div><h3>Авторизация через Google</h3><p>Войдите, чтобы мы запомнили вас</p><div id="googleLoginBtn" style="display:flex;justify-content:center"></div><button class="auth-close" id="authClose" style="margin-top:1rem">Отмена</button></div></div>
+<nav class="nav" id="mainNav"><div class="nav-inner"><div class="nav-logo">KRISTINA.AI</div><ul class="nav-links" id="navLinks"><li><a href="#" data-page="home" class="active">Главная</a></li><li><a href="#" data-page="services">Услуги</a></li><li><a href="#" data-page="pricing">Стоимость</a></li><li><a href="#" data-page="reviews">Отзывы</a></li><li><a href="#" data-page="contacts">Контакты</a></li><li><a href="#" data-page="request" style="color:var(--neon-blue)">Заявка</a></li></ul><button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+<div class="mobile-menu" id="mobileMenu"><a href="#" data-page="home">// Главная</a><a href="#" data-page="services">// Услуги</a><a href="#" data-page="pricing">// Стоимость</a><a href="#" data-page="reviews">// Отзывы</a><a href="#" data-page="contacts">// Контакты</a><a href="#" data-page="request" style="color:var(--neon-blue);font-weight:700">// Оставить заявку</a></div>
+<section class="page-section active" id="page-home"><div class="hero reveal"><div class="hero-badge"><span class="dot"></span>AI-агенты и автономные бренды</div><h1>Ваш бренд будет<br>работать <span class="accent">самостоятельно</span></h1><p class="hero-subtitle">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия.</p><div class="hero-cta"><button class="btn btn-primary" onclick="navigateTo('request')"><span>⚡</span> Оставить заявку</button><button class="btn btn-neon" onclick="navigateTo('services')"><span>→</span> Узнать больше</button></div></div><div class="path-map reveal reveal-delay-1"><div class="path-map-inner" id="pathMap"><div class="path-point active" data-page="home"><div class="path-dot"></div><span class="path-label">Главная</span></div><div class="path-line"></div><div class="path-point" data-page="services"><div class="path-dot"></div><span class="path-label">Услуги</span></div><div class="path-line"></div><div class="path-point" data-page="pricing"><div class="path-dot"></div><span class="path-label">Стоимость</span></div><div class="path-line"></div><div class="path-point" data-page="reviews"><div class="path-dot"></div><span class="path-label">Отзывы</span></div><div class="path-line"></div><div class="path-point" data-page="contacts"><div class="path-dot"></div><span class="path-label">Контакты</span></div><div class="path-line"></div><div class="path-point" data-page="request"><div class="path-dot"></div><span class="path-label">Заявка</span></div></div></div><div class="about-grid reveal reveal-delay-2"><div class="about-text"><h3>Кто я?</h3><p>Я — <strong>Кристина</strong>, эксперт по автономным брендам. Помогаю экспертам, предпринимателям и онлайн-проектам выйти из рутины через технологии и цифровую эстетику.</p><p>Я создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Мой козырь — маркетинговое мышление и опыт в продажах. Я создаю системы, которые привлекают, вовлекают и закрывают в доверие.</p><div class="terminal"><div class="terminal-line"><span class="cmd">$</span> expert --name <span class="val">"Кристина"</span></div><div class="terminal-line"><span class="cmd">$</span> skills --list <span class="flag">[SMM, боты, AI-агенты]</span></div><div class="terminal-line"><span class="cmd">$</span> projects --count <span class="val">30+</span></div><div class="terminal-line"><span class="cmd">$</span> experience --years <span class="val">6</span></div></div><div class="about-stats"><div class="stat-item"><div class="stat-num">6</div><div class="stat-label">лет в маркетинге</div></div><div class="stat-item"><div class="stat-num">4</div><div class="stat-label">года в ботах</div></div><div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">AI-проектов</div></div><div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">публичных ботов</div></div></div></div><div><div class="glass about-avatar-card"><div class="avatar-ring"><div class="avatar-inner">👩‍💻</div></div><h3 style="margin-bottom:0.3rem">Кристина</h3><p style="color:var(--text-dim);font-size:0.82rem;margin-bottom:1rem;font-family:'JetBrains Mono',monospace">@marketologdizayner</p><p style="color:var(--text-muted);font-size:0.88rem;font-style:italic;line-height:1.7">«AI-агент — это вы в автономном режиме. Он должен чувствовать вашу энергию, а не просто выдавать текст.»</p><div class="social-links" style="margin-top:1.5rem"><a href="https://t.me/marketologdizayner" target="_blank" class="social-link" title="Telegram">💬</a><a href="https://vk.ru/kristinavcifre" target="_blank" class="social-link" title="VK">🔵</a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="social-link" title="Instagram">📸</a></div></div></div></div><div class="mt-3"><div class="section-header reveal"><span class="section-tag">// Что мы создаём</span><h2>Трансформируем бизнес</h2><p>Два направления, которые заставят ваш бренд работать на автопилоте</p></div><div class="grid-2"><div class="glass reveal reveal-delay-1" onclick="navigateTo('services')" style="cursor:pointer"><div class="icon-box">🤖</div><h3>Чат-боты</h3><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7">Сценарные автоворонки: выдача материалов, запись, анкеты, модерация, сбор отзывов.</p><p style="color:var(--neon-blue);font-weight:700;font-size:1.3rem">от 4 500 ₽</p></div><div class="glass reveal reveal-delay-2" onclick="navigateTo('services')" style="cursor:pointer"><div class="icon-box">🧠</div><h3>AI-агенты</h3><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7">Цифровой двойник, обучается вашему стилю. Заменяет маркетолога, копирайтера, аналитика.</p><p style="color:var(--neon-blue);font-weight:700;font-size:1.3rem">от 25 000 ₽</p></div></div><div class="text-center mt-2 reveal reveal-delay-3"><button class="btn btn-primary" onclick="navigateTo('request')">✨ Записаться на консультацию</button></div></div><footer class="footer"><div class="footer-inner"><span>© 2025 Кристина — Эксперт по автономным брендам</span><div class="footer-links"><a href="https://t.me/marketologdizayner" target="_blank">Telegram</a><a href="https://vk.ru/kristinavcifre" target="_blank">VK</a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank">Instagram</a></div></div></footer></section>
+<section class="page-section" id="page-services"><div class="section-header reveal"><span class="section-tag">// Услуги</span><h2>Что я делаю</h2><p>Три направления для автономного бренда</p></div><div class="service-block reveal reveal-delay-1"><div class="glass"><h3>🤖 Сценарные чат-боты <span class="tag">от 4 500 ₽</span></h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Простые и эффективные автоворонки для автоматизации рутинных задач. Точка входа в ваш бизнес.</p><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов</li><li>Автостатусы и антиспам-воронки</li><li>Сбор отзывов</li></ul><p style="color:var(--text-dim);font-size:0.82rem;margin-top:1rem;font-family:'JetBrains Mono',monospace">// любое усложнение +500 ₽</p></div></div><div class="service-block reveal reveal-delay-2"><div class="glass"><h3>🧠 AI-агенты (нейроассистенты) <span class="tag">от 25 000 ₽</span></h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Это не просто бот — это ваш цифровой двойник. Обучается вашим ответам, стилю, тону. Заменяет целую команду.</p><ul class="service-features"><li>Обучение вашим паттернам, УТП и скриптам</li><li>Ведение клиента по воронке продаж</li><li>Ответы на частые вопросы в стиле бренда</li><li>Работа в Telegram и на сайте одновременно</li><li>Поддержка на 5 языках</li><li>Независимые от мессенджеров решения на коде</li></ul><div class="grid-2" style="margin-top:1.5rem"><div class="mini-card"><h4>📋 Паттерн — 25 000 ₽</h4><ul class="service-features"><li>Агент в Telegram</li><li>Обучение стилю</li><li>Тестирование</li><li>3 месяца обновлений</li></ul></div><div class="mini-card"><h4>🌐 Система — 42 000 ₽</h4><ul class="service-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня</li><li>6 месяцев обновлений</li><li>Второй агент -15%</li></ul></div></div></div></div><div class="service-block reveal reveal-delay-3"><div class="glass"><h3>🎨 Цифровая эстетика</h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Нейрофотосессии, визуал, чтобы бренд выглядел цельно и приятно. Ваш бренд должен не только работать, но и вдохновлять.</p><ul class="service-features"><li>Нейрофотосессии для соцсетей и сайта</li><li>Единый визуальный стиль бренда</li><li>Создание контент-плана</li></ul></div></div><div class="reveal reveal-delay-4 mt-3"><div class="section-header" style="margin-bottom:2rem"><span class="section-tag">// FAQ</span><h2 style="font-size:1.8rem">Частые вопросы</h2></div><div id="faqAccordion"><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Чем чат-бот отличается от AI-агента?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Чат-бот работает по заранее заданному сценарию — он отвечает на конкретные кнопки и команды. AI-агент обучается вашим данным и может вести свободный диалог, понимать контекст и отвечать как вы, даже на неожиданные вопросы.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Сколько времени занимает создание?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Простой чат-бот — от 2 до 5 дней. AI-агент «Паттерн» — от 5 до 10 дней. AI-агент «Система» с интеграцией на сайт — от 7 до 14 дней.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Нужны ли мне технические знания?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Нет! Я беру на себя всю техническую часть. Вам нужно лишь пройти консультацию, поделиться информацией о бизнесе, стиле общения и задачах.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Как происходит оплата?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Полная предоплата по договору. Гарантия возврата 50% при форс-мажоре. После сдачи — 7 дней бесплатной поддержки.</p></div></div></div></div><div class="text-center mt-2 reveal"><button class="btn btn-primary" onclick="navigateTo('pricing')">💰 Посмотреть стоимость</button><button class="btn btn-neon" onclick="navigateTo('request')" style="margin-left:0.7rem">🚀 Оставить заявку</button></div></section>
+<section class="page-section" id="page-pricing"><div class="section-header reveal"><span class="section-tag">// Стоимость</span><h2>Тарифы</h2><p>Прозрачные цены для каждого уровня задач</p></div><div class="grid-3"><div class="pricing-card reveal reveal-delay-1"><div class="icon-box" style="margin:0 auto 1rem">🤖</div><h3>Чат-бот</h3><div class="pricing-desc">Сценарный бот-визитка</div><div class="pricing-price">4 500 ₽ <span>/ база</span></div><ul class="pricing-features"><li>Приветствие и выдача PDF</li><li>Запись на консультацию</li><li>Анкетирование клиентов</li><li>Модерирование чатов</li><li>Сбор отзывов</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-top:0.5rem">// +500 ₽ за усложнение</p><button class="btn btn-neon btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div><div class="pricing-card featured reveal reveal-delay-2"><div class="icon-box" style="margin:0 auto 1rem">📋</div><h3>AI-агент «Паттерн»</h3><div class="pricing-desc">Цифровой двойник в Telegram</div><div class="pricing-price">25 000 ₽</div><ul class="pricing-features"><li>Агент в Telegram</li><li>Обучение вашему стилю</li><li>Тестирование</li><li>3 месяца обновлений</li><li>Маркетинговый аудит в подарок</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--neon-green);margin-top:0.5rem">// скидка 20% бот+агент</p><button class="btn btn-primary btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div><div class="pricing-card reveal reveal-delay-3"><div class="icon-box" style="margin:0 auto 1rem">🌐</div><h3>AI-агент «Система»</h3><div class="pricing-desc">Полная экосистема с сайтом</div><div class="pricing-price">42 000 ₽</div><ul class="pricing-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня после сдачи</li><li>6 месяцев обновлений</li><li>Второй агент со скидкой 15%</li><li>Сайт с интегрированным ботом</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--neon-green);margin-top:0.5rem">// бот+агент = -20%</p><button class="btn btn-neon btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div></div><div class="discount-banner reveal"><h4>🔥 Спецпредложение</h4><p>Боты и AI-агенты на коде — не зависят от мессенджеров, с интеграциями и сайтом.<br><strong style="color:var(--neon-blue)">4 500 ₽</strong> — первым 3 клиентам, далее — <strong>25 000 ₽</strong>.</p></div><div class="text-center mt-2 reveal"><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem">Точная цена — после бесплатной консультации</p><button class="btn btn-primary" onclick="navigateTo('request')">📞 Записаться на консультацию</button></div></section>
+<section class="page-section" id="page-reviews"><div class="section-header reveal"><span class="section-tag">// Отзывы</span><h2>Что говорят клиенты</h2><p>Реальные результаты от реальных людей</p></div><div class="grid-2"><div class="review-card reveal reveal-delay-1"><div class="review-stars">★★★★★</div><p class="review-text">«Кристина создала мне AI-агента, который реально работает как мой цифровой двойник. Клиенты не отличают его от меня! Теперь я трачу на коммуникацию в 3 раза меньше времени.»</p><div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Ирина</div><div class="review-role">Парапсихолог</div></div></div></div><div class="review-card reveal reveal-delay-2"><div class="review-stars">★★★★★</div><p class="review-text">«Бот-визитка Кристины собирает заявки даже ночью. Я просыпаюсь и вижу, что за ночь бот уже записал 3 человека на консультацию. Это магия!»</p><div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Алексей</div><div class="review-role">Коуч, инфобизнес</div></div></div></div><div class="review-card reveal reveal-delay-3"><div class="review-stars">★★★★★</div><p class="review-text">«Очень порадовал маркетинговый подход. Кристина не просто "сделала бота", она разобралась в моей аудитории, провела аудит канала и предложила решение, которое реально конвертирует.»</p><div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Мария</div><div class="review-role">Бьюти-мастер</div></div></div></div><div class="review-card reveal reveal-delay-4"><div class="review-stars">★★★★★</div><p class="review-text">«Агент "Кира" — это шедевр. Он консультирует моих клиентов, помогает определиться с выбором услуги и записывает на приём. Я просто занимаюсь стратегией.»</p><div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-role">Туристическое агентство</div></div></div></div></div><div class="text-center mt-2 reveal"><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem">Хотите оставить отзыв?</p><a href="https://t.me/otziyv_chatbota_kristina_bot" target="_blank" class="btn btn-neon">💬 Бот для отзывов</a></div></section>
+<section class="page-section" id="page-contacts"><div class="section-header reveal"><span class="section-tag">// Контакты</span><h2>Связаться со мной</h2><p>Выберите удобный канал связи</p></div><div class="contacts-grid reveal reveal-delay-1"><a href="https://t.me/marketologdizayner" target="_blank" class="contact-item"><div class="contact-icon">💬</div><div class="contact-info"><h4>Telegram</h4><p>@marketologdizayner</p></div></a><a href="https://vk.ru/kristinavcifre" target="_blank" class="contact-item"><div class="contact-icon">🔵</div><div class="contact-info"><h4>ВКонтакте</h4><p>@kristinavcifre</p></div></a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="contact-item"><div class="contact-icon">📸</div><div class="contact-info"><h4>Instagram</h4><p>@gap_____ova_kristina</p></div></a><div class="contact-item" style="cursor:default"><div class="contact-icon">🕐</div><div class="contact-info"><h4>Режим работы</h4><p style="font-family:'JetBrains Mono',monospace">Пн–Пт 10:00–19:00 МСК<br>AI-агенты работают 24/7 🤖</p></div></div></div><div class="text-center mt-2 reveal reveal-delay-2"><p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:1.05rem;line-height:1.7">Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите.<br>Я создам вашего <span style="color:var(--neon-blue)">цифрового двойника</span>.</p><button class="btn btn-primary" onclick="navigateTo('request')" style="font-size:1rem;padding:1rem 2.5rem">🚀 Оставить заявку</button></div></section>
+<section class="page-section" id="page-request"><div class="section-header reveal"><span class="section-tag">// Заявка</span><h2>Оставить заявку</h2><p>Общайтесь с AI-агентом Кристины — он соберёт заявку за вас</p></div><div class="chat-page reveal reveal-delay-1"><div class="chat-container" id="chatContainer"><div class="chat-header"><div class="chat-avatar">🤖</div><div class="chat-header-info"><h4>AI-Агент Кристины</h4><p>цифровой двойник • online</p></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off"><button class="chat-send" id="chatSendBtn" aria-label="Send">➤</button></div></div></div></section>
 <script>
-// ==================== КОНФИГУРАЦИЯ ====================
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZIwozMK38ozFHp7ZWys3Fmo3tcv2Q7YP5vdRZ6IGxR6Q5-NL0cHiTJaKDhT82iJ7Dmg/exec';
 const GOOGLE_CLIENT_ID = '198238047306-u0s10ilol27lpmqemtlj1as9m963nfav.apps.googleusercontent.com';
-
-// ==================== БАЗА ЗНАНИЙ (УЛУЧШЕННАЯ) ====================
 const knowledgeBase = [
-  {
-    keywords: ['сколько стоит', 'цена', 'стоимость', 'прайс', 'цену', 'расценки', 'стоимость бота', 'стоимость агента', 'сколько стоит чат-бот', 'сколько стоит ai-агент'],
-    answer: '💰 Стоимость зависит от сложности проекта:\n• Сценарный чат-бот — от 4 500 ₽.\n• AI-агент «Паттерн» (Telegram) — 25 000 ₽.\n• AI-агент «Система» (Telegram + сайт) — 42 000 ₽.\n• Сайт на коде — 15 000 ₽.\n• Бот на коде — 10 000 ₽.\n• Спецпредложение первым трём клиентам: комплекс (сайт+бот) — 4 500 ₽!\n\nДля точной цены напишите, какая задача вас интересует, и мы проведём бесплатную консультацию.'
-  },
-  {
-    keywords: ['кто такая кристина', 'кристина кто', 'расскажите о кристине', 'эксперт', 'кто вы'],
-    answer: '👩‍💻 Кристина — эксперт по автономным брендам, созданию чат-ботов и AI-агентов. Помогает экспертам, предпринимателям выйти из рутины через технологии и цифровую эстетику. У неё 6 лет в маркетинге, 4 года в ботах, с 2025 года создаёт ИИ-агентов. Более 30 успешных проектов.'
-  },
-  {
-    keywords: ['опыт', 'сколько лет', 'стаж', 'проектов'],
-    answer: '6 лет в маркетинге и SMM, 4 года в создании чат-ботов, 2 года в AI-агентах. За плечами более 30 успешных проектов.'
-  },
-  {
-    keywords: ['образование', 'училась', 'компьютерная академия'],
-    answer: 'Кристина закончила компьютерную академию «ШАГ» по специальности «автоматизированное тестирование ПО», параллельно изучала маркетинг, личный бренд и продающую визуализацию.'
-  },
-  {
-    keywords: ['примеры ботов', 'посмотреть ботов', 'боты примеры'],
-    answer: 'Вот примеры моих работ:\n1. @kristinavcifre_bot — знакомство со мной\n2. @otziyv_chatbota_kristina_bot — сбор отзывов\n3. @Fishka_kris_bot — выдача подарка\n4. @kosultant_Kiera_bot — AI-агент в Telegram\n5. @gid_po_intensivu_bot — продажа интенсива\n6. @rezonans_tela_bot — антиспам-воронка'
-  },
-  {
-    keywords: ['контакты', 'связаться', 'как связаться', 'телеграм', 'вк', 'instagram'],
-    answer: 'Связаться с Кристиной:\n• Telegram: @marketologdizayner\n• ВК: https://vk.ru/kristinavcifre\n• Instagram: @gap_____ova_kristina'
-  },
-  {
-    keywords: ['гарантия', 'договор', 'возврат', 'оплата', 'как оплатить'],
-    answer: 'Работаю по договору с самозанятыми и ИП. Полная предоплата, но в договоре прописана гарантия возврата 50% при форс-мажоре. После сдачи — 7 дней бесплатной поддержки.'
-  },
-  {
-    keywords: ['сроки', 'сколько времени', 'долго', 'готовность'],
-    answer: 'Сроки зависят от сложности: чат-бот — 2–5 дней, AI-агент «Паттерн» — 5–10 дней, «Система» — 7–14 дней.'
-  },
-  {
-    keywords: ['что умеет ai-агент', 'зачем агент', 'цифровой двойник'],
-    answer: 'AI-агент — это ваш цифровой двойник. Он знает ваш стиль, говорит вашим тоном, отвечает на частые вопросы, помогает клиентам принять решение, работает 24/7. Он не устаёт, не ошибается, не фантазирует.'
-  },
-  {
-    keywords: ['что умеет чат-бот', 'зачем бот'],
-    answer: 'Чат-бот — точка входа для клиентов: выдача PDF, запись на консультацию, анкетирование, сбор отзывов, модерация чатов, автоворонки. Он экономит ваше время и не теряет лидов.'
-  },
-  {
-    keywords: ['консультация бесплатно', 'бесплатная консультация'],
-    answer: 'Да, первая консультация бесплатна. На ней разберём ваши задачи, подберём решение и сделаем аудит Telegram-канала или сообщества ВК в подарок.'
-  },
-  {
-    keywords: ['время работы', 'по мск', 'часы работы', 'когда отвечает'],
-    answer: 'Кристина работает по московскому времени (МСК). Обычно отвечает в рабочие дни с 10:00 до 19:00. AI-агенты работают 24/7.'
-  }
+  { keywords: ['сколько стоит','цена','стоимость','прайс','цену','расценки'], answer: '💰 Стоимость:\n• Сценарный чат-бот — от 4 500 ₽\n• AI-агент «Паттерн» — 25 000 ₽\n• AI-агент «Система» — 42 000 ₽\n\nДля точной цены напишите, какая задача вас интересует.' },
+  { keywords: ['кто такая кристина','кристина кто','расскажите о кристине'], answer: '👩‍💻 Кристина — эксперт по автономным брендам. 6 лет в маркетинге, 4 года в ботах. Более 30 успешных проектов.' },
+  { keywords: ['контакты','связаться','как связаться'], answer: '📱 Связаться:\n• Telegram: @marketologdizayner\n• ВК: https://vk.ru/kristinavcifre\n• Instagram: @gap_____ova_kristina' }
 ];
-
-function getAnswerFromKnowledgeBase(question) {
-  const lowerQuestion = question.toLowerCase();
-  for (let item of knowledgeBase) {
-    for (let keyword of item.keywords) {
-      if (lowerQuestion.includes(keyword)) {
-        return item.answer;
-      }
-    }
-  }
-  return null;
-}
-
-// ==================== ОТПРАВКА НЕИЗВЕСТНОГО ВОПРОСА ====================
-async function sendUnknownQuestionAndGetId(question, userName) {
-  const response = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'unknownQuestion', question: question, userName: userName })
-  });
-  const data = await response.json();
-  return data.sessionId;
-}
-
-// ==================== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ====================
-let currentPage = 'home';
-let chatData = { name: '', age: '', sphere: '', service: '', income: '', contact: '', finalChoice: '' };
-let chatStep = 0;
-let userName = localStorage.getItem('chat_user_name') || null;
-let isWaitingForInput = false;
-let freeInputStep = null;
-let chatInitialized = false;
-let selectedDate = null;
-let availableTimes = [];
-let userSessionId = null;
-let pollingInterval = null;
-
-// Шаги анкеты
+function getAnswerFromKnowledgeBase(q) { const lq = q.toLowerCase(); for (let item of knowledgeBase) { for (let kw of item.keywords) { if (lq.includes(kw)) return item.answer; } } return null; }
+let currentPage = 'home', chatData = { name:'', age:'', sphere:'', service:'', income:'', contact:'', finalChoice:'' }, chatStep = 0, userName = localStorage.getItem('chat_user_name') || null, userId = localStorage.getItem('chat_user_id') || null, isWaitingForInput = false, freeInputStep = null, chatInitialized = false, selectedDate = null, availableTimes = [], userSessionId = null, pollingInterval = null, chatHistory = [];
 const steps = [
-  { text: 'Привет! Я — AI-агент Кристины, её цифровой двойник. Я говорю её голосом, отвечаю на вопросы и помогаю записаться на консультацию.\n\nВы можете зарегистрироваться через Google, чтобы я вас запомнил, или продолжить как гость.',
-    buttons: [{ text: '🔐 Зарегистрироваться через Google', action: 'google' }, { text: '👤 Продолжить как гость', action: 'guest' }] },
+  { text: 'Привет! Я — AI-агент Кристины, её цифровой двойник. Я говорю её голосом, отвечаю на вопросы и помогаю записаться на консультацию.\n\nВы можете зарегистрироваться через Google, чтобы я вас запомнил, или продолжить как гость.', buttons: [{ text: '🔐 Зарегистрироваться через Google', action: 'google' }, { text: '👤 Продолжить как гость', action: 'guest' }] },
   { text: 'Укажите, пожалуйста, как к вам можно обращаться?', input: true },
   { text: 'Сколько вам лет?', buttons: [{ text: 'до 25', value: 'до 25' }, { text: '26–35', value: '26–35' }, { text: '36–45', value: '36–45' }, { text: '46+', value: '46+' }, { text: '✏️ Другое', action: 'free_input' }] },
   { text: 'В какой сфере вы развиваетесь сейчас?', buttons: [{ text: '💼 Инфобизнес', value: 'Инфобизнес' }, { text: '🧘 Коучинг/психология', value: 'Коучинг/психология' }, { text: '💅 Бьюти', value: 'Бьюти-сфера' }, { text: '✈️ Туризм', value: 'Туризм' }, { text: '✏️ Другое', action: 'free_input' }] },
@@ -578,601 +278,243 @@ const steps = [
   { text: 'Спасибо за доверие! Осталось совсем немного. 🙏\n\nУкажите ваш никнейм в любом мессенджере (Telegram, VK, Instagram), чтобы Кристина связалась с вами:', buttons: [{ text: '✏️ Напишу вручную', action: 'free_input' }] },
   { text: 'Что именно вы хотите получить?', buttons: [{ text: '🤖 Чат-бот под ключ', value: 'Чат-бот под ключ' }, { text: '🧠 AI-агент под ключ', value: 'AI-агент под ключ' }, { text: '💬 Общая консультация', value: 'Общая консультация' }, { text: '❓ Затрудняюсь', value: 'Затрудняюсь' }] }
 ];
-
-// ==================== ФУНКЦИИ ЧАТА ====================
-function addBotMessage(text) {
-  const container = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'chat-msg bot';
-  const now = new Date().toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
-  div.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+function addBotMessage(text, showCallBtn = false) {
+  const c = document.getElementById('chatMessages'), d = document.createElement('div');
+  d.className = 'chat-msg bot';
+  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'});
+  let html = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
+  if (showCallBtn) html += `<div class="chat-buttons" style="margin-top:0.8rem"><button class="chat-btn" onclick="callManager()" style="background:rgba(255,136,0,0.15);border-color:rgba(255,136,0,0.4);color:#FF8800">👨‍💼 Вызвать менеджера</button></div>`;
+  d.innerHTML = html; c.appendChild(d); c.scrollTop = c.scrollHeight;
+  chatHistory.push({ sender: 'bot', text: text, time: now });
 }
 function addUserMessage(text) {
-  const container = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'chat-msg user';
-  const now = new Date().toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
-  div.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  const c = document.getElementById('chatMessages'), d = document.createElement('div');
+  d.className = 'chat-msg user';
+  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'});
+  d.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>`;
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+  chatHistory.push({ sender: 'user', text: text, time: now });
 }
-function addButtons(buttons, handlerName) {
-  const container = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'chat-msg bot';
-  div.style.maxWidth = '100%';
-  let html = '<div class="chat-buttons">';
-  buttons.forEach(btn => {
-    if (btn.action) {
-      html += `<button class="chat-btn" onclick="handleAction('${btn.action}')">${btn.text}</button>`;
-    } else if (handlerName === 'selectDate') {
-      html += `<button class="chat-btn" onclick="selectDate('${btn.value}')">${btn.text}</button>`;
-    } else if (handlerName === 'selectTime') {
-      html += `<button class="chat-btn" onclick="selectTime('${btn.value}')">${btn.text}</button>`;
-    } else {
-      html += `<button class="chat-btn" onclick="handleValue('${btn.value}', ${btn.stepIndex}, this)">${btn.text}</button>`;
-    }
+function addButtons(btns, handler) {
+  const c = document.getElementById('chatMessages'), d = document.createElement('div');
+  d.className = 'chat-msg bot'; d.style.maxWidth = '100%';
+  let h = '<div class="chat-buttons">';
+  btns.forEach(b => {
+    if (b.action) h += `<button class="chat-btn" onclick="handleAction('${b.action}')">${b.text}</button>`;
+    else if (handler === 'selectDate') h += `<button class="chat-btn" onclick="selectDate('${b.value}')">${b.text}</button>`;
+    else if (handler === 'selectTime') h += `<button class="chat-btn" onclick="selectTime('${b.value}')">${b.text}</button>`;
+    else h += `<button class="chat-btn" onclick="handleValue('${b.value}', ${b.stepIndex}, this)">${b.text}</button>`;
   });
-  html += '</div>';
-  div.innerHTML = html;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  h += '</div>'; d.innerHTML = h; c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
 function showTyping() {
-  const container = document.getElementById('chatMessages');
-  let typing = document.getElementById('typingIndicator');
-  if (typing) typing.remove();
-  const div = document.createElement('div');
-  div.className = 'chat-msg bot';
-  div.id = 'typingIndicator';
-  div.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  const c = document.getElementById('chatMessages');
+  let t = document.getElementById('typingIndicator'); if (t) t.remove();
+  const d = document.createElement('div'); d.className = 'chat-msg bot'; d.id = 'typingIndicator';
+  d.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
-function hideTyping() {
-  const typing = document.getElementById('typingIndicator');
-  if (typing) typing.remove();
-}
-function handleValue(value, stepIndex, btnElement) {
-  if (btnElement) {
-    const parent = btnElement.parentElement;
-    if (parent) {
-      const btns = parent.querySelectorAll('.chat-btn');
-      btns.forEach(b => { b.style.pointerEvents = 'none'; b.style.opacity = '0.5'; });
-      btnElement.style.opacity = '1';
-      btnElement.classList.add('selected');
-    }
+function hideTyping() { const t = document.getElementById('typingIndicator'); if (t) t.remove(); }
+async function callManager() {
+  addUserMessage('👨‍💼 Вызвать менеджера');
+  let hist = ''; chatHistory.forEach(m => { hist += `[${m.time}] ${m.sender==='bot'?'AI-Агент':'Вы'}: ${m.text}\n`; });
+  if (!userId) {
+    const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'getUserId'}) });
+    const d = await r.json(); userId = d.userId; localStorage.setItem('chat_user_id', userId);
   }
-  addUserMessage(btnElement ? btnElement.innerText : value);
-  if (stepIndex === 2) chatData.age = value;
-  else if (stepIndex === 3) chatData.sphere = value;
-  else if (stepIndex === 4) chatData.service = value;
-  else if (stepIndex === 5) chatData.income = value;
-  else if (stepIndex === 7) chatData.finalChoice = value;
-  setTimeout(() => goToStep(stepIndex + 1), 500);
-}
-function handleAction(action) {
-  if (action === 'google') {
-    addUserMessage('🔐 Зарегистрироваться через Google');
-    openAuthOverlay();
-  } else if (action === 'guest') {
-    addUserMessage('👤 Продолжить как гость');
-    setTimeout(() => goToStep(1), 500);
-  } else if (action === 'free_input') {
-    addUserMessage('✏️ Ввести вручную');
-    freeInputStep = chatStep;
-    isWaitingForInput = true;
-    const input = document.getElementById('chatInput');
-    input.disabled = false;
-    input.focus();
-    input.placeholder = 'Введите ваш ответ...';
-  } else if (action === 'start_quiz') {
-    addUserMessage('📝 Заполнить анкету');
-    chatStep = 1;
-    goToStep(1);
-  } else if (action.startsWith('show_date_')) {
-    const date = action.replace('show_date_', '');
-    addUserMessage(`Показать время на ${date}`);
-    selectDate(date);
-  } else if (action === 'cancel') {
-    addUserMessage('❌ Нет, спасибо');
-    addBotMessage('Хорошо, если передумаете, всегда можете записаться через кнопку "Записаться" в меню.');
-  }
-}
-function goToStep(stepIndex) {
-  chatStep = stepIndex;
-  isWaitingForInput = false;
-  freeInputStep = null;
-  const input = document.getElementById('chatInput');
-  input.disabled = false;
-  input.placeholder = 'Введите сообщение...';
-  if (stepIndex >= steps.length) {
-    showDateSelection();
-    return;
-  }
-  const step = steps[stepIndex];
   showTyping();
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'callManager', userId: userId, userName: userName||chatData.name||'Аноним', chatHistory: hist }) });
+    const result = await res.json(); hideTyping();
+    if (result.success) {
+      addBotMessage('✅ Менеджер получил ваш запрос! Я передал(а) всю историю переписки. Кристина ответит вам в ближайшее время. ⏳', true);
+      await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'saveChatHistory', userId: userId, message: 'Вызвал(а) менеджера', sender: 'user' }) });
+    } else addBotMessage('❌ Произошла ошибка при вызове менеджера. Попробуйте позже или свяжитесь напрямую.', true);
+  } catch (e) { console.error(e); hideTyping(); addBotMessage('❌ Ошибка соединения. Попробуйте позже.', true); }
+}
+function handleValue(val, idx, btn) {
+  if (btn) { const p = btn.parentElement; if (p) { p.querySelectorAll('.chat-btn').forEach(b => { b.style.pointerEvents='none'; b.style.opacity='0.5'; }); btn.style.opacity='1'; btn.classList.add('selected'); } }
+  addUserMessage(btn ? btn.innerText : val);
+  if (idx===2) chatData.age=val; else if (idx===3) chatData.sphere=val; else if (idx===4) chatData.service=val; else if (idx===5) chatData.income=val; else if (idx===7) chatData.finalChoice=val;
+  setTimeout(() => goToStep(idx+1), 500);
+}
+function handleAction(act) {
+  if (act==='google') { addUserMessage('🔐 Зарегистрироваться через Google'); openAuthOverlay(); }
+  else if (act==='guest') { addUserMessage('👤 Продолжить как гость'); setTimeout(() => goToStep(1), 500); }
+  else if (act==='free_input') { addUserMessage('✏️ Ввести вручную'); freeInputStep = chatStep; isWaitingForInput = true; const inp = document.getElementById('chatInput'); inp.disabled=false; inp.focus(); inp.placeholder='Введите ваш ответ...'; }
+  else if (act==='start_quiz') { addUserMessage('📝 Заполнить анкету'); chatStep=1; goToStep(1); }
+  else if (act.startsWith('show_date_')) { const dt = act.replace('show_date_',''); addUserMessage(`Показать время на ${dt}`); selectDate(dt); }
+  else if (act==='cancel') { addUserMessage('❌ Нет, спасибо'); addBotMessage('Хорошо, если передумаете, всегда можете записаться через кнопку "Записаться" в меню.', true); }
+}
+function goToStep(idx) {
+  chatStep = idx; isWaitingForInput = false; freeInputStep = null;
+  const inp = document.getElementById('chatInput'); inp.disabled=false; inp.placeholder='Введите сообщение...';
+  if (idx >= steps.length) { showDateSelection(); return; }
+  const step = steps[idx]; showTyping();
   setTimeout(() => {
-    hideTyping();
-    addBotMessage(step.text);
-    if (step.buttons) {
-      setTimeout(() => {
-        const btns = step.buttons.map(btn => ({ ...btn, stepIndex: stepIndex }));
-        addButtons(btns, '');
-      }, 400);
-    }
-    if (step.input) {
-      isWaitingForInput = true;
-      input.focus();
-    }
+    hideTyping(); addBotMessage(step.text, true);
+    if (step.buttons) setTimeout(() => { const bs = step.buttons.map(b => ({...b, stepIndex: idx})); addButtons(bs, ''); }, 400);
+    if (step.input) { isWaitingForInput = true; inp.focus(); }
   }, 800);
 }
-
 function parseUserDate(input) {
   input = input.trim().toLowerCase();
-  // Формат ДД.ММ или ДД.ММ.ГГГГ
-  var match = input.match(/^(\d{1,2})\.(\d{1,2})(?:\.(\d{4}|\d{2}))?$/);
-  if (match) {
-    var day = parseInt(match[1],10);
-    var month = parseInt(match[2],10);
-    var year = match[3] ? (match[3].length===2 ? 2000+parseInt(match[3],10) : parseInt(match[3],10)) : new Date().getFullYear();
-    if (day>=1 && day<=31 && month>=1 && month<=12) {
-      return new Date(year, month-1, day);
-    }
-  }
-  // Формат "7 апреля", "07 апреля 2026"
-  var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-  for (var i=0; i<months.length; i++) {
-    var regex = new RegExp('(\\d{1,2})\\s*' + months[i] + '(?:\\s*(\\d{4}))?');
-    var m = input.match(regex);
-    if (m) {
-      var d = parseInt(m[1],10);
-      var y = m[2] ? parseInt(m[2],10) : new Date().getFullYear();
-      if (d>=1 && d<=31) return new Date(y, i, d);
-    }
-  }
+  let m = input.match(/^(\d{1,2})\.(\d{1,2})(?:\.(\d{4}|\d{2}))?$/);
+  if (m) { let d=parseInt(m[1],10), mo=parseInt(m[2],10), y=m[3]?(m[3].length===2?2000+parseInt(m[3],10):parseInt(m[3],10)):new Date().getFullYear(); if (d>=1&&d<=31&&mo>=1&&mo<=12) return new Date(y, mo-1, d); }
+  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  for (let i=0; i<months.length; i++) { let rx = new RegExp('(\\d{1,2})\\s*' + months[i] + '(?:\\s*(\\d{4}))?'); let mm = input.match(rx); if (mm) { let d=parseInt(mm[1],10), y=mm[2]?parseInt(mm[2],10):new Date().getFullYear(); if (d>=1&&d<=31) return new Date(y, i, d); } }
   return null;
 }
-function formatDateToDMY(date) {
-  const d = date.getDate().toString().padStart(2,'0');
-  const m = (date.getMonth()+1).toString().padStart(2,'0');
-  const y = date.getFullYear();
-  return `${d}.${m}.${y}`;
-}
-async function fetchFreeSlots() {
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlots', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    });
-    return await res.json();
-  } catch (error) {
-    console.error('Ошибка получения слотов:', error);
-    return [];
-  }
-}
-async function fetchFreeTimesForDate(date) {
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlotsByDate&date=' + encodeURIComponent(date), {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    });
-    return await res.json();
-  } catch (error) {
-    console.error('Ошибка получения времени:', error);
-    return [];
-  }
-}
-async function fetchNearestFreeDate() {
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getNearestFreeDate', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    });
-    const data = await res.json();
-    return data.nearest;
-  } catch (error) {
-    console.error('Ошибка получения даты:', error);
-    return null;
-  }
-}
-async function bookSlot(date, time, userName, contact) {
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'bookSlot',
-        date: date,
-        time: time,
-        userName: userName,
-        contact: contact
-      })
-    });
-    return await res.json();
-  } catch (error) {
-    console.error('Ошибка бронирования:', error);
-    return { success: false, message: 'Ошибка соединения' };
-  }
-}
-function getWeekNumber(date) {
-  const d = new Date(date);
-  d.setHours(0,0,0,0);
-  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
-  const week1 = new Date(d.getFullYear(), 0, 4);
-  return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
-}
-function getStartOfWeek(date) {
-  const d = new Date(date);
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  return new Date(d.setDate(diff));
-}
+function formatDateToDMY(date) { return date.getDate().toString().padStart(2,'0') + '.' + (date.getMonth()+1).toString().padStart(2,'0') + '.' + date.getFullYear(); }
+async function fetchFreeSlots() { try { const r = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlots', { method:'GET', headers:{'Content-Type':'application/json'} }); return await r.json(); } catch(e) { console.error(e); return []; } }
+async function fetchFreeTimesForDate(dt) { try { const r = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlotsByDate&date=' + encodeURIComponent(dt), { method:'GET', headers:{'Content-Type':'application/json'} }); return await r.json(); } catch(e) { console.error(e); return []; } }
+async function bookSlot(dt, tm, nm, ct) { try { const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'bookSlot', date:dt, time:tm, userName:nm, contact:ct }) }); return await r.json(); } catch(e) { console.error(e); return { success:false, message:'Ошибка соединения' }; } }
+function getStartOfWeek(date) { const d = new Date(date); const day = d.getDay(); const diff = d.getDate() - day + (day === 0 ? -6 : 1); return new Date(d.setDate(diff)); }
 function groupSlotsByWeek(slots) {
-  const today = new Date();
-  const currentWeekStart = getStartOfWeek(today);
-  const nextWeekStart = new Date(currentWeekStart);
-  nextWeekStart.setDate(currentWeekStart.getDate() + 7);
-  const thisWeekSlots = slots.filter(slot => {
-    const slotDate = parseUserDate(slot.date);
-    return slotDate >= currentWeekStart && slotDate < nextWeekStart;
-  });
-  const nextWeekSlots = slots.filter(slot => {
-    const slotDate = parseUserDate(slot.date);
-    return slotDate >= nextWeekStart;
-  });
-  return { thisWeek: thisWeekSlots, nextWeek: nextWeekSlots };
+  const today = new Date(), cws = getStartOfWeek(today), nws = new Date(cws); nws.setDate(cws.getDate()+7);
+  return { thisWeek: slots.filter(s => { const sd = parseUserDate(s.date); return sd >= cws && sd < nws; }), nextWeek: slots.filter(s => { const sd = parseUserDate(s.date); return sd >= nws; }) };
 }
 async function showDateSelection() {
-  addBotMessage('Давайте подберём удобное время для консультации 🔍');
+  addBotMessage('Давайте подберём удобное время для консультации 🔍', true);
   const slots = await fetchFreeSlots();
-  if (!slots.length) {
-    addBotMessage('К сожалению, на ближайшие две недели нет свободных слотов. Попробуйте позже или свяжитесь с нами напрямую.');
-    // Сохраняем заявку без записи
-    submitFormWithoutBooking();
-    return;
-  }
+  if (!slots.length) { addBotMessage('К сожалению, на ближайшие две недели нет свободных слотов. Попробуйте позже или свяжитесь с нами напрямую.', true); submitFormWithoutBooking(); return; }
   const { thisWeek, nextWeek } = groupSlotsByWeek(slots);
-  let datesToShow = [];
-  if (thisWeek.length) {
-    datesToShow = [...new Map(thisWeek.map(slot => [slot.date, slot])).values()];
-    addBotMessage('Свободные даты на эту неделю:');
-  } else if (nextWeek.length) {
-    datesToShow = [...new Map(nextWeek.map(slot => [slot.date, slot])).values()];
-    addBotMessage('На этой неделе свободных мест нет. Вот даты на следующей неделе:');
-  } else {
-    addBotMessage('Нет свободных дат на ближайшие две недели.');
-    submitFormWithoutBooking();
-    return;
-  }
-  const dateButtons = datesToShow.map(slot => ({ text: slot.date, value: slot.date }));
-  addButtons(dateButtons, 'selectDate');
+  let dates = [];
+  if (thisWeek.length) { dates = [...new Map(thisWeek.map(s => [s.date, s])).values()]; addBotMessage('Свободные даты на эту неделю:', true); }
+  else if (nextWeek.length) { dates = [...new Map(nextWeek.map(s => [s.date, s])).values()]; addBotMessage('На этой неделе свободных мест нет. Вот даты на следующей неделе:', true); }
+  else { addBotMessage('Нет свободных дат на ближайшие две недели.', true); submitFormWithoutBooking(); return; }
+  addButtons(dates.map(s => ({ text: s.date, value: s.date })), 'selectDate');
 }
-async function selectDate(date) {
-  selectedDate = date;
-  availableTimes = await fetchFreeTimesForDate(date);
-  if (!availableTimes.length) {
-    addBotMessage(`На ${date} нет свободного времени. Пожалуйста, выберите другую дату.`);
-    showDateSelection();
-    return;
-  }
-  addBotMessage(`Вы выбрали ${date}. Доступное время (МСК):`);
-  const timeButtons = availableTimes.map(time => ({ text: time, value: time }));
-  addButtons(timeButtons, 'selectTime');
+async function selectDate(dt) {
+  selectedDate = dt; availableTimes = await fetchFreeTimesForDate(dt);
+  if (!availableTimes.length) { addBotMessage(`На ${dt} нет свободного времени. Пожалуйста, выберите другую дату.`, true); showDateSelection(); return; }
+  addBotMessage(`Вы выбрали ${dt}. Доступное время (МСК):`, true);
+  addButtons(availableTimes.map(t => ({ text: t, value: t })), 'selectTime');
 }
-async function selectTime(time) {
-  addUserMessage(time);
-  const result = await bookSlot(selectedDate, time, chatData.name || userName, chatData.contact || 'не указан');
-  if (result.success) {
-    addBotMessage(`✅ Отлично! Вы записаны на консультацию ${selectedDate} в ${time} (МСК). Кристина свяжется с вами.`);
-    addBotMessage('А пока — подпишитесь на соцсети, чтобы быть в курсе:');
-    const container = document.getElementById('chatMessages');
-    const div = document.createElement('div');
-    div.className = 'chat-msg bot';
-    div.style.maxWidth = '100%';
-    div.innerHTML = `
-      <div class="chat-buttons">
-        <a href="https://vk.ru/kristinavcifre" target="_blank" class="chat-btn" style="text-decoration:none;">🔵 Подписаться в ВК</a>
-        <a href="https://t.me/marketinglegkok" target="_blank" class="chat-btn" style="text-decoration:none;">💬 Подписаться в Telegram</a>
-        <button class="chat-btn" onclick="resetChat()">🔄 Закрыть</button>
-      </div>`;
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-    // Сохраняем заявку с информацией о записи
-    submitFormWithBooking(selectedDate, time);
+async function selectTime(tm) {
+  addUserMessage(tm);
+  const res = await bookSlot(selectedDate, tm, chatData.name||userName, chatData.contact||'не указан');
+  if (res.success) {
+    addBotMessage(`✅ Отлично! Вы записаны на консультацию ${selectedDate} в ${tm} (МСК). Кристина свяжется с вами.`, true);
+    addBotMessage('А пока — подпишитесь на соцсети, чтобы быть в курсе:', true);
+    const c = document.getElementById('chatMessages'), d = document.createElement('div');
+    d.className = 'chat-msg bot'; d.style.maxWidth = '100%';
+    d.innerHTML = `<div class="chat-buttons"><a href="https://vk.ru/kristinavcifre" target="_blank" class="chat-btn" style="text-decoration:none">🔵 Подписаться в ВК</a><a href="https://t.me/marketinglegkok" target="_blank" class="chat-btn" style="text-decoration:none">💬 Подписаться в Telegram</a><button class="chat-btn" onclick="resetChat()">🔄 Закрыть</button></div>`;
+    c.appendChild(d); c.scrollTop = c.scrollHeight;
+    submitFormWithBooking(selectedDate, tm);
   } else {
-    addBotMessage(`❌ К сожалению, это время уже занято. Пожалуйста, выберите другое.`);
+    addBotMessage(`❌ К сожалению, это время уже занято. Пожалуйста, выберите другое.`, true);
     availableTimes = await fetchFreeTimesForDate(selectedDate);
-    if (availableTimes.length) {
-      addButtons(availableTimes.map(t => ({ text: t, value: t })), 'selectTime');
-    } else {
-      showDateSelection();
-    }
+    if (availableTimes.length) addButtons(availableTimes.map(t => ({ text: t, value: t })), 'selectTime');
+    else showDateSelection();
   }
 }
-function submitFormWithBooking(date, time) {
-  const payload = {
-    name: chatData.name || userName || 'Не указано',
-    age: chatData.age || 'Не указано',
-    sphere: chatData.sphere || 'Не указано',
-    service: chatData.service || 'Не указано',
-    income: chatData.income || 'Не указано',
-    contact: chatData.contact || 'Не указано',
-    finalChoice: chatData.finalChoice || 'Не указано',
-    date: `${date} ${time} МСК`,
-    status: 'Новая'
-  };
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(err => console.error('Ошибка отправки заявки', err));
+function submitFormWithBooking(dt, tm) {
+  fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: chatData.name||userName||'Не указано', age: chatData.age||'Не указано', sphere: chatData.sphere||'Не указано', service: chatData.service||'Не указано', income: chatData.income||'Не указано', contact: chatData.contact||'Не указано', finalChoice: chatData.finalChoice||'Не указано', date: `${dt} ${tm} МСК`, status: 'Новая' }) }).catch(e => console.error(e));
 }
 function submitFormWithoutBooking() {
-  const payload = {
-    name: chatData.name || userName || 'Не указано',
-    age: chatData.age || 'Не указано',
-    sphere: chatData.sphere || 'Не указано',
-    service: chatData.service || 'Не указано',
-    income: chatData.income || 'Не указано',
-    contact: chatData.contact || 'Не указано',
-    finalChoice: chatData.finalChoice || 'Не указано',
-    date: new Date().toLocaleString(),
-    status: 'Новая (нет свободных слотов)'
-  };
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(err => console.error('Ошибка отправки заявки', err));
-  addBotMessage('Ваша анкета сохранена. Кристина свяжется с вами, как только появится свободное время.');
+  fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: chatData.name||userName||'Не указано', age: chatData.age||'Не указано', sphere: chatData.sphere||'Не указано', service: chatData.service||'Не указано', income: chatData.income||'Не указано', contact: chatData.contact||'Не указано', finalChoice: chatData.finalChoice||'Не указано', date: new Date().toLocaleString(), status: 'Новая (нет свободных слотов)' }) }).catch(e => console.error(e));
+  addBotMessage('Ваша анкета сохранена. Кристина свяжется с вами, как только появится свободное время.', true);
 }
-
 async function sendUserMessage(text) {
   addUserMessage(text);
+  if (text.toLowerCase().includes('вызвать менеджера') || text.toLowerCase().includes('связаться с менеджером') || text.toLowerCase().includes('менеджер')) { callManager(); return; }
   if (freeInputStep !== null) {
-    const stepIdx = freeInputStep;
-    if (stepIdx === 1) chatData.name = text;
-    else if (stepIdx === 2) chatData.age = text;
-    else if (stepIdx === 3) chatData.sphere = text;
-    else if (stepIdx === 6) chatData.contact = text;
-    freeInputStep = null;
-    isWaitingForInput = false;
-    setTimeout(() => goToStep(stepIdx + 1), 500);
-    return;
+    const idx = freeInputStep;
+    if (idx===1) chatData.name=text; else if (idx===2) chatData.age=text; else if (idx===3) chatData.sphere=text; else if (idx===6) chatData.contact=text;
+    freeInputStep = null; isWaitingForInput = false; setTimeout(() => goToStep(idx+1), 500); return;
   }
   if (isWaitingForInput) {
-    if (chatStep === 1) {
-      chatData.name = text;
-      isWaitingForInput = false;
-      setTimeout(() => goToStep(2), 500);
-    } else if (chatStep === 6) {
-      chatData.contact = text;
-      isWaitingForInput = false;
-      setTimeout(() => goToStep(7), 500);
-    }
+    if (chatStep===1) { chatData.name=text; isWaitingForInput=false; setTimeout(() => goToStep(2), 500); }
+    else if (chatStep===6) { chatData.contact=text; isWaitingForInput=false; setTimeout(() => goToStep(7), 500); }
     return;
   }
-  const parsedDate = parseUserDate(text);
-  if (parsedDate && !isNaN(parsedDate.getTime())) {
-    const dateStr = formatDateToDMY(parsedDate);
-    const freeTimes = await fetchFreeTimesForDate(dateStr);
-    if (freeTimes && freeTimes.length) {
-      selectedDate = dateStr;
-      availableTimes = freeTimes;
-      addBotMessage(`На дату ${dateStr} есть свободное время:\n${freeTimes.join(', ')}`);
-      addButtons(freeTimes.map(t => ({ text: t, value: t })), 'selectTime');
-    } else {
-      const nearest = await fetchNearestFreeDate();
-      if (nearest) {
-        addBotMessage(`К сожалению, на ${dateStr} нет свободных слотов. Ближайшая свободная дата: ${nearest}. Хотите посмотреть доступное время на ${nearest}?`);
-        addButtons([{ text: `✅ Да, показать время на ${nearest}`, action: `show_date_${nearest}` }, { text: '❌ Нет, спасибо', action: 'cancel' }]);
-      } else {
-        addBotMessage(`К сожалению, на ${dateStr} нет свободных слотов и на ближайшие две недели тоже нет мест. Пожалуйста, свяжитесь с нами напрямую или попробуйте позже.`);
-        submitFormWithoutBooking();
-      }
-    }
+  const pd = parseUserDate(text);
+  if (pd && !isNaN(pd.getTime())) {
+    const ds = formatDateToDMY(pd), ft = await fetchFreeTimesForDate(ds);
+    if (ft && ft.length) { selectedDate = ds; availableTimes = ft; addBotMessage(`На дату ${ds} есть свободное время:\n${ft.join(', ')}`, true); addButtons(ft.map(t => ({ text: t, value: t })), 'selectTime'); }
+    else { addBotMessage(`К сожалению, на ${ds} нет свободных слотов.`, true); submitFormWithoutBooking(); }
     return;
   }
-  const answer = getAnswerFromKnowledgeBase(text);
-  if (answer) {
-    addBotMessage(answer);
-  } else {
-    addBotMessage('Спасибо за ваш вопрос! Я свяжусь с вами в ближайшее время 🙂');
-    userSessionId = await sendUnknownQuestionAndGetId(text, userName || chatData.name || 'Гость');
+  const ans = getAnswerFromKnowledgeBase(text);
+  if (ans) addBotMessage(ans, true);
+  else {
+    addBotMessage('Спасибо за ваш вопрос! Я свяжусь с вами в ближайшее время 🙂', true);
+    if (!userId) { const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'getUserId'}) }); const d = await r.json(); userId = d.userId; localStorage.setItem('chat_user_id', userId); }
+    userSessionId = await sendUnknownQuestionAndGetId(text, userName||chatData.name||'Гость');
     if (userSessionId) startPollingForResponse();
   }
+}
+async function sendUnknownQuestionAndGetId(q, nm) {
+  const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'unknownQuestion', question:q, userName:nm, userId:userId }) });
+  const d = await r.json(); return d.sessionId;
 }
 function startPollingForResponse() {
   if (pollingInterval) clearInterval(pollingInterval);
   pollingInterval = setInterval(async () => {
     if (!userSessionId) return;
     try {
-      const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getManagerResponse&userSessionId=' + userSessionId, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await res.json();
-      if (data.response) {
-        clearInterval(pollingInterval);
-        addBotMessage(data.response);
-        userSessionId = null;
-      }
-    } catch (error) {
-      console.error('Ошибка получения ответа:', error);
-    }
+      const r = await fetch(GOOGLE_SCRIPT_URL + '?action=getManagerResponse&userSessionId=' + userSessionId, { method:'GET', headers:{'Content-Type':'application/json'} });
+      const d = await r.json();
+      if (d.response) { clearInterval(pollingInterval); addBotMessage(d.response, true); userSessionId = null; }
+    } catch(e) { console.error(e); }
   }, 5000);
 }
 function resetChat() {
-  chatStep = 0;
-  chatData = { name: '', age: '', sphere: '', service: '', income: '', contact: '', finalChoice: '' };
-  isWaitingForInput = false;
-  freeInputStep = null;
-  selectedDate = null;
-  availableTimes = [];
-  if (pollingInterval) clearInterval(pollingInterval);
-  userSessionId = null;
-  document.getElementById('chatMessages').innerHTML = '';
-  document.getElementById('chatInput').disabled = false;
-  document.getElementById('chatSendBtn').disabled = false;
-  document.getElementById('chatInput').placeholder = 'Введите сообщение...';
-  startChat();
+  chatStep=0; chatData={name:'',age:'',sphere:'',service:'',income:'',contact:'',finalChoice:''}; isWaitingForInput=false; freeInputStep=null; selectedDate=null; availableTimes=[]; if (pollingInterval) clearInterval(pollingInterval); userSessionId=null; chatHistory=[];
+  document.getElementById('chatMessages').innerHTML=''; document.getElementById('chatInput').disabled=false; document.getElementById('chatSendBtn').disabled=false; document.getElementById('chatInput').placeholder='Введите сообщение...'; startChat();
 }
 function startChat() {
   chatInitialized = true;
-  if (userName) {
-    addBotMessage(`Привет, ${userName}! Рада, что вы снова здесь. Давайте заполним анкету для консультации.`);
-    chatData.name = userName;
-    chatStep = 1;
-    setTimeout(() => goToStep(1), 1000);
-  } else {
-    goToStep(0);
-  }
+  if (userName) { addBotMessage(`Привет, ${userName}! Рада, что вы снова здесь. Давайте заполним анкету для консультации.`, true); chatData.name=userName; chatStep=1; setTimeout(() => goToStep(1), 1000); }
+  else goToStep(0);
 }
 function openAuthOverlay() { document.getElementById('authOverlay').classList.add('open'); }
 function closeAuthOverlay() { document.getElementById('authOverlay').classList.remove('open'); }
 function initGoogleAuth() {
-  if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
-    console.warn('Google Client ID не задан');
-    const btnDiv = document.getElementById('googleLoginBtn');
-    if (btnDiv) btnDiv.innerHTML = '<button class="auth-google" disabled>Google авторизация недоступна</button>';
-    return;
-  }
-  google.accounts.id.initialize({
-    client_id: GOOGLE_CLIENT_ID,
-    callback: handleGoogleCredential
-  });
-  google.accounts.id.renderButton(
-    document.getElementById('googleLoginBtn'),
-    { theme: 'outline', size: 'large', text: 'continue_with' }
-  );
+  if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') { console.warn('Google Client ID не задан'); const bd = document.getElementById('googleLoginBtn'); if (bd) bd.innerHTML = '<button class="auth-google" disabled>Google авторизация недоступна</button>'; return; }
+  google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
+  google.accounts.id.renderButton(document.getElementById('googleLoginBtn'), { theme:'outline', size:'large', text:'continue_with' });
 }
-function handleGoogleCredential(response) {
-  const payload = parseJwt(response.credential);
-  if (payload && payload.name) {
-    userName = payload.name;
-    localStorage.setItem('chat_user_name', userName);
-    chatData.name = userName;
-    closeAuthOverlay();
-    addUserMessage(`🔐 Авторизован как ${userName}`);
-    setTimeout(() => {
-      addBotMessage(`Отлично, ${userName}! Рада знакомству! Давайте заполним заявку. 🙂`);
-      setTimeout(() => goToStep(1), 600);
-    }, 500);
-  } else {
-    console.error('Не удалось получить имя из токена');
-    closeAuthOverlay();
-    addBotMessage('Не удалось получить имя из Google. Пожалуйста, представьтесь вручную.');
-    goToStep(1);
-  }
+function handleGoogleCredential(resp) {
+  const pl = parseJwt(resp.credential);
+  if (pl && pl.name) { userName = pl.name; localStorage.setItem('chat_user_name', userName); chatData.name = userName; closeAuthOverlay(); addUserMessage(`🔐 Авторизован как ${userName}`); setTimeout(() => { addBotMessage(`Отлично, ${userName}! Рада знакомству! Давайте заполним заявку. 🙂`, true); setTimeout(() => goToStep(1), 600); }, 500); }
+  else { console.error('Не удалось получить имя из токена'); closeAuthOverlay(); addBotMessage('Не удалось получить имя из Google. Пожалуйста, представьтесь вручную.', true); goToStep(1); }
 }
-function parseJwt(token) {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-    return JSON.parse(jsonPayload);
-  } catch(e) { return null; }
-}
+function parseJwt(token) { try { const b64u = token.split('.')[1], b64 = b64u.replace(/-/g,'+').replace(/_/g,'/'), jp = decodeURIComponent(atob(b64).split('').map(c => '%' + ('00'+c.charCodeAt(0).toString(16)).slice(-2)).join('')); return JSON.parse(jp); } catch(e) { return null; } }
 function navigateTo(page) {
-  const pages = ['home', 'services', 'pricing', 'reviews', 'contacts', 'request'];
-  if (!pages.includes(page)) return;
-  const currentEl = document.getElementById('page-' + currentPage);
-  if (currentEl) {
-    currentEl.style.opacity = '0';
-    setTimeout(() => {
-      currentEl.classList.remove('active');
-      currentEl.style.display = 'none';
-    }, 300);
-  }
+  const pages = ['home','services','pricing','reviews','contacts','request']; if (!pages.includes(page)) return;
+  const ce = document.getElementById('page-'+currentPage); if (ce) { ce.style.opacity='0'; setTimeout(() => { ce.classList.remove('active'); ce.style.display='none'; }, 300); }
   setTimeout(() => {
-    const newEl = document.getElementById('page-' + page);
-    if (newEl) {
-      newEl.style.display = 'block';
-      newEl.offsetHeight;
-      newEl.style.opacity = '1';
-      newEl.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(initReveal, 100);
-      if (page === 'request' && !chatInitialized) startChat();
-    }
+    const ne = document.getElementById('page-'+page); if (ne) { ne.style.display='block'; ne.offsetHeight; ne.style.opacity='1'; ne.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); setTimeout(initReveal,100); if (page==='request' && !chatInitialized) startChat(); }
   }, 350);
-  currentPage = page;
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
-  updatePathMap(page);
-  closeMobileMenu();
+  currentPage = page; document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page===page)); updatePathMap(page); closeMobileMenu();
 }
 function updatePathMap(page) {
-  const order = ['home', 'services', 'pricing', 'reviews', 'contacts', 'request'];
-  const idx = order.indexOf(page);
-  document.querySelectorAll('.path-point').forEach((p, i) => p.classList.toggle('active', i <= idx));
-  document.querySelectorAll('.path-line').forEach((l, i) => l.classList.toggle('active', i < idx));
+  const order = ['home','services','pricing','reviews','contacts','request'], idx = order.indexOf(page);
+  document.querySelectorAll('.path-point').forEach((p,i) => p.classList.toggle('active', i<=idx));
+  document.querySelectorAll('.path-line').forEach((l,i) => l.classList.toggle('active', i<idx));
 }
 function initReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  reveals.forEach(el => { if (!el.classList.contains('visible')) observer.observe(el); });
+  const rv = document.querySelectorAll('.reveal'), obs = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:0.1, rootMargin:'0px 0px -50px 0px' });
+  rv.forEach(el => { if (!el.classList.contains('visible')) obs.observe(el); });
 }
-function toggleAccordion(header) {
-  const item = header.parentElement;
-  const isOpen = item.classList.contains('open');
+function toggleAccordion(hdr) {
+  const it = hdr.parentElement, op = it.classList.contains('open');
   document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
+  if (!op) it.classList.add('open');
 }
-function closeMobileMenu() {
-  burger.classList.remove('open');
-  mobileMenu.classList.remove('open');
-}
-document.getElementById('chatSendBtn').addEventListener('click', () => {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (text) {
-    input.value = '';
-    sendUserMessage(text);
-  }
-});
-document.getElementById('chatInput').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    const input = e.target;
-    const text = input.value.trim();
-    if (text) {
-      input.value = '';
-      sendUserMessage(text);
-    }
-  }
-});
+function closeMobileMenu() { burger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+document.getElementById('chatSendBtn').addEventListener('click', () => { const inp = document.getElementById('chatInput'), txt = inp.value.trim(); if (txt) { inp.value=''; sendUserMessage(txt); } });
+document.getElementById('chatInput').addEventListener('keypress', e => { if (e.key==='Enter') { const inp = e.target, txt = inp.value.trim(); if (txt) { inp.value=''; sendUserMessage(txt); } } });
 document.getElementById('authClose').addEventListener('click', closeAuthOverlay);
-document.querySelectorAll('[data-page]').forEach(link => {
-  link.addEventListener('click', (e) => { e.preventDefault(); navigateTo(link.dataset.page); });
-});
-document.querySelectorAll('.path-point').forEach(point => {
-  point.addEventListener('click', () => navigateTo(point.dataset.page));
-});
-const burger = document.getElementById('burger');
-const mobileMenu = document.getElementById('mobileMenu');
-burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').style.background = window.scrollY > 50 ? 'rgba(5,13,10,0.95)' : 'rgba(5,13,10,0.7)';
-});
-document.querySelectorAll('.glass').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty('--mx', x + '%');
-    card.style.setProperty('--my', y + '%');
-  });
-});
-initReveal();
-initGoogleAuth();
-navigateTo('home');
+document.querySelectorAll('[data-page]').forEach(l => { l.addEventListener('click', e => { e.preventDefault(); navigateTo(l.dataset.page); }); });
+document.querySelectorAll('.path-point').forEach(p => { p.addEventListener('click', () => navigateTo(p.dataset.page)); });
+const burger = document.getElementById('burger'), mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+window.addEventListener('scroll', () => { document.getElementById('mainNav').style.background = window.scrollY > 50 ? 'rgba(5,13,10,0.95)' : 'rgba(5,13,10,0.7)'; });
+document.querySelectorAll('.glass').forEach(c => { c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(), x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100; c.style.setProperty('--mx', x+'%'); c.style.setProperty('--my', y+'%'); }); });
+initReveal(); initGoogleAuth(); navigateTo('home');
 </script>
 </body>
 </html>
