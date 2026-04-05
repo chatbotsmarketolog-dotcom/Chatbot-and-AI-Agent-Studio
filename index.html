@@ -475,7 +475,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dar
 
 <script>
 // ==================== КОНФИГУРАЦИЯ ====================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhECNnC-r3-1zUBQn1UODXDjGLmk_dgbmZ6OYXeO3XX4BGM-XODBCIL_GiSOJfk8lyzA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZIwozMK38ozFHp7ZWys3Fmo3tcv2Q7YP5vdRZ6IGxR6Q5-NL0cHiTJaKDhT82iJ7Dmg/exec';
 const GOOGLE_CLIENT_ID = '198238047306-u0s10ilol27lpmqemtlj1as9m963nfav.apps.googleusercontent.com';
 
 // ==================== БАЗА ЗНАНИЙ (УЛУЧШЕННАЯ) ====================
@@ -742,37 +742,60 @@ function formatDateToDMY(date) {
   return `${d}.${m}.${y}`;
 }
 async function fetchFreeSlots() {
-  const res = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'action=getFreeSlots'
-  });
-  return await res.json();
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlots', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    return await res.json();
+  } catch (error) {
+    console.error('Ошибка получения слотов:', error);
+    return [];
+  }
 }
 async function fetchFreeTimesForDate(date) {
-  const res = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `action=getFreeSlotsByDate&date=${encodeURIComponent(date)}`
-  });
-  return await res.json();
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlotsByDate&date=' + encodeURIComponent(date), {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    return await res.json();
+  } catch (error) {
+    console.error('Ошибка получения времени:', error);
+    return [];
+  }
 }
 async function fetchNearestFreeDate() {
-  const res = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: 'action=getNearestFreeDate'
-  });
-  const data = await res.json();
-  return data.nearest;
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getNearestFreeDate', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    return data.nearest;
+  } catch (error) {
+    console.error('Ошибка получения даты:', error);
+    return null;
+  }
 }
 async function bookSlot(date, time, userName, contact) {
-  const res = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `action=bookSlot&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&userName=${encodeURIComponent(userName)}&contact=${encodeURIComponent(contact)}`
-  });
-  return await res.json();
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'bookSlot',
+        date: date,
+        time: time,
+        userName: userName,
+        contact: contact
+      })
+    });
+    return await res.json();
+  } catch (error) {
+    console.error('Ошибка бронирования:', error);
+    return { success: false, message: 'Ошибка соединения' };
+  }
 }
 function getWeekNumber(date) {
   const d = new Date(date);
@@ -966,16 +989,19 @@ function startPollingForResponse() {
   if (pollingInterval) clearInterval(pollingInterval);
   pollingInterval = setInterval(async () => {
     if (!userSessionId) return;
-    const res = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `action=getManagerResponse&userSessionId=${userSessionId}`
-    });
-    const data = await res.json();
-    if (data.response) {
-      clearInterval(pollingInterval);
-      addBotMessage(data.response);
-      userSessionId = null;
+    try {
+      const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getManagerResponse&userSessionId=' + userSessionId, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const data = await res.json();
+      if (data.response) {
+        clearInterval(pollingInterval);
+        addBotMessage(data.response);
+        userSessionId = null;
+      }
+    } catch (error) {
+      console.error('Ошибка получения ответа:', error);
     }
   }, 5000);
 }
