@@ -8,15 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async></script>
 <style>
-/* Все стили – без изменений, оставляем как было */
-:root {
-  --pine: #1B4332; --pine-deep: #143628; --pine-light: #2D6A4F;
-  --ocean: #0B6E7A; --ocean-light: #0E8A9E; --ocean-bright: #10A5B8;
-  --neon-blue: #00E5FF; --neon-green: #00FF88; --neon-purple: #A855F7;
-  --bg-dark: #050D0A; --bg-card: rgba(18,43,31,0.6); --bg-glass: rgba(10,31,22,0.4);
-  --text-white: #E8FFF5; --text-muted: #7BA88F; --text-dim: #4A7059;
-  --border-glow: rgba(0,229,255,0.15); --glow-cyan: rgba(0,229,255,0.4); --glow-green: rgba(0,255,136,0.3);
-}
+/* ========== ВСЕ ВАШИ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ ========== */
+:root { --pine: #1B4332; --pine-deep: #143628; --pine-light: #2D6A4F; --ocean: #0B6E7A; --ocean-light: #0E8A9E; --ocean-bright: #10A5B8; --neon-blue: #00E5FF; --neon-green: #00FF88; --neon-purple: #A855F7; --bg-dark: #050D0A; --bg-card: rgba(18, 43, 31, 0.6); --bg-glass: rgba(10, 31, 22, 0.4); --text-white: #E8FFF5; --text-muted: #7BA88F; --text-dim: #4A7059; --border-glow: rgba(0, 229, 255, 0.15); --glow-cyan: rgba(0, 229, 255, 0.4); --glow-green: rgba(0, 255, 136, 0.3); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-white); overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
@@ -482,14 +475,18 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dar
 
 <script>
 // ==================== КОНФИГУРАЦИЯ ====================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxnAfgaQ8AHFLVpjzSCSVRoNjQxsA4lMEP3SW32YCjpW7jcwFH83o5kvgusi8QV2TDctQ/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhECNnC-r3-1zUBQn1UODXDjGLmk_dgbmZ6OYXeO3XX4BGM-XODBCIL_GiSOJfk8lyzA/exec';
 const GOOGLE_CLIENT_ID = '198238047306-u0s10ilol27lpmqemtlj1as9m963nfav.apps.googleusercontent.com';
 
-// ==================== БАЗА ЗНАНИЙ ====================
+// ==================== БАЗА ЗНАНИЙ (УЛУЧШЕННАЯ) ====================
 const knowledgeBase = [
   {
-    keywords: ['кто такая кристина', 'кристина кто', 'расскажите о кристине', 'эксперт'],
-    answer: 'Кристина — эксперт по автономным брендам, созданию чат-ботов и AI-агентов. Помогает экспертам, предпринимателям выйти из рутины через технологии и цифровую эстетику. У неё 6 лет в маркетинге, 4 года в ботах, с 2025 года создаёт ИИ-агентов. Более 30 успешных проектов.'
+    keywords: ['сколько стоит', 'цена', 'стоимость', 'прайс', 'цену', 'расценки', 'стоимость бота', 'стоимость агента', 'сколько стоит чат-бот', 'сколько стоит ai-агент'],
+    answer: '💰 Стоимость зависит от сложности проекта:\n• Сценарный чат-бот — от 4 500 ₽.\n• AI-агент «Паттерн» (Telegram) — 25 000 ₽.\n• AI-агент «Система» (Telegram + сайт) — 42 000 ₽.\n• Сайт на коде — 15 000 ₽.\n• Бот на коде — 10 000 ₽.\n• Спецпредложение первым трём клиентам: комплекс (сайт+бот) — 4 500 ₽!\n\nДля точной цены напишите, какая задача вас интересует, и мы проведём бесплатную консультацию.'
+  },
+  {
+    keywords: ['кто такая кристина', 'кристина кто', 'расскажите о кристине', 'эксперт', 'кто вы'],
+    answer: '👩‍💻 Кристина — эксперт по автономным брендам, созданию чат-ботов и AI-агентов. Помогает экспертам, предпринимателям выйти из рутины через технологии и цифровую эстетику. У неё 6 лет в маркетинге, 4 года в ботах, с 2025 года создаёт ИИ-агентов. Более 30 успешных проектов.'
   },
   {
     keywords: ['опыт', 'сколько лет', 'стаж', 'проектов'],
@@ -498,22 +495,6 @@ const knowledgeBase = [
   {
     keywords: ['образование', 'училась', 'компьютерная академия'],
     answer: 'Кристина закончила компьютерную академию «ШАГ» по специальности «автоматизированное тестирование ПО», параллельно изучала маркетинг, личный бренд и продающую визуализацию.'
-  },
-  {
-    keywords: ['стоимость бота', 'сколько стоит бот', 'цена чат-бота', 'бот цена'],
-    answer: 'Стоимость чат-бота зависит от сложности. Простой сценарный бот — от 4 500 ₽. Если нужны интеграции, оплата, нейрофотосессия — цена увеличивается на +500 ₽ за каждую опцию. Точную цену назову после консультации.'
-  },
-  {
-    keywords: ['стоимость агента', 'ai-агент цена', 'паттерн', 'система'],
-    answer: 'Тарифы на AI-агентов:\n• «Паттерн» — 25 000 ₽ (агент в Telegram, обучение стилю, 3 месяца обновлений).\n• «Система» — 42 000 ₽ (всё из Паттерн + интеграция на сайт, поддержка 3 дня, 6 месяцев обновлений, второй агент со скидкой 15%).'
-  },
-  {
-    keywords: ['сайт на коде', 'проект на коде', 'сайт цена', 'сайт стоимость'],
-    answer: 'Я создаю сайты на чистом коде (HTML/CSS/JS) под ваш бренд. Стоимость сайта — 15 000 ₽. Бот на коде — 10 000 ₽. Комплекс сайт+бот — 25 000 ₽.'
-  },
-  {
-    keywords: ['спецпредложение', 'первым трём', '4500', 'акция', 'скидка'],
-    answer: '🔥 Спецпредложение: первым трём клиентам полный проект (сайт + бот) — 4 500 ₽! Далее цена — 25 000 ₽. Сайт отдельно — 15 000 ₽, бот на коде — 10 000 ₽.'
   },
   {
     keywords: ['примеры ботов', 'посмотреть ботов', 'боты примеры'],
@@ -546,10 +527,6 @@ const knowledgeBase = [
   {
     keywords: ['время работы', 'по мск', 'часы работы', 'когда отвечает'],
     answer: 'Кристина работает по московскому времени (МСК). Обычно отвечает в рабочие дни с 10:00 до 19:00. AI-агенты работают 24/7.'
-  },
-  {
-    keywords: ['как записаться', 'запись на консультацию', 'хочу на консультацию'],
-    answer: 'Для записи на консультацию просто напишите «записаться» или заполните анкету — бот поможет.'
   }
 ];
 
@@ -563,6 +540,17 @@ function getAnswerFromKnowledgeBase(question) {
     }
   }
   return null;
+}
+
+// ==================== ОТПРАВКА НЕИЗВЕСТНОГО ВОПРОСА ====================
+async function sendUnknownQuestionAndGetId(question, userName) {
+  const response = await fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'unknownQuestion', question: question, userName: userName })
+  });
+  const data = await response.json();
+  return data.sessionId;
 }
 
 // ==================== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ====================
@@ -684,6 +672,13 @@ function handleAction(action) {
     addUserMessage('📝 Заполнить анкету');
     chatStep = 1;
     goToStep(1);
+  } else if (action.startsWith('show_date_')) {
+    const date = action.replace('show_date_', '');
+    addUserMessage(`Показать время на ${date}`);
+    selectDate(date);
+  } else if (action === 'cancel') {
+    addUserMessage('❌ Нет, спасибо');
+    addBotMessage('Хорошо, если передумаете, всегда можете записаться через кнопку "Записаться" в меню.');
   }
 }
 function goToStep(stepIndex) {
@@ -714,68 +709,37 @@ function goToStep(stepIndex) {
     }
   }, 800);
 }
-async function sendUnknownQuestionAndGetId(question, userName) {
-  const response = await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'unknownQuestion', question: question, userName: userName })
-  });
-  const data = await response.json();
-  return data.sessionId;
+
+function parseUserDate(input) {
+  input = input.trim().toLowerCase();
+  // Формат ДД.ММ или ДД.ММ.ГГГГ
+  var match = input.match(/^(\d{1,2})\.(\d{1,2})(?:\.(\d{4}|\d{2}))?$/);
+  if (match) {
+    var day = parseInt(match[1],10);
+    var month = parseInt(match[2],10);
+    var year = match[3] ? (match[3].length===2 ? 2000+parseInt(match[3],10) : parseInt(match[3],10)) : new Date().getFullYear();
+    if (day>=1 && day<=31 && month>=1 && month<=12) {
+      return new Date(year, month-1, day);
+    }
+  }
+  // Формат "7 апреля", "07 апреля 2026"
+  var months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  for (var i=0; i<months.length; i++) {
+    var regex = new RegExp('(\\d{1,2})\\s*' + months[i] + '(?:\\s*(\\d{4}))?');
+    var m = input.match(regex);
+    if (m) {
+      var d = parseInt(m[1],10);
+      var y = m[2] ? parseInt(m[2],10) : new Date().getFullYear();
+      if (d>=1 && d<=31) return new Date(y, i, d);
+    }
+  }
+  return null;
 }
-function startPollingForResponse() {
-  if (pollingInterval) clearInterval(pollingInterval);
-  pollingInterval = setInterval(async () => {
-    if (!userSessionId) return;
-    const res = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `action=getManagerResponse&userSessionId=${userSessionId}`
-    });
-    const data = await res.json();
-    if (data.response) {
-      clearInterval(pollingInterval);
-      addBotMessage(data.response);
-      userSessionId = null;
-    }
-  }, 5000);
-}
-async function sendUserMessage(text) {
-  addUserMessage(text);
-  
-  if (freeInputStep !== null) {
-    const stepIdx = freeInputStep;
-    if (stepIdx === 1) chatData.name = text;
-    else if (stepIdx === 2) chatData.age = text;
-    else if (stepIdx === 3) chatData.sphere = text;
-    else if (stepIdx === 6) chatData.contact = text;
-    freeInputStep = null;
-    isWaitingForInput = false;
-    setTimeout(() => goToStep(stepIdx + 1), 500);
-    return;
-  }
-  if (isWaitingForInput) {
-    if (chatStep === 1) {
-      chatData.name = text;
-      isWaitingForInput = false;
-      setTimeout(() => goToStep(2), 500);
-    } else if (chatStep === 6) {
-      chatData.contact = text;
-      isWaitingForInput = false;
-      setTimeout(() => goToStep(7), 500);
-    }
-    return;
-  }
-  const answer = getAnswerFromKnowledgeBase(text);
-  if (answer) {
-    addBotMessage(answer);
-  } else {
-    addBotMessage('Спасибо за ваш вопрос! Я свяжусь с вами в ближайшее время 🙂');
-    userSessionId = await sendUnknownQuestionAndGetId(text, userName || chatData.name || 'Гость');
-    if (userSessionId) {
-      startPollingForResponse();
-    }
-  }
+function formatDateToDMY(date) {
+  const d = date.getDate().toString().padStart(2,'0');
+  const m = (date.getMonth()+1).toString().padStart(2,'0');
+  const y = date.getFullYear();
+  return `${d}.${m}.${y}`;
 }
 async function fetchFreeSlots() {
   const res = await fetch(GOOGLE_SCRIPT_URL, {
@@ -793,6 +757,15 @@ async function fetchFreeTimesForDate(date) {
   });
   return await res.json();
 }
+async function fetchNearestFreeDate() {
+  const res = await fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: 'action=getNearestFreeDate'
+  });
+  const data = await res.json();
+  return data.nearest;
+}
 async function bookSlot(date, time, userName, contact) {
   const res = await fetch(GOOGLE_SCRIPT_URL, {
     method: 'POST',
@@ -801,10 +774,12 @@ async function bookSlot(date, time, userName, contact) {
   });
   return await res.json();
 }
-function parseDateFromDMY(dateStr) {
-  const parts = dateStr.split('.');
-  if (parts.length !== 3) return null;
-  return new Date(parseInt(parts[2],10), parseInt(parts[1],10)-1, parseInt(parts[0],10));
+function getWeekNumber(date) {
+  const d = new Date(date);
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(d.getFullYear(), 0, 4);
+  return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
 }
 function getStartOfWeek(date) {
   const d = new Date(date);
@@ -818,11 +793,11 @@ function groupSlotsByWeek(slots) {
   const nextWeekStart = new Date(currentWeekStart);
   nextWeekStart.setDate(currentWeekStart.getDate() + 7);
   const thisWeekSlots = slots.filter(slot => {
-    const slotDate = parseDateFromDMY(slot.date);
+    const slotDate = parseUserDate(slot.date);
     return slotDate >= currentWeekStart && slotDate < nextWeekStart;
   });
   const nextWeekSlots = slots.filter(slot => {
-    const slotDate = parseDateFromDMY(slot.date);
+    const slotDate = parseUserDate(slot.date);
     return slotDate >= nextWeekStart;
   });
   return { thisWeek: thisWeekSlots, nextWeek: nextWeekSlots };
@@ -832,6 +807,8 @@ async function showDateSelection() {
   const slots = await fetchFreeSlots();
   if (!slots.length) {
     addBotMessage('К сожалению, на ближайшие две недели нет свободных слотов. Попробуйте позже или свяжитесь с нами напрямую.');
+    // Сохраняем заявку без записи
+    submitFormWithoutBooking();
     return;
   }
   const { thisWeek, nextWeek } = groupSlotsByWeek(slots);
@@ -844,6 +821,7 @@ async function showDateSelection() {
     addBotMessage('На этой неделе свободных мест нет. Вот даты на следующей неделе:');
   } else {
     addBotMessage('Нет свободных дат на ближайшие две недели.');
+    submitFormWithoutBooking();
     return;
   }
   const dateButtons = datesToShow.map(slot => ({ text: slot.date, value: slot.date }));
@@ -879,6 +857,8 @@ async function selectTime(time) {
       </div>`;
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
+    // Сохраняем заявку с информацией о записи
+    submitFormWithBooking(selectedDate, time);
   } else {
     addBotMessage(`❌ К сожалению, это время уже занято. Пожалуйста, выберите другое.`);
     availableTimes = await fetchFreeTimesForDate(selectedDate);
@@ -889,15 +869,125 @@ async function selectTime(time) {
     }
   }
 }
+function submitFormWithBooking(date, time) {
+  const payload = {
+    name: chatData.name || userName || 'Не указано',
+    age: chatData.age || 'Не указано',
+    sphere: chatData.sphere || 'Не указано',
+    service: chatData.service || 'Не указано',
+    income: chatData.income || 'Не указано',
+    contact: chatData.contact || 'Не указано',
+    finalChoice: chatData.finalChoice || 'Не указано',
+    date: `${date} ${time} МСК`,
+    status: 'Новая'
+  };
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error('Ошибка отправки заявки', err));
+}
+function submitFormWithoutBooking() {
+  const payload = {
+    name: chatData.name || userName || 'Не указано',
+    age: chatData.age || 'Не указано',
+    sphere: chatData.sphere || 'Не указано',
+    service: chatData.service || 'Не указано',
+    income: chatData.income || 'Не указано',
+    contact: chatData.contact || 'Не указано',
+    finalChoice: chatData.finalChoice || 'Не указано',
+    date: new Date().toLocaleString(),
+    status: 'Новая (нет свободных слотов)'
+  };
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error('Ошибка отправки заявки', err));
+  addBotMessage('Ваша анкета сохранена. Кристина свяжется с вами, как только появится свободное время.');
+}
+
+async function sendUserMessage(text) {
+  addUserMessage(text);
+  if (freeInputStep !== null) {
+    const stepIdx = freeInputStep;
+    if (stepIdx === 1) chatData.name = text;
+    else if (stepIdx === 2) chatData.age = text;
+    else if (stepIdx === 3) chatData.sphere = text;
+    else if (stepIdx === 6) chatData.contact = text;
+    freeInputStep = null;
+    isWaitingForInput = false;
+    setTimeout(() => goToStep(stepIdx + 1), 500);
+    return;
+  }
+  if (isWaitingForInput) {
+    if (chatStep === 1) {
+      chatData.name = text;
+      isWaitingForInput = false;
+      setTimeout(() => goToStep(2), 500);
+    } else if (chatStep === 6) {
+      chatData.contact = text;
+      isWaitingForInput = false;
+      setTimeout(() => goToStep(7), 500);
+    }
+    return;
+  }
+  const parsedDate = parseUserDate(text);
+  if (parsedDate && !isNaN(parsedDate.getTime())) {
+    const dateStr = formatDateToDMY(parsedDate);
+    const freeTimes = await fetchFreeTimesForDate(dateStr);
+    if (freeTimes && freeTimes.length) {
+      selectedDate = dateStr;
+      availableTimes = freeTimes;
+      addBotMessage(`На дату ${dateStr} есть свободное время:\n${freeTimes.join(', ')}`);
+      addButtons(freeTimes.map(t => ({ text: t, value: t })), 'selectTime');
+    } else {
+      const nearest = await fetchNearestFreeDate();
+      if (nearest) {
+        addBotMessage(`К сожалению, на ${dateStr} нет свободных слотов. Ближайшая свободная дата: ${nearest}. Хотите посмотреть доступное время на ${nearest}?`);
+        addButtons([{ text: `✅ Да, показать время на ${nearest}`, action: `show_date_${nearest}` }, { text: '❌ Нет, спасибо', action: 'cancel' }]);
+      } else {
+        addBotMessage(`К сожалению, на ${dateStr} нет свободных слотов и на ближайшие две недели тоже нет мест. Пожалуйста, свяжитесь с нами напрямую или попробуйте позже.`);
+        submitFormWithoutBooking();
+      }
+    }
+    return;
+  }
+  const answer = getAnswerFromKnowledgeBase(text);
+  if (answer) {
+    addBotMessage(answer);
+  } else {
+    addBotMessage('Спасибо за ваш вопрос! Я свяжусь с вами в ближайшее время 🙂');
+    userSessionId = await sendUnknownQuestionAndGetId(text, userName || chatData.name || 'Гость');
+    if (userSessionId) startPollingForResponse();
+  }
+}
+function startPollingForResponse() {
+  if (pollingInterval) clearInterval(pollingInterval);
+  pollingInterval = setInterval(async () => {
+    if (!userSessionId) return;
+    const res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `action=getManagerResponse&userSessionId=${userSessionId}`
+    });
+    const data = await res.json();
+    if (data.response) {
+      clearInterval(pollingInterval);
+      addBotMessage(data.response);
+      userSessionId = null;
+    }
+  }, 5000);
+}
 function resetChat() {
   chatStep = 0;
   chatData = { name: '', age: '', sphere: '', service: '', income: '', contact: '', finalChoice: '' };
   isWaitingForInput = false;
   freeInputStep = null;
   selectedDate = null;
-  availableTimes = null;
-  userSessionId = null;
+  availableTimes = [];
   if (pollingInterval) clearInterval(pollingInterval);
+  userSessionId = null;
   document.getElementById('chatMessages').innerHTML = '';
   document.getElementById('chatInput').disabled = false;
   document.getElementById('chatSendBtn').disabled = false;
@@ -915,12 +1005,8 @@ function startChat() {
     goToStep(0);
   }
 }
-function openAuthOverlay() {
-  document.getElementById('authOverlay').classList.add('open');
-}
-function closeAuthOverlay() {
-  document.getElementById('authOverlay').classList.remove('open');
-}
+function openAuthOverlay() { document.getElementById('authOverlay').classList.add('open'); }
+function closeAuthOverlay() { document.getElementById('authOverlay').classList.remove('open'); }
 function initGoogleAuth() {
   if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
     console.warn('Google Client ID не задан');
