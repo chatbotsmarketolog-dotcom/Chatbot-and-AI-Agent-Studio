@@ -2,593 +2,412 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Кристина — Эксперт по автономным брендам</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-/* ========== ВСЕ ВАШИ СТИЛИ (ОНИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ) ========== */
 :root { --pine: #1B4332; --pine-deep: #143628; --pine-light: #2D6A4F; --ocean: #0B6E7A; --ocean-light: #0E8A9E; --ocean-bright: #10A5B8; --neon-blue: #00E5FF; --neon-green: #00FF88; --neon-purple: #A855F7; --bg-dark: #050D0A; --bg-card: rgba(18, 43, 31, 0.6); --bg-glass: rgba(10, 31, 22, 0.4); --text-white: #E8FFF5; --text-muted: #7BA88F; --text-dim: #4A7059; --border-glow: rgba(0, 229, 255, 0.15); --glow-cyan: rgba(0, 229, 255, 0.4); --glow-green: rgba(0, 255, 136, 0.3); }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; font-size: 16px; touch-action: manipulation; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-white); overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 2px; box-shadow: 0 0 8px var(--glow-cyan); }
-.cyber-grid { position: fixed; inset: 0; z-index: -2; background: linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px); background-size: 60px 60px; animation: gridScroll 20s linear infinite; }
+::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 2px; }
+.cyber-grid { position: fixed; inset: 0; z-index: -2; background: linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px); background-size: 60px 60px; animation: gridScroll 20s linear infinite; pointer-events: none; }
 @keyframes gridScroll { to { background-position: 60px 60px; } }
-.scanline { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); opacity: 0.15; z-index: 1001; animation: scanMove 8s linear infinite; pointer-events: none; }
-@keyframes scanMove { 0% { top: -3px; } 100% { top: 100vh; } }
-.orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1; animation: orbFloat 12s ease-in-out infinite; }
-.orb-1 { width: 400px; height: 400px; background: radial-gradient(circle,rgba(0,229,255,0.15),transparent 70%); top: -100px; right: -100px; }
-.orb-2 { width: 350px; height: 350px; background: radial-gradient(circle,rgba(0,255,136,0.1),transparent 70%); bottom: -50px; left: -50px; animation-delay: -4s; }
-.orb-3 { width: 300px; height: 300px; background: radial-gradient(circle,rgba(168,85,247,0.08),transparent 70%); top: 40%; left: 50%; animation-delay: -8s; }
-@keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-40px) scale(1.1); } 66% { transform: translate(-20px,20px) scale(0.9); } }
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(5,13,10,0.7); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(0,229,255,0.1); transition: all 0.4s ease; }
-.nav::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); opacity: 0.4; }
-.nav-inner { max-width: 1300px; margin: 0 auto; padding: 0.7rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-.nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.05em; position: relative; }
-.nav-logo::before { content: '> '; color: var(--neon-green); -webkit-text-fill-color: var(--neon-green); animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.nav-links { display: flex; gap: 0.3rem; list-style: none; }
-.nav-links a { color: var(--text-muted); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.78rem; font-weight: 500; transition: all 0.3s ease; position: relative; text-transform: uppercase; letter-spacing: 0.08em; }
-.nav-links a::before { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%) scaleX(0); width: 60%; height: 1px; background: var(--neon-blue); transition: transform 0.3s ease; box-shadow: 0 0 6px var(--glow-cyan); }
-.nav-links a:hover::before, .nav-links a.active::before { transform: translateX(-50%) scaleX(1); }
-.nav-links a:hover, .nav-links a.active { color: var(--neon-blue); background: rgba(0,229,255,0.05); }
-.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; background: none; border: none; }
-.burger span { width: 22px; height: 1.5px; background: var(--neon-blue); border-radius: 2px; transition: all 0.3s ease; box-shadow: 0 0 4px var(--glow-cyan); }
-.burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.burger.open span:nth-child(2) { opacity: 0; }
-.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-.mobile-menu { display: none; position: fixed; inset: 0; background: rgba(5,13,10,0.97); z-index: 999; padding: 5rem 2rem 2rem; flex-direction: column; gap: 0.3rem; overflow-y: auto; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(5,13,10,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,229,255,0.1); }
+.nav-inner { max-width: 1300px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.burger span { width: 24px; height: 2px; background: var(--neon-blue); border-radius: 2px; }
+.mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(5,13,10,0.98); z-index: 999; padding: 1rem; flex-direction: column; gap: 0.5rem; }
 .mobile-menu.open { display: flex; }
-.mobile-menu a { color: var(--text-white); text-decoration: none; padding: 1rem 1.5rem; font-size: 1rem; font-weight: 500; border-radius: 10px; border: 1px solid transparent; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
-.mobile-menu a:hover { border-color: var(--neon-blue); background: rgba(0,229,255,0.05); color: var(--neon-blue); }
-.page-section { min-height: 100vh; padding: 6rem 1.5rem 3rem; max-width: 1300px; margin: 0 auto; display: none; opacity: 0; transition: opacity 0.5s ease; }
+.mobile-menu a { color: var(--text-white); text-decoration: none; padding: 0.8rem 1rem; font-size: 0.9rem; border-radius: 8px; }
+.mobile-menu a:hover { background: rgba(0,229,255,0.1); }
+.page-section { min-height: 100vh; padding: 5rem 1rem 2rem; max-width: 1300px; margin: 0 auto; display: none; opacity: 0; transition: opacity 0.4s ease; }
 .page-section.active { display: block; opacity: 1; }
-.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.path-map { display: flex; justify-content: center; padding: 1rem 0.5rem; margin: 1.5rem auto 3rem; max-width: 1000px; overflow-x: auto; scrollbar-width: none; }
-.path-map::-webkit-scrollbar { display: none; }
-.path-map-inner { display: flex; align-items: center; min-width: fit-content; padding: 0 1rem; }
-.path-point { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.3s ease; padding: 0.4rem; }
-.path-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--text-dim); border: 1.5px solid rgba(0,229,255,0.2); transition: all 0.4s ease; position: relative; }
-.path-dot::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 1px solid transparent; transition: all 0.4s ease; }
-.path-point.active .path-dot { background: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 12px var(--glow-cyan),0 0 25px rgba(0,229,255,0.2); transform: scale(1.3); }
-.path-point.active .path-dot::after { border-color: var(--neon-blue); animation: pulseRing 2s infinite; }
-@keyframes pulseRing { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.2); opacity: 0; } }
-.path-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--text-dim); white-space: nowrap; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.1em; }
-.path-point.active .path-label { color: var(--neon-blue); }
-.path-line { width: 35px; height: 1px; background: rgba(0,229,255,0.15); margin: 0 0.2rem; margin-bottom: 1.5rem; transition: all 0.4s ease; position: relative; overflow: hidden; }
-.path-line.active { background: var(--neon-blue); box-shadow: 0 0 8px var(--glow-cyan); }
-.path-line.active::after { content: ''; position: absolute; top: -1px; left: -100%; width: 100%; height: 3px; background: linear-gradient(90deg,transparent,white,transparent); animation: shimmer 2s infinite; }
-@keyframes shimmer { to { left: 100%; } }
-.hero { text-align: center; padding: 3rem 0 2rem; position: relative; }
-.hero::before { content: ''; position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 60%); pointer-events: none; animation: heroPulse 8s ease-in-out infinite; }
-@keyframes heroPulse { 0%,100% { transform: translateX(-50%) scale(1); opacity: 0.5; } 50% { transform: translateX(-50%) scale(1.15); opacity: 0.8; } }
-.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.2); border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 500; color: var(--neon-blue); margin-bottom: 2rem; letter-spacing: 0.12em; text-transform: uppercase; position: relative; overflow: hidden; }
-.hero-badge::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(0,229,255,0.1),transparent); animation: badgeShine 3s infinite; }
-@keyframes badgeShine { to { left: 100%; } }
-.hero-badge .dot { width: 6px; height: 6px; background: var(--neon-green); border-radius: 50%; animation: statusPulse 2s infinite; }
-@keyframes statusPulse { 0%,100% { opacity: 1; box-shadow: 0 0 6px var(--glow-green); } 50% { opacity: 0.3; } }
-.hero h1 { font-size: clamp(2.5rem,6vw,4.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.04em; position: relative; }
-.hero h1 .accent { background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; }
-.hero h1 .accent::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg,var(--neon-blue),var(--neon-green)); opacity: 0.5; box-shadow: 0 0 10px var(--glow-cyan); }
-.hero-subtitle { font-size: clamp(1rem,2vw,1.2rem); color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.8; font-weight: 300; }
-.hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 2rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: all 0.3s ease; font-family: inherit; position: relative; overflow: hidden; }
-.btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); transition: left 0.5s ease; }
-.btn:hover::before { left: 100%; }
-.btn-primary { background: linear-gradient(135deg,var(--ocean),var(--ocean-light)); color: white; box-shadow: 0 4px 25px rgba(0,229,255,0.2), inset 0 1px 0 rgba(255,255,255,0.1); border: 1px solid rgba(0,229,255,0.2); }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(0,229,255,0.35), inset 0 1px 0 rgba(255,255,255,0.15); border-color: rgba(0,229,255,0.4); }
-.btn-neon { background: transparent; color: var(--neon-blue); border: 1px solid rgba(0,229,255,0.3); box-shadow: 0 0 15px rgba(0,229,255,0.1), inset 0 0 15px rgba(0,229,255,0.05); }
-.btn-neon:hover { border-color: var(--neon-blue); background: rgba(0,229,255,0.08); transform: translateY(-3px); box-shadow: 0 0 25px rgba(0,229,255,0.25), inset 0 0 20px rgba(0,229,255,0.08); }
-.btn-sm { padding: 0.55rem 1.2rem; font-size: 0.8rem; border-radius: 10px; }
-.glass { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(0,229,255,0.08); border-radius: 20px; padding: 2rem; transition: all 0.4s ease; position: relative; overflow: hidden; }
-.glass::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); opacity: 0; transition: opacity 0.4s ease; }
-.glass::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,229,255,0.04) 0%,transparent 50%); pointer-events: none; opacity: 0; transition: opacity 0.4s ease; }
-.glass:hover { border-color: rgba(0,229,255,0.2); transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,229,255,0.05); }
-.glass:hover::before { opacity: 1; }
-.glass:hover::after { opacity: 1; }
-.section-header { text-align: center; margin-bottom: 3rem; }
-.section-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 0.8rem; display: block; }
-.section-header h2 { font-size: clamp(1.8rem,3vw,2.8rem); font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.03em; }
-.section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.5rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 1.5rem; }
-.icon-box { width: 52px; height: 52px; border-radius: 14px; background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.4rem; transition: all 0.4s ease; position: relative; }
-.glass:hover .icon-box { transform: scale(1.1) rotate(5deg); background: rgba(0,229,255,0.15); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
-.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; }
-.about-text h3 { font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
-.about-text p { color: var(--text-muted); margin-bottom: 1rem; line-height: 1.8; }
-.about-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.8rem; margin-top: 1.5rem; }
-.stat-item { background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid rgba(0,229,255,0.08); border-radius: 14px; padding: 1.2rem 0.8rem; text-align: center; transition: all 0.3s ease; }
-.stat-item:hover { border-color: rgba(0,229,255,0.2); box-shadow: 0 0 20px rgba(0,229,255,0.08); }
-.stat-num { font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-dim); margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.about-avatar-card { text-align: center; padding: 2.5rem; position: relative; }
-.avatar-ring { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; position: relative; animation: ringPulse 4s ease-in-out infinite; }
-.avatar-ring::before { content: ''; position: absolute; inset: -4px; border-radius: 50%; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); opacity: 0.3; filter: blur(10px); animation: ringGlow 4s ease-in-out infinite; }
-@keyframes ringPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-@keyframes ringGlow { 0%,100% { opacity: 0.3; } 50% { opacity: 0.6; } }
-.avatar-inner { width: 112px; height: 112px; border-radius: 50%; background: var(--bg-dark); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; position: relative; z-index: 1; }
-.social-links { display: flex; gap: 0.8rem; justify-content: center; margin-top: 1.5rem; }
-.social-link { width: 44px; height: 44px; border-radius: 12px; background: var(--bg-card); border: 1px solid rgba(0,229,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease; }
-.social-link:hover { border-color: var(--neon-blue); transform: translateY(-4px); background: rgba(0,229,255,0.08); box-shadow: 0 8px 20px rgba(0,229,255,0.15); }
-.service-block { margin-bottom: 2rem; }
-.service-block h3 { font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
-.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; padding: 0.25rem 0.7rem; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2); color: var(--neon-blue); border-radius: 6px; font-weight: 600; letter-spacing: 0.05em; }
-.service-features { list-style: none; margin: 1rem 0; }
-.service-features li { padding: 0.5rem 0; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.92rem; line-height: 1.6; }
-.service-features li::before { content: '▹'; color: var(--neon-blue); font-size: 0.85rem; margin-top: 0.15rem; flex-shrink: 0; }
-.mini-card { background: rgba(0,229,255,0.03); border: 1px solid rgba(0,229,255,0.1); border-radius: 14px; padding: 1.2rem; transition: all 0.3s ease; }
-.mini-card:hover { border-color: rgba(0,229,255,0.25); background: rgba(0,229,255,0.06); }
-.mini-card h4 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--neon-blue); }
-.accordion-item { background: var(--bg-card); border: 1px solid rgba(0,229,255,0.08); border-radius: 14px; margin-bottom: 0.6rem; overflow: hidden; transition: all 0.3s ease; }
-.accordion-item:hover { border-color: rgba(0,229,255,0.2); }
-.accordion-header { padding: 1.1rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.92rem; user-select: none; transition: background 0.3s ease; }
-.accordion-header:hover { background: rgba(0,229,255,0.03); }
-.accordion-icon { font-size: 1.2rem; transition: transform 0.3s ease; color: var(--neon-blue); font-family: 'JetBrains Mono', monospace; }
-.accordion-item.open .accordion-icon { transform: rotate(45deg); }
-.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; }
-.accordion-item.open .accordion-content { max-height: 300px; padding: 0 1.5rem 1.2rem; }
-.pricing-card { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(0,229,255,0.08); border-radius: 22px; padding: 2.2rem 1.8rem; text-align: center; position: relative; transition: all 0.4s ease; }
-.pricing-card.featured { border-color: rgba(0,229,255,0.3); box-shadow: 0 0 50px rgba(0,229,255,0.08); }
-.pricing-card.featured::before { content: 'ПОПУЛЯРНЫЙ'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); color: var(--bg-dark); padding: 0.3rem 1.2rem; border-radius: 0 0 12px 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; }
-.pricing-card:hover { transform: translateY(-8px); border-color: rgba(0,229,255,0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,229,255,0.06); }
-.pricing-card h3 { font-size: 1.2rem; margin-bottom: 0.3rem; font-weight: 700; }
-.pricing-desc { color: var(--text-dim); font-size: 0.8rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
-.pricing-price { font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0; line-height: 1; }
-.pricing-price span { font-size: 0.8rem; font-weight: 400; -webkit-text-fill-color: var(--text-dim); }
-.pricing-features { list-style: none; margin: 1.5rem 0; text-align: left; }
-.pricing-features li { padding: 0.4rem 0; color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; gap: 0.6rem; }
-.pricing-features li::before { content: '◆'; color: var(--neon-green); font-size: 0.5rem; }
-.discount-banner { background: linear-gradient(135deg,rgba(0,229,255,0.05),rgba(0,255,136,0.05)); border: 1px solid rgba(0,229,255,0.15); border-radius: 18px; padding: 2rem; margin-top: 2rem; text-align: center; position: relative; overflow: hidden; }
-.discount-banner::before { content: ''; position: absolute; top: 0; left: -100%; width: 200%; height: 100%; background: linear-gradient(90deg,transparent,rgba(0,229,255,0.05),transparent); animation: shineBanner 4s infinite; }
-@keyframes shineBanner { to { left: 100%; } }
-.discount-banner h4 { font-family: 'JetBrains Mono', monospace; color: var(--neon-blue); margin-bottom: 0.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
-.discount-banner p { color: var(--text-muted); font-size: 0.9rem; }
-.review-card { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(0,229,255,0.08); border-radius: 20px; padding: 2rem; transition: all 0.4s ease; position: relative; }
-.review-card::before { content: '"'; position: absolute; top: 1rem; right: 1.5rem; font-size: 4rem; color: rgba(0,229,255,0.08); font-family: Georgia, serif; line-height: 1; }
-.review-card:hover { transform: translateY(-5px); border-color: rgba(0,229,255,0.2); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-.review-stars { color: #FFD700; margin-bottom: 0.8rem; font-size: 0.85rem; letter-spacing: 3px; text-shadow: 0 0 10px rgba(255,215,0,0.3); }
-.review-text { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
-.review-author { display: flex; align-items: center; gap: 0.8rem; }
-.review-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: var(--bg-dark); }
-.review-name { font-weight: 600; font-size: 0.9rem; }
-.review-role { font-size: 0.78rem; color: var(--text-dim); }
-.contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-.contact-item { display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem; background: var(--bg-card); backdrop-filter: blur(15px); border: 1px solid rgba(0,229,255,0.08); border-radius: 16px; text-decoration: none; color: var(--text-white); transition: all 0.4s ease; position: relative; overflow: hidden; }
-.contact-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); opacity: 0; transition: opacity 0.4s ease; }
-.contact-item:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.3), 0 0 25px rgba(0,229,255,0.08); }
-.contact-item:hover::before { opacity: 1; }
-.contact-icon { width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(135deg,rgba(0,229,255,0.15),rgba(0,255,136,0.1)); border: 1px solid rgba(0,229,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; transition: all 0.3s ease; }
-.contact-item:hover .contact-icon { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
-.contact-info h4 { font-size: 1rem; margin-bottom: 0.2rem; }
-.contact-info p { font-size: 0.82rem; color: var(--text-dim); }
-.chat-page { display: flex; flex-direction: column; align-items: center; min-height: 80vh; padding-top: 4rem; }
-.chat-container { width: 100%; max-width: 620px; background: rgba(10,31,22,0.6); backdrop-filter: blur(25px); border: 1px solid rgba(0,229,255,0.15); border-radius: 24px; overflow: hidden; box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 40px rgba(0,229,255,0.05); display: flex; flex-direction: column; height: 75vh; max-height: 700px; position: relative; }
-.chat-container::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); }
-.chat-header { padding: 1rem 1.5rem; background: rgba(0,229,255,0.03); border-bottom: 1px solid rgba(0,229,255,0.1); display: flex; align-items: center; gap: 1rem; }
-.chat-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 0 15px rgba(0,229,255,0.3); position: relative; }
-.chat-avatar::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 12px; height: 12px; background: var(--neon-green); border-radius: 50%; border: 2px solid var(--bg-dark); animation: statusPulse 2s infinite; }
+.hero { text-align: center; padding: 2rem 0; }
+.hero h1 { font-size: clamp(1.8rem,5vw,3rem); font-weight: 900; margin-bottom: 1rem; }
+.hero h1 .accent { background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-subtitle { color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; font-size: 1rem; }
+.hero-cta { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 0.8rem 1.8rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+.btn-primary { background: linear-gradient(135deg,var(--ocean),var(--ocean-light)); color: white; }
+.btn-neon { background: transparent; color: var(--neon-blue); border: 1px solid rgba(0,229,255,0.3); }
+.btn:hover { transform: translateY(-2px); }
+.glass { background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid rgba(0,229,255,0.08); border-radius: 20px; padding: 1.5rem; }
+.chat-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 0; }
+.chat-container { width: 100%; max-width: 100%; height: 100vh; max-height: 100vh; background: rgba(10,31,22,0.8); backdrop-filter: blur(25px); border: none; border-radius: 0; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 100; }
+.chat-header { padding: 1rem 1.5rem; background: rgba(0,229,255,0.05); border-bottom: 1px solid rgba(0,229,255,0.1); display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+.chat-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .chat-header-info h4 { font-size: 0.95rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
 .chat-header-info p { font-size: 0.75rem; color: var(--text-dim); }
-.chat-messages { flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth; }
-.chat-msg { max-width: 85%; animation: msgAppear 0.4s ease; }
-@keyframes msgAppear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; scroll-behavior: smooth; }
+.chat-msg { max-width: 90%; animation: msgAppear 0.3s ease; }
+@keyframes msgAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .chat-msg.bot { align-self: flex-start; }
 .chat-msg.user { align-self: flex-end; }
-.msg-bubble { padding: 0.9rem 1.2rem; border-radius: 16px; font-size: 0.88rem; line-height: 1.6; word-wrap: break-word; }
-.chat-msg.bot .msg-bubble { background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.1); color: var(--text-white); border-bottom-left-radius: 4px; }
-.chat-msg.user .msg-bubble { background: linear-gradient(135deg,rgba(0,229,255,0.15),rgba(0,255,136,0.1)); border: 1px solid rgba(0,229,255,0.2); color: var(--text-white); border-bottom-right-radius: 4px; }
-.msg-time { font-size: 0.65rem; color: var(--text-dim); margin-top: 0.3rem; padding: 0 0.3rem; font-family: 'JetBrains Mono', monospace; }
-.chat-msg.user .msg-time { text-align: right; }
-.chat-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
-.chat-btn { padding: 0.5rem 1rem; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15); border-radius: 10px; color: var(--neon-blue); font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; font-family: inherit; text-decoration: none; display: inline-block; }
-.chat-btn:hover { background: rgba(0,229,255,0.15); border-color: rgba(0,229,255,0.4); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,229,255,0.15); }
-.chat-btn.selected { background: rgba(0,229,255,0.2); color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 12px rgba(0,229,255,0.2); }
-.chat-input-area { padding: 1rem 1.5rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(0,229,255,0.02); display: flex; gap: 0.8rem; align-items: center; }
-.chat-input { flex: 1; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12); border-radius: 14px; padding: 0.8rem 1.2rem; color: var(--text-white); font-size: 0.88rem; font-family: inherit; outline: none; transition: all 0.3s ease; }
-.chat-input:focus { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0,229,255,0.1); background: rgba(0,229,255,0.06); }
-.chat-input::placeholder { color: var(--text-dim); }
-.chat-send { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); border: none; color: var(--bg-dark); font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; }
-.chat-send:hover { transform: scale(1.08); box-shadow: 0 4px 20px rgba(0,229,255,0.4); }
-.chat-send:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
-.typing-indicator { display: flex; gap: 5px; padding: 0.8rem 1.2rem; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.1); border-radius: 16px; border-bottom-left-radius: 4px; width: fit-content; }
-.typing-dot { width: 6px; height: 6px; background: var(--neon-blue); border-radius: 50%; animation: typingBounce 1.4s infinite; box-shadow: 0 0 6px var(--glow-cyan); }
+.msg-bubble { padding: 0.8rem 1rem; border-radius: 14px; font-size: 0.9rem; line-height: 1.5; word-wrap: break-word; }
+.chat-msg.bot .msg-bubble { background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.1); color: var(--text-white); }
+.chat-msg.user .msg-bubble { background: linear-gradient(135deg,rgba(0,229,255,0.2),rgba(0,255,136,0.15)); border: 1px solid rgba(0,229,255,0.25); color: var(--text-white); }
+.msg-time { font-size: 0.6rem; color: var(--text-dim); margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
+.chat-buttons { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+.chat-btn { padding: 0.4rem 0.9rem; background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.15); border-radius: 8px; color: var(--neon-blue); font-size: 0.8rem; cursor: pointer; font-family: inherit; }
+.chat-input-area { padding: 0.8rem 1rem; border-top: 1px solid rgba(0,229,255,0.1); background: rgba(0,229,255,0.03); display: flex; gap: 0.6rem; align-items: center; flex-shrink: 0; }
+.chat-input { flex: 1; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.12); border-radius: 12px; padding: 0.7rem 1rem; color: var(--text-white); font-size: 0.9rem; outline: none; font-family: inherit; }
+.chat-input:focus { border-color: var(--neon-blue); }
+.chat-send { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg,var(--neon-blue),var(--neon-green)); border: none; color: var(--bg-dark); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.typing-indicator { display: flex; gap: 4px; padding: 0.7rem 1rem; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.1); border-radius: 14px; width: fit-content; }
+.typing-dot { width: 5px; height: 5px; background: var(--neon-blue); border-radius: 50%; animation: typingBounce 1.4s infinite; }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-8px); opacity: 1; } }
-.auth-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
-.auth-overlay.open { display: flex; }
-.auth-card { background: rgba(10,31,22,0.95); border: 1px solid rgba(0,229,255,0.2); border-radius: 24px; padding: 2.5rem; width: 90%; max-width: 400px; text-align: center; animation: modalIn 0.3s ease; box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,229,255,0.1); position: relative; overflow: hidden; }
-.auth-card::before { content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--neon-blue),transparent); }
-@keyframes modalIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-.auth-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-.auth-card p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.85rem; }
-.auth-google { display: flex; align-items: center; justify-content: center; gap: 0.7rem; width: 100%; padding: 0.9rem; background: white; color: #333; border: none; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.3s ease; margin-bottom: 1rem; }
-.auth-google:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,255,255,0.15); }
-.auth-google-icon { width: 20px; height: 20px; }
-.auth-close { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 0.85rem; padding: 0.5rem; font-family: inherit; transition: color 0.3s ease; }
-.auth-close:hover { color: var(--neon-blue); }
-.footer { border-top: 1px solid rgba(0,229,255,0.08); padding: 2rem; text-align: center; color: var(--text-dim); font-size: 0.8rem; margin-top: 3rem; }
-.footer-inner { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a { color: var(--text-dim); text-decoration: none; transition: color 0.3s ease; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.05em; }
-.footer-links a:hover { color: var(--neon-blue); }
+@keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
 @media (max-width: 768px) {
-  .nav-links { display: none; }
   .burger { display: flex; }
-  .about-grid, .contacts-grid { grid-template-columns: 1fr; }
-  .about-stats { grid-template-columns: repeat(2,1fr); }
-  .page-section { padding: 5rem 1.2rem 2rem; }
-  .chat-container { height: 85vh; max-height: none; border-radius: 18px; }
-  .hero h1 { font-size: 2.2rem; }
-  .grid-3 { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; }
-}
-@media (max-width: 480px) {
-  .chat-buttons { flex-direction: column; }
-  .chat-btn { width: 100%; text-align: center; }
-  .path-map { padding: 0.8rem 0; }
-  .hero h1 { font-size: 1.8rem; }
-}
-.text-center { text-align: center; }
-.mt-2 { margin-top: 2rem; }
-.mt-3 { margin-top: 3rem; }
-.mb-1 { margin-bottom: 1rem; }
-.hidden { display: none !important; }
-.terminal { font-family: 'JetBrains Mono', monospace; background: rgba(0,0,0,0.3); border: 1px solid rgba(0,229,255,0.1); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1rem 0; }
-.terminal-line { color: var(--text-muted); font-size: 0.82rem; line-height: 1.8; }
-.terminal-line .cmd { color: var(--neon-green); }
-.terminal-line .flag { color: var(--neon-blue); }
-.terminal-line .val { color: #FFD700; }
-.manager-btn {
-  position: fixed;
-  top: 90px;
-  right: 20px;
-  z-index: 1100;
-  background: linear-gradient(135deg, #FF8800, #FF6600);
-  border: none;
-  border-radius: 40px;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 15px rgba(255,136,0,0.3);
-  transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.manager-btn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #FF7700, #FF5500);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 20px rgba(255,136,0,0.5);
-}
-.manager-btn:active {
-  transform: scale(0.98);
-}
-@media (max-width: 768px) {
-  .manager-btn {
-    top: 80px;
-    right: 10px;
-    padding: 8px 14px;
-    font-size: 12px;
-  }
+  .nav-links { display: none; }
+  .page-section { padding: 4.5rem 0.8rem 1.5rem; }
+  .chat-container { height: 100vh; max-height: 100vh; border-radius: 0; }
+  .chat-messages { padding: 0.8rem; }
+  .chat-input-area { padding: 0.6rem 0.8rem; }
 }
 </style>
 </head>
 <body>
-<div class="cyber-grid"></div><div class="scanline"></div>
-<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
-<button class="manager-btn" id="managerBtn" style="display: none;" onclick="callManager()">👨‍💼 Вызвать менеджера</button>
-<div class="auth-overlay" id="authOverlay"><div class="auth-card"><div style="font-size:2.5rem;margin-bottom:1rem">🔐</div><h3>Авторизация через Google</h3><p>Войдите, чтобы мы запомнили вас</p><div id="googleLoginBtn" style="display:flex;justify-content:center"></div><button class="auth-close" id="authClose" style="margin-top:1rem">Отмена</button></div></div>
-<nav class="nav" id="mainNav"><div class="nav-inner"><div class="nav-logo">KRISTINA.AI</div><ul class="nav-links" id="navLinks"><li><a href="#" data-page="home" class="active">Главная</a></li><li><a href="#" data-page="services">Услуги</a></li><li><a href="#" data-page="pricing">Стоимость</a></li><li><a href="#" data-page="reviews">Отзывы</a></li><li><a href="#" data-page="contacts">Контакты</a></li><li><a href="#" data-page="request" style="color:var(--neon-blue)">Заявка</a></li></ul><button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
-<div class="mobile-menu" id="mobileMenu"><a href="#" data-page="home">// Главная</a><a href="#" data-page="services">// Услуги</a><a href="#" data-page="pricing">// Стоимость</a><a href="#" data-page="reviews">// Отзывы</a><a href="#" data-page="contacts">// Контакты</a><a href="#" data-page="request" style="color:var(--neon-blue);font-weight:700">// Оставить заявку</a></div>
-<section class="page-section active" id="page-home"><div class="hero reveal"><div class="hero-badge"><span class="dot"></span>AI-агенты и автономные бренды</div><h1>Ваш бренд будет<br>работать <span class="accent">самостоятельно</span></h1><p class="hero-subtitle">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия.</p><div class="hero-cta"><button class="btn btn-primary" onclick="navigateTo('request')"><span>⚡</span> Оставить заявку</button><button class="btn btn-neon" onclick="navigateTo('services')"><span>→</span> Узнать больше</button></div></div><div class="path-map reveal reveal-delay-1"><div class="path-map-inner" id="pathMap"><div class="path-point active" data-page="home"><div class="path-dot"></div><span class="path-label">Главная</span></div><div class="path-line"></div><div class="path-point" data-page="services"><div class="path-dot"></div><span class="path-label">Услуги</span></div><div class="path-line"></div><div class="path-point" data-page="pricing"><div class="path-dot"></div><span class="path-label">Стоимость</span></div><div class="path-line"></div><div class="path-point" data-page="reviews"><div class="path-dot"></div><span class="path-label">Отзывы</span></div><div class="path-line"></div><div class="path-point" data-page="contacts"><div class="path-dot"></div><span class="path-label">Контакты</span></div><div class="path-line"></div><div class="path-point" data-page="request"><div class="path-dot"></div><span class="path-label">Заявка</span></div></div></div><div class="about-grid reveal reveal-delay-2"><div class="about-text"><h3>Кто я?</h3><p>Я — <strong>Кристина</strong>, эксперт по автономным брендам. Помогаю экспертам, предпринимателям и онлайн-проектам выйти из рутины через технологии и цифровую эстетику.</p><p>Я создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Мой козырь — маркетинговое мышление и опыт в продажах. Я создаю системы, которые привлекают, вовлекают и закрывают в доверие.</p><div class="terminal"><div class="terminal-line"><span class="cmd">$</span> expert --name <span class="val">"Кристина"</span></div><div class="terminal-line"><span class="cmd">$</span> skills --list <span class="flag">[SMM, боты, AI-агенты]</span></div><div class="terminal-line"><span class="cmd">$</span> projects --count <span class="val">30+</span></div><div class="terminal-line"><span class="cmd">$</span> experience --years <span class="val">6</span></div></div><div class="about-stats"><div class="stat-item"><div class="stat-num">6</div><div class="stat-label">лет в маркетинге</div></div><div class="stat-item"><div class="stat-num">4</div><div class="stat-label">года в ботах</div></div><div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">AI-проектов</div></div><div class="stat-item"><div class="stat-num">6+</div><div class="stat-label">публичных ботов</div></div></div></div><div><div class="glass about-avatar-card"><div class="avatar-ring"><div class="avatar-inner">👩‍💻</div></div><h3 style="margin-bottom:0.3rem">Кристина</h3><p style="color:var(--text-dim);font-size:0.82rem;margin-bottom:1rem;font-family:'JetBrains Mono',monospace">@marketologdizayner</p><p style="color:var(--text-muted);font-size:0.88rem;font-style:italic;line-height:1.7">«AI-агент — это вы в автономном режиме. Он должен чувствовать вашу энергию, а не просто выдавать текст.»</p><div class="social-links" style="margin-top:1.5rem"><a href="https://t.me/marketologdizayner" target="_blank" class="social-link" title="Telegram">💬</a><a href="https://vk.ru/kristinavcifre" target="_blank" class="social-link" title="VK">🔵</a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="social-link" title="Instagram">📸</a></div></div></div></div><div class="mt-3"><div class="section-header reveal"><span class="section-tag">// Что мы создаём</span><h2>Трансформируем бизнес</h2><p>Два направления, которые заставят ваш бренд работать на автопилоте</p></div><div class="grid-2"><div class="glass reveal reveal-delay-1" onclick="navigateTo('services')" style="cursor:pointer"><div class="icon-box">🤖</div><h3>Чат-боты</h3><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7">Сценарные автоворонки: выдача материалов, запись, анкеты, модерация, сбор отзывов.</p><p style="color:var(--neon-blue);font-weight:700;font-size:1.3rem">от 4 500 ₽</p></div><div class="glass reveal reveal-delay-2" onclick="navigateTo('services')" style="cursor:pointer"><div class="icon-box">🧠</div><h3>AI-агенты</h3><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7">Цифровой двойник, обучается вашему стилю. Заменяет маркетолога, копирайтера, аналитика.</p><p style="color:var(--neon-blue);font-weight:700;font-size:1.3rem">от 25 000 ₽</p></div></div><div class="text-center mt-2 reveal reveal-delay-3"><button class="btn btn-primary" onclick="navigateTo('request')">✨ Записаться на консультацию</button></div></div><footer class="footer"><div class="footer-inner"><span>© 2025 Кристина — Эксперт по автономным брендам</span><div class="footer-links"><a href="https://t.me/marketologdizayner" target="_blank">Telegram</a><a href="https://vk.ru/kristinavcifre" target="_blank">VK</a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank">Instagram</a></div></div></footer></section>
-<section class="page-section" id="page-services"><div class="section-header reveal"><span class="section-tag">// Услуги</span><h2>Что я делаю</h2><p>Три направления для автономного бренда</p></div><div class="service-block reveal reveal-delay-1"><div class="glass"><h3>🤖 Сценарные чат-боты <span class="tag">от 4 500 ₽</span></h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Простые и эффективные автоворонки для автоматизации рутинных задач. Точка входа в ваш бизнес.</p><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов</li><li>Автостатусы и антиспам-воронки</li><li>Сбор отзывов</li></ul><p style="color:var(--text-dim);font-size:0.82rem;margin-top:1rem;font-family:'JetBrains Mono',monospace">// любое усложнение +500 ₽</p></div></div><div class="service-block reveal reveal-delay-2"><div class="glass"><h3>🧠 AI-агенты (нейроассистенты) <span class="tag">от 25 000 ₽</span></h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Это не просто бот — это ваш цифровой двойник. Обучается вашим ответам, стилю, тону. Заменяет целую команду.</p><ul class="service-features"><li>Обучение вашим паттернам, УТП и скриптам</li><li>Ведение клиента по воронке продаж</li><li>Ответы на частые вопросы в стиле бренда</li><li>Работа в Telegram и на сайте одновременно</li><li>Поддержка на 5 языках</li><li>Независимые от мессенджеров решения на коде</li></ul><div class="grid-2" style="margin-top:1.5rem"><div class="mini-card"><h4>📋 Паттерн — 25 000 ₽</h4><ul class="service-features"><li>Агент в Telegram</li><li>Обучение стилю</li><li>Тестирование</li><li>3 месяца обновлений</li></ul></div><div class="mini-card"><h4>🌐 Система — 42 000 ₽</h4><ul class="service-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня</li><li>6 месяцев обновлений</li><li>Второй агент -15%</li></ul></div></div></div></div><div class="service-block reveal reveal-delay-3"><div class="glass"><h3>🎨 Цифровая эстетика</h3><p style="color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Нейрофотосессии, визуал, чтобы бренд выглядел цельно и приятно. Ваш бренд должен не только работать, но и вдохновлять.</p><ul class="service-features"><li>Нейрофотосессии для соцсетей и сайта</li><li>Единый визуальный стиль бренда</li><li>Создание контент-плана</li></ul></div></div><div class="reveal reveal-delay-4 mt-3"><div class="section-header" style="margin-bottom:2rem"><span class="section-tag">// FAQ</span><h2 style="font-size:1.8rem">Частые вопросы</h2></div><div id="faqAccordion"><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Чем чат-бот отличается от AI-агента?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Чат-бот работает по заранее заданному сценарию — он отвечает на конкретные кнопки и команды. AI-агент обучается вашим данным и может вести свободный диалог, понимать контекст и отвечать как вы, даже на неожиданные вопросы.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Сколько времени занимает создание?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Простой чат-бот — от 2 до 5 дней. AI-агент «Паттерн» — от 5 до 10 дней. AI-агент «Система» с интеграцией на сайт — от 7 до 14 дней.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Нужны ли мне технические знания?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Нет! Я беру на себя всю техническую часть. Вам нужно лишь пройти консультацию, поделиться информацией о бизнесе, стиле общения и задачах.</p></div></div><div class="accordion-item"><div class="accordion-header" onclick="toggleAccordion(this)">Как происходит оплата?<span class="accordion-icon">+</span></div><div class="accordion-content"><p>Полная предоплата по договору. Гарантия возврата 50% при форс-мажоре. После сдачи — 7 дней бесплатной поддержки.</p></div></div></div></div><div class="text-center mt-2 reveal"><button class="btn btn-primary" onclick="navigateTo('pricing')">💰 Посмотреть стоимость</button><button class="btn btn-neon" onclick="navigateTo('request')" style="margin-left:0.7rem">🚀 Оставить заявку</button></div></section>
-<section class="page-section" id="page-pricing"><div class="section-header reveal"><span class="section-tag">// Стоимость</span><h2>Тарифы</h2><p>Прозрачные цены для каждого уровня задач</p></div><div class="grid-3"><div class="pricing-card reveal reveal-delay-1"><div class="icon-box" style="margin:0 auto 1rem">🤖</div><h3>Чат-бот</h3><div class="pricing-desc">Сценарный бот-визитка</div><div class="pricing-price">4 500 ₽ <span>/ база</span></div><ul class="pricing-features"><li>Приветствие и выдача PDF</li><li>Запись на консультацию</li><li>Анкетирование клиентов</li><li>Модерирование чатов</li><li>Сбор отзывов</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-top:0.5rem">// +500 ₽ за усложнение</p><button class="btn btn-neon btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div><div class="pricing-card featured reveal reveal-delay-2"><div class="icon-box" style="margin:0 auto 1rem">📋</div><h3>AI-агент «Паттерн»</h3><div class="pricing-desc">Цифровой двойник в Telegram</div><div class="pricing-price">25 000 ₽</div><ul class="pricing-features"><li>Агент в Telegram</li><li>Обучение вашему стилю</li><li>Тестирование</li><li>3 месяца обновлений</li><li>Маркетинговый аудит в подарок</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--neon-green);margin-top:0.5rem">// скидка 20% бот+агент</p><button class="btn btn-primary btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div><div class="pricing-card reveal reveal-delay-3"><div class="icon-box" style="margin:0 auto 1rem">🌐</div><h3>AI-агент «Система»</h3><div class="pricing-desc">Полная экосистема с сайтом</div><div class="pricing-price">42 000 ₽</div><ul class="pricing-features"><li>Интеграция на сайт</li><li>Поддержка 3 дня после сдачи</li><li>6 месяцев обновлений</li><li>Второй агент со скидкой 15%</li><li>Сайт с интегрированным ботом</li></ul><p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--neon-green);margin-top:0.5rem">// бот+агент = -20%</p><button class="btn btn-neon btn-sm" style="width:100%;margin-top:1rem" onclick="navigateTo('request')">Выбрать</button></div></div><div class="discount-banner reveal"><h4>🔥 Спецпредложение</h4><p>Боты и AI-агенты на коде — не зависят от мессенджеров, с интеграциями и сайтом.<br><strong style="color:var(--neon-blue)">4 500 ₽</strong> — первым 3 клиентам, далее — <strong>25 000 ₽</strong>.</p></div><div class="text-center mt-2 reveal"><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem">Точная цена — после бесплатной консультации</p><button class="btn btn-primary" onclick="navigateTo('request')">📞 Записаться на консультацию</button></div></section>
-<section class="page-section" id="page-reviews"><div class="section-header reveal"><span class="section-tag">// Отзывы</span><h2>Что говорят клиенты</h2><p>Реальные результаты от реальных людей</p></div><div class="grid-2"><div class="review-card reveal reveal-delay-1"><div class="review-stars">★★★★★</div><p class="review-text">«Кристина создала мне AI-агента, который реально работает как мой цифровой двойник. Клиенты не отличают его от меня! Теперь я трачу на коммуникацию в 3 раза меньше времени.»</p><div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Ирина</div><div class="review-role">Парапсихолог</div></div></div></div><div class="review-card reveal reveal-delay-2"><div class="review-stars">★★★★★</div><p class="review-text">«Бот-визитка Кристины собирает заявки даже ночью. Я просыпаюсь и вижу, что за ночь бот уже записал 3 человека на консультацию. Это магия!»</p><div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Алексей</div><div class="review-role">Коуч, инфобизнес</div></div></div></div><div class="review-card reveal reveal-delay-3"><div class="review-stars">★★★★★</div><p class="review-text">«Очень порадовал маркетинговый подход. Кристина не просто "сделала бота", она разобралась в моей аудитории, провела аудит канала и предложила решение, которое реально конвертирует.»</p><div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Мария</div><div class="review-role">Бьюти-мастер</div></div></div></div><div class="review-card reveal reveal-delay-4"><div class="review-stars">★★★★★</div><p class="review-text">«Агент "Кира" — это шедевр. Он консультирует моих клиентов, помогает определиться с выбором услуги и записывает на приём. Я просто занимаюсь стратегией.»</p><div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-role">Туристическое агентство</div></div></div></div></div><div class="text-center mt-2 reveal"><p style="color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem">Хотите оставить отзыв?</p><a href="https://t.me/otziyv_chatbota_kristina_bot" target="_blank" class="btn btn-neon">💬 Бот для отзывов</a></div></section>
-<section class="page-section" id="page-contacts"><div class="section-header reveal"><span class="section-tag">// Контакты</span><h2>Связаться со мной</h2><p>Выберите удобный канал связи</p></div><div class="contacts-grid reveal reveal-delay-1"><a href="https://t.me/marketologdizayner" target="_blank" class="contact-item"><div class="contact-icon">💬</div><div class="contact-info"><h4>Telegram</h4><p>@marketologdizayner</p></div></a><a href="https://vk.ru/kristinavcifre" target="_blank" class="contact-item"><div class="contact-icon">🔵</div><div class="contact-info"><h4>ВКонтакте</h4><p>@kristinavcifre</p></div></a><a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="contact-item"><div class="contact-icon">📸</div><div class="contact-info"><h4>Instagram</h4><p>@gap_____ova_kristina</p></div></a><div class="contact-item" style="cursor:default"><div class="contact-icon">🕐</div><div class="contact-info"><h4>Режим работы</h4><p style="font-family:'JetBrains Mono',monospace">Пн–Пт 10:00–19:00 МСК<br>AI-агенты работают 24/7 🤖</p></div></div></div><div class="text-center mt-2 reveal reveal-delay-2"><p style="color:var(--text-muted);margin-bottom:1.5rem;font-size:1.05rem;line-height:1.7">Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите.<br>Я создам вашего <span style="color:var(--neon-blue)">цифрового двойника</span>.</p><button class="btn btn-primary" onclick="navigateTo('request')" style="font-size:1rem;padding:1rem 2.5rem">🚀 Оставить заявку</button></div></section>
-<section class="page-section" id="page-request"><div class="section-header reveal"><span class="section-tag">// Заявка</span><h2>Оставить заявку</h2><p>Общайтесь с AI-агентом Кристины — он соберёт заявку за вас</p></div><div class="chat-page reveal reveal-delay-1"><div class="chat-container" id="chatContainer"><div class="chat-header"><div class="chat-avatar">🤖</div><div class="chat-header-info"><h4>AI-Агент Кристины</h4><p>цифровой двойник • online</p></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off"><button class="chat-send" id="chatSendBtn" aria-label="Send">➤</button></div></div></div></section>
+<div class="cyber-grid"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">KRISTINA.AI</div>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="navigateTo('home'); closeMobileMenu(); return false;">// Главная</a>
+  <a href="#" onclick="navigateTo('services'); closeMobileMenu(); return false;">// Услуги</a>
+  <a href="#" onclick="navigateTo('pricing'); closeMobileMenu(); return false;">// Стоимость</a>
+  <a href="#" onclick="navigateTo('request'); closeMobileMenu(); return false;" style="color:var(--neon-blue);">// Заявка</a>
+</div>
+
+<!-- HOME -->
+<section class="page-section active" id="page-home">
+  <div class="hero">
+    <h1>Ваш бренд будет работать <span class="accent">самостоятельно</span></h1>
+    <p class="hero-subtitle">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="navigateTo('request')">⚡ Оставить заявку</button>
+      <button class="btn btn-neon" onclick="navigateTo('services')">→ Узнать больше</button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="page-section" id="page-services">
+  <div class="glass">
+    <h3>🤖 Чат-боты — от 4 500 ₽</h3>
+    <p style="color:var(--text-muted); margin: 0.5rem 0 1rem;">Сценарные автоворонки: выдача материалов, запись, анкеты.</p>
+    <h3>🧠 AI-агенты — от 25 000 ₽</h3>
+    <p style="color:var(--text-muted); margin: 0.5rem 0 1rem;">Цифровой двойник, обучается вашему стилю.</p>
+    <button class="btn btn-primary" onclick="navigateTo('request')">✨ Записаться</button>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="page-section" id="page-pricing">
+  <div class="glass">
+    <h3>💰 Тарифы</h3>
+    <ul style="list-style:none; margin:1rem 0; color:var(--text-muted);">
+      <li>• Чат-бот — от 4 500 ₽</li>
+      <li>• AI-агент «Паттерн» — 25 000 ₽</li>
+      <li>• AI-агент «Система» — 42 000 ₽</li>
+    </ul>
+    <button class="btn btn-primary" onclick="navigateTo('request')">📞 Записаться</button>
+  </div>
+</section>
+
+<!-- REQUEST (CHAT) -->
+<section class="page-section" id="page-request">
+  <div class="chat-page">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <h4>AI-Агент Кристины</h4>
+          <p>онлайн</p>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off">
+        <button class="chat-send" id="chatSendBtn">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
-// ==================== КОНФИГУРАЦИЯ (НОВЫЙ URL) ====================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzo6cIJFPAsbNNPpBqS5qIzFxm6OCfX9r5wRCN37hVpm5z79-qfMpQDNe3vHTvpsZ5l6A/exec';
-const GOOGLE_CLIENT_ID = '198238047306-u0s10ilol27lpmqemtlj1as9m963nfav.apps.googleusercontent.com';
-const knowledgeBase = [
-  { keywords: ['сколько стоит','цена','стоимость','прайс','цену','расценки'], answer: '💰 Стоимость:\n• Сценарный чат-бот — от 4 500 ₽\n• AI-агент «Паттерн» — 25 000 ₽\n• AI-агент «Система» — 42 000 ₽\n\nДля точной цены напишите, какая задача вас интересует.' },
-  { keywords: ['кто такая кристина','кристина кто','расскажите о кристине'], answer: '👩‍💻 Кристина — эксперт по автономным брендам. 6 лет в маркетинге, 4 года в ботах. Более 30 успешных проектов.' },
-  { keywords: ['контакты','связаться','как связаться'], answer: '📱 Связаться:\n• Telegram: @marketologdizayner\n• ВК: https://vk.ru/kristinavcifre\n• Instagram: @gap_____ova_kristina' }
-];
-function getAnswerFromKnowledgeBase(q) { const lq = q.toLowerCase(); for (let item of knowledgeBase) { for (let kw of item.keywords) { if (lq.includes(kw)) return item.answer; } } return null; }
+// ==================== КОНФИГУРАЦИЯ ====================
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfdrt94ExQNsHWFv6uYwtbKCC9lqS6QnnRc15hSpSntCM68v1-TacCQBbG8VowX_-lEg/exec';
 
-let currentPage = 'home', chatData = { name:'', age:'', sphere:'', service:'', income:'', contact:'', finalChoice:'' }, chatStep = 0, userName = localStorage.getItem('chat_user_name') || null, userId = localStorage.getItem('chat_user_id') || null, isWaitingForInput = false, freeInputStep = null, chatInitialized = false, selectedDate = null, availableTimes = [], userSessionId = null, pollingInterval = null, chatHistory = [];
+// ==================== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ====================
+let currentPage = 'home';
+let chatData = { name: '', age: '', sphere: '', service: '', income: '', contact: '', finalChoice: '', date: '' };
+let chatStep = 0;
+let isWaitingForInput = false;
+let chatInitialized = false;
+let chatHistory = [];
 
-// ========== ШАГИ АНКЕТЫ ==========
+// ==================== ШАГИ АНКЕТЫ ====================
 const steps = [
-  { text: 'Привет! Я — AI-агент Кристины, её цифровой двойник. Я говорю её голосом, отвечаю на вопросы и помогаю записаться на консультацию.\n\nВы можете зарегистрироваться через Google, чтобы я вас запомнил, или продолжить как гость.', buttons: [{ text: '🔐 Зарегистрироваться через Google', action: 'google' }, { text: '👤 Продолжить как гость', action: 'guest' }] },
-  { text: 'Укажите, пожалуйста, как к вам можно обращаться?', input: true },
-  { text: 'Сколько вам лет?', buttons: [{ text: 'до 25', value: 'до 25' }, { text: '26–35', value: '26–35' }, { text: '36–45', value: '36–45' }, { text: '46+', value: '46+' }, { text: '✏️ Другое', action: 'free_input' }] },
-  { text: 'В какой сфере вы развиваетесь сейчас?', buttons: [{ text: '💼 Инфобизнес', value: 'Инфобизнес' }, { text: '🧘 Коучинг/психология', value: 'Коучинг/психология' }, { text: '💅 Бьюти', value: 'Бьюти-сфера' }, { text: '✈️ Туризм', value: 'Туризм' }, { text: '✏️ Другое', action: 'free_input' }] },
-  { text: 'Какая из моих услуг вам сейчас актуальна?', buttons: [{ text: '🤖 Чат-бот', value: 'Чат-бот' }, { text: '🧠 AI-агент', value: 'AI-агент' }, { text: '💬 Общая консультация', value: 'Общая консультация' }, { text: '❓ Не знаю, помогите определиться', value: 'Затрудняюсь' }] },
-  { text: 'Какой у вас средний доход с клиента или продукта?', buttons: [{ text: 'до 10 000 ₽', value: 'до 10 000 ₽' }, { text: '10 000–50 000 ₽', value: '10 000–50 000 ₽' }, { text: '50 000–200 000 ₽', value: '50 000–200 000 ₽' }, { text: 'более 200 000 ₽', value: 'более 200 000 ₽' }, { text: '🤫 Не скажу', value: 'Не скажу' }] },
-  { text: 'Спасибо за доверие! Осталось совсем немного. 🙏\n\nУкажите ваш никнейм в любом мессенджере (Telegram, VK, Instagram), чтобы Кристина связалась с вами:', buttons: [{ text: '✏️ Напишу вручную', action: 'free_input' }] },
-  { text: 'Что именно вы хотите получить?', buttons: [{ text: '🤖 Чат-бот под ключ', value: 'Чат-бот под ключ' }, { text: '🧠 AI-агент под ключ', value: 'AI-агент под ключ' }, { text: '💬 Общая консультация', value: 'Общая консультация' }, { text: '❓ Затрудняюсь', value: 'Затрудняюсь' }] }
+  { text: 'Привет! Я — помощник Кристины. Помогу записаться на консультацию. Как к вам обращаться?', input: true },
+  { text: 'Сколько вам лет?', buttons: [{ text: 'до 25' }, { text: '26–35' }, { text: '36–45' }, { text: '46+' }] },
+  { text: 'В какой сфере вы развиваетесь?', buttons: [{ text: 'Инфобизнес' }, { text: 'Коучинг/психология' }, { text: 'Бьюти' }, { text: 'Туризм' }, { text: 'Другое' }] },
+  { text: 'Какая услуга вам интересна?', buttons: [{ text: 'Чат-бот' }, { text: 'AI-агент' }, { text: 'Консультация' }] },
+  { text: 'Какой у вас средний доход с клиента?', buttons: [{ text: 'до 10 000 ₽' }, { text: '10–50 тыс ₽' }, { text: '50–200 тыс ₽' }, { text: 'более 200 тыс ₽' }] },
+  { text: 'Укажите ваш контакт (ник в мессенджере), чтобы Кристина связалась с вами:', input: true },
+  { text: 'На какую дату и время хотите записаться? (формат: ДД.ММ.ГГГГ ЧЧ:ММ, например: 15.04.2026 14:00)', input: true }
 ];
 
-// ========== ФУНКЦИИ ЧАТА ==========
+// ==================== ФУНКЦИИ ЧАТА ====================
 function addBotMessage(text) {
-  const c = document.getElementById('chatMessages'), d = document.createElement('div');
+  const c = document.getElementById('chatMessages');
+  const d = document.createElement('div');
   d.className = 'chat-msg bot';
-  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'});
+  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
   d.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
   chatHistory.push({ sender: 'bot', text: text, time: now });
 }
+
 function addUserMessage(text) {
-  const c = document.getElementById('chatMessages'), d = document.createElement('div');
+  const c = document.getElementById('chatMessages');
+  const d = document.createElement('div');
   d.className = 'chat-msg user';
-  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'});
+  const now = new Date().toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
   d.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${now}</div>`;
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
   chatHistory.push({ sender: 'user', text: text, time: now });
 }
-function addButtons(btns, handler) {
-  const c = document.getElementById('chatMessages'), d = document.createElement('div');
-  d.className = 'chat-msg bot'; d.style.maxWidth = '100%';
-  let h = '<div class="chat-buttons">';
-  btns.forEach(b => {
-    if (b.action) h += `<button class="chat-btn" onclick="handleAction('${b.action}')">${b.text}</button>`;
-    else if (handler === 'selectDate') h += `<button class="chat-btn" onclick="selectDate('${b.value}')">${b.text}</button>`;
-    else if (handler === 'selectTime') h += `<button class="chat-btn" onclick="selectTime('${b.value}')">${b.text}</button>`;
-    else h += `<button class="chat-btn" onclick="handleValue('${b.value}', ${b.stepIndex}, this)">${b.text}</button>`;
+
+function addButtons(buttons) {
+  const c = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'chat-msg bot';
+  d.style.maxWidth = '100%';
+  let html = '<div class="chat-buttons">';
+  buttons.forEach(btn => {
+    html += `<button class="chat-btn" onclick="handleValue('${btn.text}', this)">${btn.text}</button>`;
   });
-  h += '</div>'; d.innerHTML = h; c.appendChild(d); c.scrollTop = c.scrollHeight;
+  html += '</div>';
+  d.innerHTML = html;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
 }
+
 function showTyping() {
   const c = document.getElementById('chatMessages');
-  let t = document.getElementById('typingIndicator'); if (t) t.remove();
-  const d = document.createElement('div'); d.className = 'chat-msg bot'; d.id = 'typingIndicator';
+  let t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+  const d = document.createElement('div');
+  d.className = 'chat-msg bot';
+  d.id = 'typingIndicator';
   d.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
-  c.appendChild(d); c.scrollTop = c.scrollHeight;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
 }
-function hideTyping() { const t = document.getElementById('typingIndicator'); if (t) t.remove(); }
 
-async function callManager() {
-  addUserMessage('👨‍💼 Вызвать менеджера');
-  let hist = ''; chatHistory.forEach(m => { hist += `[${m.time}] ${m.sender==='bot'?'AI-Агент':'Вы'}: ${m.text}\n`; });
-  if (!userId) {
-    const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'getUserId'}) });
-    const d = await r.json(); userId = d.userId; localStorage.setItem('chat_user_id', userId);
+function hideTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function handleValue(val, btn) {
+  if (btn) {
+    const p = btn.parentElement;
+    if (p) {
+      p.querySelectorAll('.chat-btn').forEach(b => { b.style.opacity = '0.5'; b.style.pointerEvents = 'none'; });
+      btn.style.opacity = '1';
+    }
   }
-  showTyping();
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'callManager', userId: userId, userName: userName||chatData.name||'Аноним', chatHistory: hist }) });
-    const result = await res.json(); hideTyping();
-    if (result.success) {
-      addBotMessage('✅ Менеджер получил ваш запрос! Я передал(а) всю историю переписки. Кристина ответит вам в ближайшее время. ⏳');
-    } else addBotMessage('❌ Произошла ошибка при вызове менеджера. Попробуйте позже или свяжитесь напрямую.');
-  } catch (e) { console.error(e); hideTyping(); addBotMessage('❌ Ошибка соединения. Попробуйте позже.'); }
+  addUserMessage(val);
+  if (chatStep === 1) chatData.age = val;
+  else if (chatStep === 2) chatData.sphere = val;
+  else if (chatStep === 3) chatData.service = val;
+  else if (chatStep === 4) chatData.income = val;
+  setTimeout(() => goToStep(chatStep + 1), 400);
 }
-function handleValue(val, idx, btn) {
-  if (btn) { const p = btn.parentElement; if (p) { p.querySelectorAll('.chat-btn').forEach(b => { b.style.pointerEvents='none'; b.style.opacity='0.5'; }); btn.style.opacity='1'; btn.classList.add('selected'); } }
-  addUserMessage(btn ? btn.innerText : val);
-  if (idx===2) chatData.age=val; else if (idx===3) chatData.sphere=val; else if (idx===4) chatData.service=val; else if (idx===5) chatData.income=val; else if (idx===7) chatData.finalChoice=val;
-  setTimeout(() => goToStep(idx+1), 500);
-}
-function handleAction(act) {
-  if (act==='google') { addUserMessage('🔐 Зарегистрироваться через Google'); openAuthOverlay(); }
-  else if (act==='guest') { addUserMessage('👤 Продолжить как гость'); setTimeout(() => goToStep(1), 500); }
-  else if (act==='free_input') { addUserMessage('✏️ Ввести вручную'); freeInputStep = chatStep; isWaitingForInput = true; const inp = document.getElementById('chatInput'); inp.disabled=false; inp.focus(); inp.placeholder='Введите ваш ответ...'; }
-  else if (act==='start_quiz') { addUserMessage('📝 Заполнить анкету'); chatStep=1; goToStep(1); }
-  else if (act==='cancel') { addUserMessage('❌ Нет, спасибо'); addBotMessage('Хорошо, если передумаете, всегда можете записаться через кнопку "Записаться" в меню.'); }
-}
-function goToStep(idx) {
-  chatStep = idx; isWaitingForInput = false; freeInputStep = null;
-  const inp = document.getElementById('chatInput'); inp.disabled=false; inp.placeholder='Введите сообщение...';
-  if (idx >= steps.length) { 
-    addBotMessage('Спасибо за анкету! Теперь, чтобы записаться на консультацию, укажите, пожалуйста, желаемые дату и время в формате ДД.ММ.ГГГГ ЧЧ:ММ (например, 15.04.2026 14:00)');
-    isWaitingForInput = true;
-    return;
-  }
-  const step = steps[idx]; showTyping();
-  setTimeout(() => {
-    hideTyping(); addBotMessage(step.text);
-    if (step.buttons) setTimeout(() => { const bs = step.buttons.map(b => ({...b, stepIndex: idx})); addButtons(bs, ''); }, 400);
-    if (step.input) { isWaitingForInput = true; inp.focus(); }
-  }, 800);
-}
-async function checkSlotAndBook(dateStr, timeStr, userName, contact) {
-  showTyping();
-  try {
-    const checkRes = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'checkSlot', date: dateStr, time: timeStr })
-    });
-    const checkData = await checkRes.json();
-    hideTyping();
-    if (checkData.free) {
-      const bookRes = await fetch(GOOGLE_SCRIPT_URL, {
+
+async function goToStep(idx) {
+  chatStep = idx;
+  isWaitingForInput = false;
+  const inp = document.getElementById('chatInput');
+  inp.disabled = false;
+  inp.placeholder = 'Введите сообщение...';
+  
+  if (idx >= steps.length) {
+    // Завершение анкеты
+    showTyping();
+    try {
+      // Сохраняем заявку
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'bookSlot', date: dateStr, time: timeStr, userName: userName, contact: contact })
+        body: JSON.stringify({ action: 'saveRequest', ...chatData })
       });
-      const bookData = await bookRes.json();
-      if (bookData.success) {
-        addBotMessage(`✅ Отлично! Вы записаны на консультацию ${dateStr} в ${timeStr} (МСК). Кристина свяжется с вами.`);
-        addBotMessage('А пока — подпишитесь на соцсети, чтобы быть в курсе:');
-        const c = document.getElementById('chatMessages'), d = document.createElement('div');
-        d.className = 'chat-msg bot'; d.style.maxWidth = '100%';
-        d.innerHTML = `<div class="chat-buttons"><a href="https://vk.ru/kristinavcifre" target="_blank" class="chat-btn" style="text-decoration:none">🔵 Подписаться в ВК</a><a href="https://t.me/marketinglegkok" target="_blank" class="chat-btn" style="text-decoration:none">💬 Подписаться в Telegram</a><button class="chat-btn" onclick="resetChat()">🔄 Закрыть</button></div>`;
-        c.appendChild(d); c.scrollTop = c.scrollHeight;
-        submitFormWithBooking(dateStr, timeStr);
-      } else {
-        addBotMessage(`❌ Не удалось записаться. Попробуйте другую дату/время.`);
-        showAlternativeSlots();
-      }
-    } else {
-      addBotMessage(`К сожалению, время ${dateStr} ${timeStr} уже занято. Предлагаю выбрать из свободных слотов:`);
-      showAlternativeSlots();
+      // Сохраняем историю чата
+      const chatText = chatHistory.map(m => `[${m.time}] ${m.sender === 'bot' ? 'Бот' : 'Вы'}: ${m.text}`).join('\n');
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'saveChatHistory', userName: chatData.name, sphere: chatData.sphere, chatText: chatText })
+      });
+      hideTyping();
+      addBotMessage(`✅ Спасибо, ${chatData.name}! Ваша заявка принята.\n\n📅 Запись: ${chatData.date}\n📱 Контакт: ${chatData.contact}\n\nКристина свяжется с вами в ближайшее время! 🙏`);
+      // Отправляем уведомление в Telegram
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'sendTelegram', text: `✅ Заявка от ${chatData.name}\n📅 ${chatData.date}\n📱 ${chatData.contact}` })
+      });
+    } catch (e) {
+      hideTyping();
+      addBotMessage('✅ Заявка сохранена! Кристина свяжется с вами.');
     }
-  } catch (err) {
-    console.error(err);
-    hideTyping();
-    addBotMessage('❌ Ошибка проверки расписания. Попробуйте позже.');
-    showAlternativeSlots();
-  }
-}
-async function showAlternativeSlots() {
-  showTyping();
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + '?action=getFreeSlots', { method: 'GET', headers: { 'Content-Type': 'application/json' } });
-    const slots = await res.json();
-    hideTyping();
-    if (!slots.length) {
-      addBotMessage('На ближайшие две недели нет свободных слотов. Попробуйте позже или свяжитесь с нами напрямую.');
-      submitFormWithoutBooking();
-      return;
-    }
-    const grouped = {};
-    slots.forEach(slot => { if (!grouped[slot.date]) grouped[slot.date] = []; grouped[slot.date].push(slot.time); });
-    let msg = 'Вот доступные варианты:\n';
-    for (let date in grouped) { msg += `📅 ${date}: ${grouped[date].join(', ')}\n`; }
-    addBotMessage(msg);
-    addBotMessage('Напишите, пожалуйста, новую дату и время в формате ДД.ММ.ГГГГ ЧЧ:ММ');
-    isWaitingForInput = true;
-  } catch (err) {
-    console.error(err);
-    hideTyping();
-    addBotMessage('Ошибка получения расписания. Попробуйте позже.');
-  }
-}
-function submitFormWithBooking(date, time) {
-  fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: chatData.name||userName||'Не указано', age: chatData.age||'Не указано', sphere: chatData.sphere||'Не указано', service: chatData.service||'Не указано', income: chatData.income||'Не указано', contact: chatData.contact||'Не указано', finalChoice: chatData.finalChoice||'Не указано', date: `${date} ${time} МСК`, status: 'Новая' }) }).catch(e => console.error(e));
-}
-function submitFormWithoutBooking() {
-  fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name: chatData.name||userName||'Не указано', age: chatData.age||'Не указано', sphere: chatData.sphere||'Не указано', service: chatData.service||'Не указано', income: chatData.income||'Не указано', contact: chatData.contact||'Не указано', finalChoice: chatData.finalChoice||'Не указано', date: new Date().toLocaleString(), status: 'Новая (нет свободных слотов)' }) }).catch(e => console.error(e));
-  addBotMessage('Ваша анкета сохранена. Кристина свяжется с вами, как только появится свободное время.');
-}
-async function sendUserMessage(text) {
-  addUserMessage(text);
-  if (text.toLowerCase().includes('вызвать менеджера') || text.toLowerCase().includes('связаться с менеджером')) { callManager(); return; }
-  if (freeInputStep !== null) {
-    const idx = freeInputStep;
-    if (idx===1) chatData.name=text; else if (idx===2) chatData.age=text; else if (idx===3) chatData.sphere=text; else if (idx===6) chatData.contact=text;
-    freeInputStep = null; isWaitingForInput = false; setTimeout(() => goToStep(idx+1), 500); return;
-  }
-  if (isWaitingForInput) {
-    if (chatStep===1) { chatData.name=text; isWaitingForInput=false; setTimeout(() => goToStep(2), 500); return; }
-    if (chatStep===6) { chatData.contact=text; isWaitingForInput=false; setTimeout(() => goToStep(7), 500); return; }
-    if (chatStep >= steps.length) {
-      let parts = text.trim().split(/\s+/);
-      if (parts.length >= 2) {
-        let dateStr = parts[0];
-        let timeStr = parts[1];
-        if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(dateStr) && /^\d{1,2}:\d{2}$/.test(timeStr)) {
-          isWaitingForInput = false;
-          await checkSlotAndBook(dateStr, timeStr, chatData.name||userName||'Гость', chatData.contact||'не указан');
-          return;
-        }
-      }
-      addBotMessage('Пожалуйста, введите дату и время в формате ДД.ММ.ГГГГ ЧЧ:ММ (например, 15.04.2026 14:00)');
-      return;
-    }
-    addBotMessage('Я вас слушаю...');
+    inp.disabled = true;
+    inp.placeholder = 'Заявка отправлена ✓';
     return;
   }
-  const ans = getAnswerFromKnowledgeBase(text);
-  if (ans) addBotMessage(ans);
-  else {
-    addBotMessage('Спасибо за ваш вопрос! Я свяжусь с вами в ближайшее время 🙂');
-    if (!userId) { const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'getUserId'}) }); const d = await r.json(); userId = d.userId; localStorage.setItem('chat_user_id', userId); }
-    userSessionId = await sendUnknownQuestionAndGetId(text, userName||chatData.name||'Гость');
-    if (userSessionId) startPollingForResponse();
+  
+  const step = steps[idx];
+  showTyping();
+  setTimeout(() => {
+    hideTyping();
+    addBotMessage(step.text);
+    if (step.buttons) {
+      setTimeout(() => addButtons(step.buttons), 300);
+    }
+    if (step.input) {
+      isWaitingForInput = true;
+      inp.focus();
+    }
+  }, 600);
+}
+
+async function sendUserMessage(text) {
+  addUserMessage(text);
+  
+  if (isWaitingForInput) {
+    if (chatStep === 0) chatData.name = text;
+    else if (chatStep === 5) chatData.contact = text;
+    else if (chatStep === 6) {
+      chatData.date = text;
+      // Валидация простого формата
+      if (!/^\d{1,2}\.\d{1,2}\.\d{4}\s+\d{1,2}:\d{2}$/.test(text.trim())) {
+        addBotMessage('Пожалуйста, введите в формате: ДД.ММ.ГГГГ ЧЧ:ММ (например: 15.04.2026 14:00)');
+        return;
+      }
+    }
+    isWaitingForInput = false;
+    setTimeout(() => goToStep(chatStep + 1), 400);
+    return;
   }
+  
+  // Простые ответы на частые вопросы
+  const lower = text.toLowerCase();
+  if (lower.includes('цена') || lower.includes('стоимость')) {
+    addBotMessage('💰 Стоимость:\n• Чат-бот — от 4 500 ₽\n• AI-агент — от 25 000 ₽\n\nДля точной цены заполните заявку.');
+    return;
+  }
+  if (lower.includes('контакт') || lower.includes('связаться')) {
+    addBotMessage('📱 Связаться с Кристиной:\n• Telegram: @marketologdizayner\n• ВК: @kristinavcifre');
+    return;
+  }
+  
+  addBotMessage('Спасибо за вопрос! Чтобы записаться на консультацию, пройдите анкету или напишите "начать".');
 }
-async function sendUnknownQuestionAndGetId(q, nm) {
-  const r = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'unknownQuestion', question:q, userName:nm, userId:userId }) });
-  const d = await r.json(); return d.sessionId;
-}
-function startPollingForResponse() {
-  if (pollingInterval) clearInterval(pollingInterval);
-  pollingInterval = setInterval(async () => {
-    if (!userSessionId) return;
-    try {
-      const r = await fetch(GOOGLE_SCRIPT_URL + '?action=getManagerResponse&userSessionId=' + userSessionId, { method:'GET', headers:{'Content-Type':'application/json'} });
-      const d = await r.json();
-      if (d.response) { clearInterval(pollingInterval); addBotMessage(d.response); userSessionId = null; }
-    } catch(e) { console.error(e); }
-  }, 5000);
-}
+
 function resetChat() {
-  chatStep=0; chatData={name:'',age:'',sphere:'',service:'',income:'',contact:'',finalChoice:''}; isWaitingForInput=false; freeInputStep=null; selectedDate=null; availableTimes=[]; if (pollingInterval) clearInterval(pollingInterval); userSessionId=null; chatHistory=[];
-  document.getElementById('chatMessages').innerHTML=''; document.getElementById('chatInput').disabled=false; document.getElementById('chatSendBtn').disabled=false; document.getElementById('chatInput').placeholder='Введите сообщение...'; startChat();
+  chatStep = 0;
+  chatData = { name: '', age: '', sphere: '', service: '', income: '', contact: '', finalChoice: '', date: '' };
+  isWaitingForInput = false;
+  chatHistory = [];
+  document.getElementById('chatMessages').innerHTML = '';
+  document.getElementById('chatInput').disabled = false;
+  document.getElementById('chatInput').placeholder = 'Введите сообщение...';
+  startChat();
 }
+
 function startChat() {
   chatInitialized = true;
-  if (userName) { addBotMessage(`Привет, ${userName}! Рада, что вы снова здесь. Давайте заполним анкету для консультации.`); chatData.name=userName; chatStep=1; setTimeout(() => goToStep(1), 1000); }
-  else goToStep(0);
+  goToStep(0);
 }
-function openAuthOverlay() { document.getElementById('authOverlay').classList.add('open'); }
-function closeAuthOverlay() { document.getElementById('authOverlay').classList.remove('open'); }
-function initGoogleAuth() {
-  if (!GOOGLE_CLIENT_ID) { console.warn('Google Client ID не задан'); return; }
-  google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredential });
-  google.accounts.id.renderButton(document.getElementById('googleLoginBtn'), { theme:'outline', size:'large', text:'continue_with' });
-}
-async function handleGoogleCredential(resp) {
-  showTyping();
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'verifyGoogleToken', id_token: resp.credential }) });
-    const data = await res.json();
-    hideTyping();
-    if (data.success) {
-      userName = data.user.name;
-      localStorage.setItem('chat_user_name', userName);
-      chatData.name = userName;
-      closeAuthOverlay();
-      addUserMessage(`🔐 Авторизован как ${userName}`);
-      addBotMessage(`Отлично, ${userName}! Рада знакомству! Давайте заполним заявку. 🙂`);
-      setTimeout(() => goToStep(1), 600);
-    } else {
-      addBotMessage(`❌ Ошибка входа: ${data.error}. Попробуйте другой аккаунт.`);
-    }
-  } catch(err) {
-    hideTyping();
-    console.error(err);
-    addBotMessage('Ошибка при авторизации. Попробуйте позже.');
-  }
-}
+
+// ==================== НАВИГАЦИЯ ====================
 function navigateTo(page) {
-  const pages = ['home','services','pricing','reviews','contacts','request']; if (!pages.includes(page)) return;
-  const ce = document.getElementById('page-'+currentPage); if (ce) { ce.style.opacity='0'; setTimeout(() => { ce.classList.remove('active'); ce.style.display='none'; }, 300); }
+  const pages = ['home', 'services', 'pricing', 'request'];
+  if (!pages.includes(page)) return;
+  
+  document.querySelectorAll('.page-section').forEach(s => {
+    s.classList.remove('active');
+    s.style.opacity = '0';
+  });
+  
   setTimeout(() => {
-    const ne = document.getElementById('page-'+page); if (ne) { ne.style.display='block'; ne.offsetHeight; ne.style.opacity='1'; ne.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); setTimeout(initReveal,100); if (page==='request' && !chatInitialized) startChat(); }
-  }, 350);
-  currentPage = page; document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page===page)); updatePathMap(page); closeMobileMenu();
-  const managerBtn = document.getElementById('managerBtn');
-  if (managerBtn) { if (page === 'request') managerBtn.style.display = 'flex'; else managerBtn.style.display = 'none'; }
+    const el = document.getElementById('page-' + page);
+    if (el) {
+      el.style.display = 'block';
+      el.offsetHeight;
+      el.style.opacity = '1';
+      el.classList.add('active');
+      if (page === 'request' && !chatInitialized) startChat();
+    }
+  }, 300);
+  
+  currentPage = page;
+  closeMobileMenu();
 }
-function updatePathMap(page) { const order = ['home','services','pricing','reviews','contacts','request'], idx = order.indexOf(page); document.querySelectorAll('.path-point').forEach((p,i) => p.classList.toggle('active', i<=idx)); document.querySelectorAll('.path-line').forEach((l,i) => l.classList.toggle('active', i<idx)); }
-function initReveal() { const rv = document.querySelectorAll('.reveal'), obs = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:0.1, rootMargin:'0px 0px -50px 0px' }); rv.forEach(el => { if (!el.classList.contains('visible')) obs.observe(el); }); }
-function toggleAccordion(hdr) { const it = hdr.parentElement, op = it.classList.contains('open'); document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open')); if (!op) it.classList.add('open'); }
-function closeMobileMenu() { burger.classList.remove('open'); mobileMenu.classList.remove('open'); }
-document.getElementById('chatSendBtn').addEventListener('click', () => { const inp = document.getElementById('chatInput'), txt = inp.value.trim(); if (txt) { inp.value=''; sendUserMessage(txt); } });
-document.getElementById('chatInput').addEventListener('keypress', e => { if (e.key==='Enter') { const inp = e.target, txt = inp.value.trim(); if (txt) { inp.value=''; sendUserMessage(txt); } } });
-document.getElementById('authClose').addEventListener('click', closeAuthOverlay);
-document.querySelectorAll('[data-page]').forEach(l => { l.addEventListener('click', e => { e.preventDefault(); navigateTo(l.dataset.page); }); });
-document.querySelectorAll('.path-point').forEach(p => { p.addEventListener('click', () => navigateTo(p.dataset.page)); });
-const burger = document.getElementById('burger'), mobileMenu = document.getElementById('mobileMenu');
-burger.addEventListener('click', () => { burger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
-window.addEventListener('scroll', () => { document.getElementById('mainNav').style.background = window.scrollY > 50 ? 'rgba(5,13,10,0.95)' : 'rgba(5,13,10,0.7)'; });
-document.querySelectorAll('.glass').forEach(c => { c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(), x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100; c.style.setProperty('--mx', x+'%'); c.style.setProperty('--my', y+'%'); }); });
-initReveal(); initGoogleAuth(); navigateTo('home');
+
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ==================== СОБЫТИЯ ====================
+document.getElementById('chatSendBtn').addEventListener('click', () => {
+  const inp = document.getElementById('chatInput');
+  const txt = inp.value.trim();
+  if (txt) {
+    inp.value = '';
+    sendUserMessage(txt);
+  }
+});
+
+document.getElementById('chatInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    const inp = e.target;
+    const txt = inp.value.trim();
+    if (txt) {
+      inp.value = '';
+      sendUserMessage(txt);
+    }
+  }
+});
+
+document.getElementById('burger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// Закрытие меню при клике вне
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('burger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+
+// Инициализация
+navigateTo('home');
 </script>
 </body>
 </html>
