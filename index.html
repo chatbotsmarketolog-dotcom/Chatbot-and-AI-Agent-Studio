@@ -244,7 +244,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-dar
 <section class="page-section" id="page-request"><div class="section-header reveal"><span class="section-tag">// Заявка</span><h2>Оставить заявку</h2><p>Общайтесь с AI-агентом Кристины — он соберёт заявку за вас</p></div><div class="chat-page reveal reveal-delay-1"><div class="chat-container" id="chatContainer"><div class="chat-header"><div class="chat-avatar">🤖</div><div class="chat-header-info"><h4>AI-Агент Кристины</h4><p>цифровой двойник • online</p></div></div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-area"><input type="text" class="chat-input" id="chatInput" placeholder="Введите сообщение..." autocomplete="off"><button class="chat-send" id="chatSendBtn" aria-label="Send">➤</button></div></div></div></section>
 <script>
 // ==================== КОНФИГУРАЦИЯ (НОВЫЙ URL) ====================
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaFCi2eVISGsxpUmeleYUoA7LXP4biCU-clizrxo8_repw-e3l2Y1EO5TOKDVuex1AHA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzinX2Xf1y1FnhdDEo2owkjr8tnYfRZzN7-UPPF3pe9pqWFKwPd7k8bcbBRJAHE_H6S1Q/exec';
 const knowledgeBase = [
   { keywords: ['сколько стоит','цена','стоимость','прайс','цену','расценки'], answer: '💰 Стоимость:\n• Сценарный чат-бот — от 4 500 ₽\n• AI-агент «Паттерн» — 25 000 ₽\n• AI-агент «Система» — 42 000 ₽\n\nДля точной цены напишите, какая задача вас интересует.' },
   { keywords: ['кто такая кристина','кристина кто','расскажите о кристине'], answer: '👩‍💻 Кристина — эксперт по автономным брендам. 6 лет в маркетинге, 4 года в ботах. Более 30 успешных проектов.' },
@@ -342,7 +342,6 @@ async function sendUserMessage(text) {
         let timeStr = parts[1];
         if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(dateStr) && /^\d{1,2}:\d{2}$/.test(timeStr)) {
           isWaitingForInput = false;
-          // Сохраняем заявку с введёнными датой и временем
           const payload = {
             action: 'saveRequest',
             name: chatData.name,
@@ -356,7 +355,6 @@ async function sendUserMessage(text) {
             status: 'Новая'
           };
           await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-          // Сохраняем историю чата
           const historyText = chatHistory.map(m => `[${m.time}] ${m.sender==='bot'?'AI-Агент':'Вы'}: ${m.text}`).join('\n');
           await fetch(GOOGLE_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'saveChatHistory', name: chatData.name, sphere: chatData.sphere, history: historyText }) });
           addBotMessage(`✅ Отлично! Вы записаны на консультацию ${dateStr} в ${timeStr} (МСК). Кристина свяжется с вами.`);
