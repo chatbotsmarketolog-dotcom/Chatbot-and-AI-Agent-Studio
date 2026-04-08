@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://chatbotsmarketolog-dotcom.github.io/Chatbot-and-AI-Agent-Studio/sitemap.xml
+User-agent: Yandex
+Crawl-delay: 1
