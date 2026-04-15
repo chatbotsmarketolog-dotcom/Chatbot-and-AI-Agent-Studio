@@ -12,11 +12,12 @@ cloudinary:
 
 collections:
   - name: "site"
-    label: " Сайт КРИСТИНА.AI"
+    label: "📄 Сайт КРИСТИНА.AI"
     editor:
       preview: false
     files:
-      - file: "content/site.json"
+      - name: "site-config"  # ✅ ДОБАВЛЕНО! Это обязательно
+        file: "content/site.json"
         label: "📄 Главная страница"
         fields:
           # === META & SEO ===
@@ -39,7 +40,7 @@ collections:
                 default: "чат-бот, AI-агент, автоматизация, телеграм-бот, маркетинг, сайт на коде"
 
           # === HEADER ===
-          - label: " Шапка сайта (Header)"
+          - label: "🔝 Шапка сайта (Header)"
             name: "header"
             widget: "object"
             collapsed: false
@@ -123,7 +124,7 @@ collections:
               - label: "Статистика"
                 name: "stats"
                 widget: "list"
-                summary: "{{fields.label}}"
+                summary: "{{fields.number}} {{fields.text}}"
                 fields:
                   - label: "Число"
                     name: "number"
@@ -384,37 +385,3 @@ collections:
                 default_language: "javascript"
                 output_code_only: false
                 hint: "Например: чат-виджеты, пиксели, кастомные скрипты"
-              - label: "Дополнительные HTML-блоки"
-                name: "html_blocks"
-                widget: "list"
-                summary: "{{fields.name}}"
-                fields:
-                  - label: "Название блока"
-                    name: "name"
-                    widget: "string"
-                    hint: "Например: Промо-баннер, Popup, Спецпредложение"
-                  - label: "HTML код"
-                    name: "html"
-                    widget: "code"
-                    default_language: "html"
-                    output_code_only: false
-                  - label: "CSS код (опционально)"
-                    name: "css"
-                    widget: "code"
-                    default_language: "css"
-                    output_code_only: false
-                    required: false
-                  - label: "JavaScript код (опционально)"
-                    name: "js"
-                    widget: "code"
-                    default_language: "javascript"
-                    output_code_only: false
-                    required: false
-                  - label: "Где показать"
-                    name: "position"
-                    widget: "select"
-                    options:
-                      - { label: "После Hero", value: "after-hero" }
-                      - { label: "Перед Footer", value: "before-footer" }
-                      - { label: "В конце body", value: "end-body" }
-                    default: "before-footer"
