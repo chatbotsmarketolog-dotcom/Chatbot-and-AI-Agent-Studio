@@ -16,7 +16,7 @@ collections:
     editor:
       preview: false
     files:
-      - name: "site-config"  # ✅ ДОБАВЛЕНО! Это обязательно
+      - name: "site-config"
         file: "content/site.json"
         label: "📄 Главная страница"
         fields:
