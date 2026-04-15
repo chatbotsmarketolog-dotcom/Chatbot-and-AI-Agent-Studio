@@ -297,11 +297,34 @@
             .nav { display: none; } .burger { display: flex; } .hero { padding: 100px 0 60px; } .hero h1 { font-size: 2rem; }
             .demo-grid, .about-facts, .stats-row { grid-template-columns: 1fr; }
             .footer-inner { flex-direction: column; text-align: center; } .modal { padding: 24px; }
+            /* Исправление адаптивности CRM-блока */
+            .crm-inner {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+                gap: 32px;
+            }
+            .crm-mockup {
+                padding: 16px;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+            .crm-mockup-content {
+                min-width: 280px;
+            }
+            .crm-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .crm-badge {
+                margin-left: auto;
+            }
         }
         @media (max-width: 480px) {
             .hero-buttons, .hero-triggers { flex-direction: column; align-items: center; }
             .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
             .phone-mockup { width: 240px; height: 460px; } .contact-form { padding: 24px; }
+            .crm-inner { padding: 24px 16px; }
+            .crm-feature { flex-direction: column; align-items: flex-start; gap: 4px; }
         }
     </style>
 </head>
@@ -468,7 +491,7 @@
             <h2 class="section-title reveal">Цифры и эмоции <span>говорят громче слов</span></h2>
             <p class="section-subtitle reveal">Что говорят те, кто уже работает с AI-агентами</p>
             <div class="reviews-grid">
-                <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">«Схватывает все на лету, подстраивается под энергетику, под мои запросы, выдаёт просто потрясающие результаты. Кристина, благодарю тебя! Ты — профессионал 🧙»</p><div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Ирина</div><div class="review-role">Парапсихолог</div><a href="https://t.me/rezonans_tela_bot" target="_blank" style="color:var(--cyan);font-size:0.8rem;">Смотреть бота →</a></div></div></div>
+                <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">«Схватывает все на лету, подстраивается под энергетику, под мои запросы, выдаёт просто потрясающие результаты. Кристина, благодарю тебя! Ты — профессионал 🧙»</p><div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Ирина</div><div class="review-role">Парапсихолог</div></div></div></div>
                 <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">«Лаконично и понятно. Теперь мне не нужно каждый раз скидывать один и тот же файл с ценами. Клиент сам всё смотрит и пишет уже по делу.»</p><div class="review-author"><div class="review-avatar">Е</div><div><div class="review-name">Елена</div><div class="review-role">Видеомейкер</div></div></div></div>
                 <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">«Кристина создала мне AI-агента, который реально работает как мой цифровой двойник. Клиенты не отличают его от меня! Теперь я трачу на коммуникацию в 3 раза меньше времени.»</p><div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-role">Туристическое агентство</div></div></div></div>
                 <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">«Теперь я не просто увлекаюсь нейросетями, а я — специалист с практикой и портфолио. Огромное спасибо Кристине за бесценные знания и поддержку!»</p><div class="review-author"><div class="review-avatar">Е</div><div><div class="review-name">Елена</div><div class="review-role">Ученица курса · Prompt-мастер</div></div></div></div>
@@ -540,7 +563,7 @@
                 <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Как начинаем работу?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner"><strong>Бесплатное знакомство (15 мин):</strong> короткая встреча или переписка. Знакомимся, я слушаю запрос, кратко описываю решение. На этом этапе консультаций и стратегий нет. Старт работ — только после внесения предоплаты.</div></div></div>
                 <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Какие условия оплаты?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner"><ul><li><strong>До 4 500 ₽</strong> (Боты, Нейро-фото, Аудит): 100% предоплата.</li><li><strong>От 15 000 ₽</strong> (Сайты, AI-агенты): 50% предоплата, 50% после утверждения результата.</li><li><strong>Аудит (3 500 ₽):</strong> 100% оплата в день встречи, до начала (без возврата).</li><li><strong>Пакеты Нейро-фото:</strong> 50% предоплата, 50% перед выдачей файлов.</li></ul></div></div></div>
                 <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Какие сроки выполнения?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner"><ul><li>Чат-бот: <strong>2–5 дней</strong></li><li>AI-агент: <strong>5–10 дней</strong></li><li>Сайт на коде: <strong>10–20 дней</strong></li><li>Сайт на Tilda: <strong>3–7 дней</strong></li></ul></div></div></div>
-                <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Какие гарантии?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner"><strong>7 дней бесплатной поддержки</strong> после сдачи проекта. При форс-мажоре с моей стороны предусмотрен возврат 50% предоплаты.</div></div></div>
+                <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Какие гарантии?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner"><strong>7 дней бесплатной поддержки</strong> после сдачи проекта.</div></div></div>
                 <div class="faq-item reveal"><button class="faq-question" onclick="toggleFaq(this)"><span>Нужны ли мне технические знания?</span><div class="faq-icon">+</div></button><div class="faq-answer"><div class="faq-answer-inner">Нет. Я беру всю архитектуру, код и интеграции на себя. От вас нужны материалы о бизнесе, стиль общения и утверждение промежуточных этапов.</div></div></div>
             </div>
         </div>
@@ -576,7 +599,7 @@
         </div>
     </div>
 
-    <!-- Виджет онлайн-консультации (только скрипт, без дополнительной надписи) -->
+    <!-- Виджет онлайн-консультации -->
     <script>
         window.KRISTINA_API_KEY = 'site_cbd8ee8b';
         var s = document.createElement('script');
