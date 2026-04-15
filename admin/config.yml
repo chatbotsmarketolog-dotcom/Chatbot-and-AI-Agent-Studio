@@ -6,10 +6,6 @@ backend:
 media_folder: "assets"
 public_folder: "/assets"
 
-cloudinary:
-  cloud_name: dszoysjcl
-  api_key: 277136834892212
-
 collections:
   - name: "site"
     label: "📄 Сайт КРИСТИНА.AI"
@@ -20,27 +16,23 @@ collections:
         file: "content/site.json"
         label: "📄 Главная страница"
         fields:
-          # === META & SEO ===
+          # === SEO ===
           - label: "🔍 SEO настройки"
             name: "seo"
             widget: "object"
             collapsed: true
             fields:
-              - label: "Title (заголовок вкладки)"
+              - label: "Title"
                 name: "title"
                 widget: "string"
                 default: "Кристина — Эксперт по автономным брендам | AI-агенты и чат-боты"
-              - label: "Description (описание для поисковиков)"
+              - label: "Description"
                 name: "description"
                 widget: "text"
-                default: "Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Автономные бренды будущего."
-              - label: "Keywords (ключевые слова)"
-                name: "keywords"
-                widget: "string"
-                default: "чат-бот, AI-агент, автоматизация, телеграм-бот, маркетинг, сайт на коде"
+                default: "Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7."
 
           # === HEADER ===
-          - label: "🔝 Шапка сайта (Header)"
+          - label: "🔝 Header"
             name: "header"
             widget: "object"
             collapsed: false
@@ -57,15 +49,12 @@ collections:
                   - label: "Название"
                     name: "label"
                     widget: "string"
-                    required: true
-                  - label: "Ссылка (якорь)"
+                  - label: "Ссылка"
                     name: "href"
                     widget: "string"
-                    required: true
-                    hint: "Например: #hero, #about, #services"
 
-          # === HERO SECTION ===
-          - label: "🎯 Hero (Главный экран)"
+          # === HERO ===
+          - label: "🎯 Hero Section"
             name: "hero"
             widget: "object"
             collapsed: false
@@ -82,28 +71,28 @@ collections:
                 name: "description"
                 widget: "markdown"
                 default: "Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия. Добро пожаловать в будущее."
-              - label: "Текст кнопки 1"
+              - label: "Кнопка 1 текст"
                 name: "btn1_text"
                 widget: "string"
                 default: "🚀 Оставить заявку"
-              - label: "Ссылка кнопки 1"
+              - label: "Кнопка 1 ссылка"
                 name: "btn1_link"
                 widget: "string"
                 default: "#applications"
-              - label: "Текст кнопки 2"
+              - label: "Кнопка 2 текст"
                 name: "btn2_text"
                 widget: "string"
                 default: "Узнать больше →"
-              - label: "Ссылка кнопки 2"
+              - label: "Кнопка 2 ссылка"
                 name: "btn2_link"
                 widget: "string"
                 default: "#services"
-              - label: "Триггеры (через запятую)"
+              - label: "Триггеры"
                 name: "triggers"
                 widget: "string"
                 default: "✅ Работает 24/7, ✅ Интеграция с Telegram/VK, ✅ Гарантия окупаемости"
 
-          # === ABOUT SECTION ===
+          # === ABOUT ===
           - label: "👤 Обо мне"
             name: "about"
             widget: "object"
@@ -120,7 +109,7 @@ collections:
               - label: "Текст 2"
                 name: "text2"
                 widget: "markdown"
-                default: "Я создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Мой козырь — маркетинговое мышление и опыт в продажах. Я создаю системы, которые привлекают, вовлекают и строят доверие."
+                default: "Я создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7. Мой козырь — маркетинговое мышление и опыт в продажах."
               - label: "Статистика"
                 name: "stats"
                 widget: "list"
@@ -129,31 +118,37 @@ collections:
                   - label: "Число"
                     name: "number"
                     widget: "string"
-                    default: "6"
-                  - label: "Подпись"
+                  - label: "Текст"
                     name: "text"
                     widget: "string"
-                    default: "лет в маркетинге"
+              - label: "Имя"
+                name: "name"
+                widget: "string"
+                default: "Кристина"
+              - label: "Должность"
+                name: "role"
+                widget: "string"
+                default: "Эксперт по автономным брендам"
               - label: "Цитата"
                 name: "quote"
                 widget: "markdown"
                 default: "«AI-агент — это вы в автономном режиме. Он должен чувствовать вашу энергию, а не просто выдавать текст.»"
-              - label: "Telegram ссылка"
+              - label: "Telegram"
                 name: "telegram"
                 widget: "string"
                 default: "https://t.me/marketologdizayner"
-              - label: "VK ссылка"
+              - label: "VK"
                 name: "vk"
                 widget: "string"
                 default: "https://vk.ru/kristinavcifre"
 
-          # === SERVICES SECTION ===
+          # === SERVICES ===
           - label: "⚙️ Услуги"
             name: "services"
             widget: "object"
             collapsed: false
             fields:
-              - label: "Заголовок секции"
+              - label: "Заголовок"
                 name: "title"
                 widget: "string"
                 default: "Что мы создаём"
@@ -161,37 +156,34 @@ collections:
                 name: "subtitle"
                 widget: "markdown"
                 default: "Два направления, которые трансформируют ваш бизнес в автономную систему"
-              - label: "Карточки услуг"
+              - label: "Карточки"
                 name: "cards"
                 widget: "list"
                 summary: "{{fields.title}}"
                 fields:
-                  - label: "Иконка (эмодзи)"
+                  - label: "Иконка"
                     name: "icon"
                     widget: "string"
-                    default: "🤖"
                   - label: "Название"
                     name: "title"
                     widget: "string"
-                    required: true
                   - label: "Описание"
                     name: "description"
                     widget: "markdown"
                   - label: "Цена"
                     name: "price"
                     widget: "string"
-                  - label: "Текст кнопки"
+                  - label: "Кнопка"
                     name: "btn_text"
                     widget: "string"
-                    default: "✨ Записаться на консультацию"
 
-          # === PRICING SECTION ===
+          # === PRICING ===
           - label: "💰 Тарифы"
             name: "pricing"
             widget: "object"
             collapsed: false
             fields:
-              - label: "Заголовок секции"
+              - label: "Заголовок"
                 name: "title"
                 widget: "string"
                 default: "Стоимость"
@@ -199,7 +191,7 @@ collections:
                 name: "subtitle"
                 widget: "markdown"
                 default: "Прозрачные тарифы для каждого уровня задач"
-              - label: "Карточки тарифов"
+              - label: "Карточки"
                 name: "cards"
                 widget: "list"
                 summary: "{{fields.name}}"
@@ -207,23 +199,20 @@ collections:
                   - label: "Иконка"
                     name: "icon"
                     widget: "string"
-                    default: "🤖"
                   - label: "Название"
                     name: "name"
                     widget: "string"
-                    required: true
                   - label: "Подзаголовок"
                     name: "subtitle"
                     widget: "string"
                   - label: "Цена"
                     name: "price"
                     widget: "string"
-                    required: true
-                  - label: "Популярный (выделить)"
+                  - label: "Популярный"
                     name: "popular"
                     widget: "boolean"
                     default: false
-                  - label: "Список возможностей"
+                  - label: "Возможности"
                     name: "features"
                     widget: "list"
                     summary: "{{fields.item}}"
@@ -231,18 +220,17 @@ collections:
                       - label: "Пункт"
                         name: "item"
                         widget: "string"
-                  - label: "Текст кнопки"
+                  - label: "Кнопка"
                     name: "btn_text"
                     widget: "string"
-                    default: "Выбрать"
 
-          # === TESTIMONIALS SECTION ===
+          # === TESTIMONIALS ===
           - label: "⭐ Отзывы"
             name: "testimonials"
             widget: "object"
             collapsed: false
             fields:
-              - label: "Заголовок секции"
+              - label: "Заголовок"
                 name: "title"
                 widget: "string"
                 default: "Отзывы клиентов"
@@ -250,34 +238,32 @@ collections:
                 name: "subtitle"
                 widget: "markdown"
                 default: "Что говорят те, кто уже работает с AI-агентами"
-              - label: "Карточки отзывов"
+              - label: "Карточки"
                 name: "cards"
                 widget: "list"
                 summary: "{{fields.author}}"
                 fields:
-                  - label: "Имя"
+                  - label: "Автор"
                     name: "author"
                     widget: "string"
-                    required: true
                   - label: "Профессия"
                     name: "role"
                     widget: "string"
-                  - label: "Текст отзыва"
+                  - label: "Текст"
                     name: "text"
                     widget: "markdown"
-                    required: true
-                  - label: "Рейтинг (звёзды)"
+                  - label: "Рейтинг"
                     name: "rating"
                     widget: "number"
                     default: 5
                     min: 1
                     max: 5
-              - label: "Ссылка на бота отзывов"
+              - label: "Ссылка на бота"
                 name: "bot_link"
                 widget: "string"
                 default: "https://t.me/otziyv_chatbota_kristina_bot"
 
-          # === CONTACTS SECTION ===
+          # === CONTACTS ===
           - label: "📞 Контакты"
             name: "contacts"
             widget: "object"
@@ -307,16 +293,16 @@ collections:
                 name: "hours"
                 widget: "string"
                 default: "Пн–Пт: 10:00–19:00 (МСК)"
-              - label: "AI-статус"
+              - label: "AI статус"
                 name: "ai_status"
                 widget: "string"
                 default: "AI-агенты работают 24/7 🤖"
-              - label: "Финальная фраза"
+              - label: "Финальный текст"
                 name: "final_text"
                 widget: "markdown"
                 default: "Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите."
 
-          # === APPLICATIONS SECTION ===
+          # === APPLICATIONS ===
           - label: "🚀 Блок заявки"
             name: "applications"
             widget: "object"
@@ -334,13 +320,13 @@ collections:
                 name: "widget_name"
                 widget: "string"
                 default: "AI-агент Кристины"
-              - label: "Подпись виджета"
+              - label: "Подпись"
                 name: "widget_subtitle"
                 widget: "string"
                 default: "Цифровой двойник"
 
           # === FOOTER ===
-          - label: "🔻 Footer (Подвал)"
+          - label: "🔻 Footer"
             name: "footer"
             widget: "object"
             collapsed: false
@@ -366,22 +352,20 @@ collections:
                 widget: "string"
                 default: "© 2025 КРИСТИНА.AI — Оазис будущего"
 
-          # === CUSTOM CODE SECTIONS (как на Тильде) ===
-          - label: "💻 Кастомный код (HTML/JS/CSS)"
+          # === CUSTOM CODE ===
+          - label: "💻 Кастомный код"
             name: "custom_code"
             widget: "object"
             collapsed: true
-            hint: "Вставляй сюда любые скрипты, стили или HTML-блоки. Как на Тильде."
+            hint: "Вставляй скрипты как на Тильде"
             fields:
-              - label: "Код в <head> (метатеги, стили, скрипты аналитики)"
+              - label: "Код в <head>"
                 name: "head_code"
                 widget: "code"
                 default_language: "html"
                 output_code_only: false
-                hint: "Например: Яндекс.Метрика, Google Analytics, кастомные стили"
-              - label: "Код перед </body> (скрипты, виджеты)"
+              - label: "Код перед </body>"
                 name: "footer_code"
                 widget: "code"
                 default_language: "javascript"
                 output_code_only: false
-                hint: "Например: чат-виджеты, пиксели, кастомные скрипты"
