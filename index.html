@@ -140,18 +140,18 @@
         .crm-section { padding: 100px 0; }
         .crm-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; }
         .crm-inner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, transparent 70%); pointer-events: none; }
-        .crm-visual { position: relative; }
-        .crm-mockup { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+        .crm-visual { position: relative; overflow-x: auto; }
+        .crm-mockup { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); min-width: 280px; }
         .crm-mockup-header { display: flex; gap: 8px; margin-bottom: 16px; }
         .crm-mockup-header span { width: 12px; height: 12px; border-radius: 50%; }
         .crm-mockup-header span:nth-child(1) { background: #FF5F57; } .crm-mockup-header span:nth-child(2) { background: #FFBD2E; } .crm-mockup-header span:nth-child(3) { background: #28C840; }
         .crm-mockup-content { display: flex; flex-direction: column; gap: 12px; }
-        .crm-row { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border); }
+        .crm-row { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-card); border-radius: 10px; border: 1px solid var(--border); flex-wrap: wrap; }
         .crm-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), #0066FF); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--bg-primary); flex-shrink: 0; }
-        .crm-row-info { flex: 1; }
+        .crm-row-info { flex: 1; min-width: 120px; }
         .crm-row-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
         .crm-row-status { font-size: 0.75rem; color: var(--text-muted); }
-        .crm-badge { padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; }
+        .crm-badge { padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
         .crm-badge.active { background: rgba(40, 200, 64, 0.15); color: #28C840; }
         .crm-badge.pending { background: rgba(255, 189, 46, 0.15); color: #FFBD2E; }
         .crm-badge.new { background: rgba(0, 240, 255, 0.15); color: var(--cyan); }
@@ -163,7 +163,7 @@
         .crm-feature-icon { width: 24px; height: 24px; background: rgba(0, 240, 255, 0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
         .crm-feature p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
         .crm-feature strong { color: var(--text-primary); }
-        .crm-status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 189, 46, 0.1); border: 1px solid rgba(255, 189, 46, 0.3); border-radius: 10px; font-size: 0.85rem; color: #FFBD2E; margin-bottom: 24px; }
+        .crm-status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 189, 46, 0.1); border: 1px solid rgba(255, 189, 46, 0.3); border-radius: 10px; font-size: 0.85rem; color: #FFBD2E; margin-bottom: 24px; flex-wrap: wrap; }
 
         .demo-section { padding: 100px 0; }
         .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -181,7 +181,7 @@
         .review-card:hover { border-color: var(--border-cyan); transform: translateY(-3px); }
         .review-stars { color: #FFBD2E; font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
         .review-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-        .review-author { display: flex; align-items: center; gap: 12px; }
+        .review-author { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .review-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), #0066FF); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; color: var(--bg-primary); }
         .review-name { font-weight: 600; font-size: 0.95rem; }
         .review-role { font-size: 0.8rem; color: var(--text-muted); }
@@ -194,7 +194,7 @@
         .contact-info h2 span { color: var(--cyan); }
         .contact-info > p { color: var(--text-secondary); margin-bottom: 36px; font-size: 1.05rem; }
         .contact-methods { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-        .contact-method { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; transition: all 0.3s ease; }
+        .contact-method { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; transition: all 0.3s ease; flex-wrap: wrap; }
         .contact-method:hover { border-color: var(--border-cyan); transform: translateX(5px); }
         .contact-method-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
         .contact-method-icon.tg { background: rgba(0, 136, 204, 0.15); } .contact-method-icon.vk { background: rgba(39, 135, 245, 0.15); } .contact-method-icon.ig { background: rgba(228, 64, 95, 0.15); } .contact-method-icon.clock { background: rgba(0, 240, 255, 0.15); }
@@ -230,7 +230,7 @@
         .about-content h2 span { color: var(--cyan); }
         .about-content p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px; }
         .about-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
-        .about-fact { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+        .about-fact { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; flex-wrap: wrap; }
         .about-fact-icon { font-size: 1.3rem; }
         .about-fact-text { font-size: 0.9rem; color: var(--text-secondary); }
         .about-fact-text strong { color: var(--cyan); display: block; font-size: 1rem; }
@@ -286,45 +286,33 @@
         ::-webkit-scrollbar-thumb { background: var(--bg-card-hover); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dark); }
 
+        /* Мобильная адаптация CRM и других элементов */
         @media (max-width: 1024px) {
             .hero-inner, .crm-inner, .contact-inner, .about-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-text { margin: 0 auto 36px; } .hero-buttons { justify-content: center; } .hero-triggers { justify-content: center; } .hero-visual { order: -1; } .phone-mockup { width: 260px; height: 500px; }
             .pain-grid, .services-grid, .reviews-grid { grid-template-columns: 1fr; }
             .demo-grid { grid-template-columns: repeat(2, 1fr); }
             .about-photo { justify-self: center; } .about-facts { grid-template-columns: 1fr 1fr; }
+            .crm-inner { padding: 32px; gap: 32px; }
+            .crm-mockup { overflow-x: auto; }
+            .crm-row { flex-wrap: wrap; justify-content: space-between; }
         }
         @media (max-width: 768px) {
             .nav { display: none; } .burger { display: flex; } .hero { padding: 100px 0 60px; } .hero h1 { font-size: 2rem; }
             .demo-grid, .about-facts, .stats-row { grid-template-columns: 1fr; }
             .footer-inner { flex-direction: column; text-align: center; } .modal { padding: 24px; }
-            /* Исправление адаптивности CRM-блока */
-            .crm-inner {
-                grid-template-columns: 1fr;
-                padding: 32px 24px;
-                gap: 32px;
-            }
-            .crm-mockup {
-                padding: 16px;
-                max-width: 100%;
-                overflow-x: auto;
-            }
-            .crm-mockup-content {
-                min-width: 280px;
-            }
-            .crm-row {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .crm-badge {
-                margin-left: auto;
-            }
+            .crm-inner { padding: 20px; }
+            .crm-feature { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .crm-status { justify-content: center; text-align: center; }
+            .contact-method { flex-direction: column; text-align: center; }
+            .contact-method-icon { margin: 0 auto; }
         }
         @media (max-width: 480px) {
             .hero-buttons, .hero-triggers { flex-direction: column; align-items: center; }
             .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
             .phone-mockup { width: 240px; height: 460px; } .contact-form { padding: 24px; }
-            .crm-inner { padding: 24px 16px; }
-            .crm-feature { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .crm-row { flex-direction: column; align-items: flex-start; }
+            .crm-badge { align-self: flex-start; }
         }
     </style>
 </head>
@@ -599,7 +587,7 @@
         </div>
     </div>
 
-    <!-- Виджет онлайн-консультации -->
+    <!-- Виджет онлайн-консультации (только скрипт) -->
     <script>
         window.KRISTINA_API_KEY = 'site_cbd8ee8b';
         var s = document.createElement('script');
