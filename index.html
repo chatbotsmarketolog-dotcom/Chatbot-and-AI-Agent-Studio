@@ -605,7 +605,7 @@
         </div>
     </div>
 
-    <!-- Виджет для переписки с надписью "онлайн консультация" -->
+    <!-- Виджет онлайн-консультации и скрипт отправки в Telegram -->
     <div class="online-consult-label">💬 онлайн консультация</div>
     <script>
         window.KRISTINA_API_KEY = 'site_cbd8ee8b';
@@ -677,13 +677,29 @@
             }
         }
 
-        // === Form Submission (Google Sheets Integration) ===
-        // ИНСТРУКЦИЯ: Замените 'YOUR_SCRIPT_ID' на реальный URL вашего веб-приложения Google Apps Script
-        // 1. Откройте вашу таблицу: https://docs.google.com/spreadsheets/d/1IT1-iMsLD-zdlru4x7SFSXvWWf_T5d3qyGtmZVsWNm0
-        // 2. Расширения → Apps Script → вставьте код из предыдущего сообщения (скрипт для doPost)
-        // 3. Опубликуйте как веб-приложение (доступ "Все, у кого есть ссылка")
-        // 4. Скопируйте URL и вставьте его вместо 'YOUR_SCRIPT_ID'
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+        // === Отправка формы в Telegram ===
+        const TELEGRAM_BOT_TOKEN = '8614360839:AAHGI8_TbLpVntEI-f4dkh1OUZgeQ6wRJiY';
+        const TELEGRAM_CHAT_ID = '6300678737';
+
+        async function sendToTelegram(data) {
+            const message = `🟢 *Новая заявка с сайта*\n\n👤 *Имя:* ${data.name}\n📱 *Контакт:* ${data.contact}\n📦 *Услуга:* ${data.service}\n📝 *Сообщение:* ${data.message || '—'}\n⏰ *Время:* ${data.timestamp}`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                return response.ok;
+            } catch (err) {
+                console.error('Ошибка отправки в Telegram:', err);
+                return false;
+            }
+        }
 
         async function handleSubmit(e) {
             e.preventDefault();
@@ -709,25 +725,14 @@
                 source: window.location.href
             };
 
-            try {
-                // Если URL скрипта не заменён, будет ошибка, показываем fallback
-                if (GOOGLE_SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
-                    throw new Error('Скрипт не настроен');
-                }
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+            const sent = await sendToTelegram(payload);
+            if (sent) {
                 form.style.display = 'none';
                 success.classList.add('show');
-            } catch (err) {
-                // Fallback: открываем Telegram для ручной отправки
-                alert('Данные подготовлены. Для быстрой связи напишите в Telegram!');
-                window.open('https://t.me/marketologdizayner?text=' + encodeURIComponent(JSON.stringify(payload)), '_blank');
-                form.style.display = 'none';
-                success.classList.add('show');
+            } else {
+                alert('Произошла ошибка при отправке. Попробуйте позже или свяжитесь в Telegram.');
+                btn.textContent = '🚀 Отправить заявку';
+                btn.disabled = false;
             }
         }
 
