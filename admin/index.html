@@ -55,47 +55,43 @@
       margin-top: 10px;
     }
     .btn:hover { opacity: 0.9; }
-    .hidden { display: none; }
-    .loading { margin-top: 20px; }
+    .hidden { display: none !important; }
+    #cms-wrapper { display: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="login-screen">
-      <h1>🔐 Вход в админ-панель</h1>
-      
-      <div class="info">
-        <strong>Как получить токен:</strong><br>
-        1. Перейди: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
-        2. Нажми <strong>Generate new token (classic)</strong><br>
-        3. Введи название: <code>КРИСТИНА.AI CMS</code><br>
-        4. Поставь галочку: <strong>repo</strong> (полный доступ)<br>
-        5. Нажми <strong>Generate token</strong><br>
-        6. Скопируй токен (начинается на <code>ghp_...</code>) и вставь ниже
-      </div>
-      
-      <input type="password" id="token-input" class="input" placeholder="Вставь GitHub Personal Access Token (ghp_...)">
-      <button class="btn" onclick="login()">Войти в админку</button>
-      <p id="error-msg" style="color: #ff6b6b; margin-top: 15px; display: none;"></p>
+  <!-- Экран входа -->
+  <div id="login-screen" class="container">
+    <h1>🔐 Вход в админ-панель</h1>
+    
+    <div class="info">
+      <strong>Как получить токен:</strong><br>
+      1. Перейди: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
+      2. Нажми <strong>Generate new token (classic)</strong><br>
+      3. Введи название: <code>КРИСТИНА.AI CMS</code><br>
+      4. Поставь галочку: <strong>repo</strong> (полный доступ)<br>
+      5. Нажми <strong>Generate token</strong><br>
+      6. Скопируй токен (начинается на <code>ghp_...</code>) и вставь ниже
     </div>
     
-    <div id="loading-screen" class="hidden">
-      <h1>⏳ Загрузка...</h1>
-      <p>Проверяю токен и загружаю админ-панель</p>
-    </div>
+    <input type="password" id="token-input" class="input" placeholder="Вставь GitHub Personal Access Token (ghp_...)">
+    <button class="btn" onclick="handleLogin()">Войти в админку</button>
+    <p id="error-msg" style="color: #ff6b6b; margin-top: 15px; display: none;"></p>
   </div>
+  
+  <!-- Контейнер для CMS -->
+  <div id="cms-wrapper"></div>
 
   <script>
     const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
-    
-    // Проверяем сохраненный токен
     const savedToken = localStorage.getItem('kristina-cms-token');
+    
+    // Если токен есть — сразу загружаем CMS
     if (savedToken) {
-      showLoading();
-      verifyAndInit(savedToken);
+      initCMS(savedToken);
     }
     
-    function login() {
+    function handleLogin() {
       const token = document.getElementById('token-input').value.trim();
       if (!token) {
         showError('Введите токен!');
@@ -107,13 +103,7 @@
       }
       
       localStorage.setItem('kristina-cms-token', token);
-      showLoading();
-      verifyAndInit(token);
-    }
-    
-    function showLoading() {
-      document.getElementById('login-screen').classList.add('hidden');
-      document.getElementById('loading-screen').classList.remove('hidden');
+      initCMS(token);
     }
     
     function showError(msg) {
@@ -122,7 +112,7 @@
       errorEl.style.display = 'block';
     }
     
-    function verifyAndInit(token) {
+    function initCMS(token) {
       // Проверяем токен
       fetch('https://api.github.com/user', {
         headers: { 
@@ -131,47 +121,55 @@
         }
       })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error('Неверный токен');
-        }
+        if (!res.ok) throw new Error('Неверный токен');
+        return res.json();
       })
       .then(user => {
-        console.log('Авторизован как:', user.login);
-        loadDecapCMS(token);
+        console.log('✓ Авторизован как:', user.login);
+        
+        // Скрываем экран входа ПОЛНОСТЬЮ
+        const loginScreen = document.getElementById('login-screen');
+        if (loginScreen) {
+          loginScreen.classList.add('hidden');
+          loginScreen.style.display = 'none';
+        }
+        
+        // Показываем CMS контейнер
+        const cmsWrapper = document.getElementById('cms-wrapper');
+        cmsWrapper.style.display = 'block';
+        
+        // Загружаем Decap CMS
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        script.onload = () => {
+          console.log('✓ Decap CMS загружен');
+          
+          // Инициализируем CMS
+          CMS.init({
+            backend: {
+              name: 'github',
+              repo: REPO,
+              branch: 'main',
+              token: token
+            },
+            load_config_file: true,
+            config_path: 'admin/config.yml',
+            media_folder: 'assets',
+            public_folder: '/assets'
+          });
+        };
+        
+        script.onerror = () => {
+          showError('Ошибка загрузки CMS. Обновите страницу.');
+        };
+        
+        document.head.appendChild(script);
       })
       .catch(err => {
-        console.error(err);
+        console.error('✗ Ошибка:', err);
         localStorage.removeItem('kristina-cms-token');
-        document.getElementById('login-screen').classList.remove('hidden');
-        document.getElementById('loading-screen').classList.add('hidden');
         showError('Неверный токен или ошибка сети. Попробуйте снова.');
       });
-    }
-    
-    function loadDecapCMS(token) {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-      script.onload = () => {
-        console.log('Decap CMS загружен');
-        CMS.init({
-          backend: {
-            name: 'github',
-            repo: REPO,
-            branch: 'main',
-            token: token
-          },
-          load_config_file: true,
-          config_path: 'admin/config.yml',
-          media_folder: 'assets',
-          public_folder: '/assets'
-        });
-      };
-      script.onerror = () => {
-        showError('Ошибка загрузки CMS. Обновите страницу.');
-      };
-      document.head.appendChild(script);
     }
   </script>
 </body>
