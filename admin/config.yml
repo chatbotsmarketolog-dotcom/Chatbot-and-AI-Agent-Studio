@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio
+  name: git-gateway
   branch: main
-  token: "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"
 
 media_folder: "assets"
 public_folder: "/assets"
