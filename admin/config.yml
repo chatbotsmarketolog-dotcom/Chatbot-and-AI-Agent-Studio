@@ -229,11 +229,8 @@ collections:
                   - label: "Список возможностей"
                     name: "features"
                     widget: "list"
-                    summary: "{{fields.item}}"
-                    fields:
-                      - label: "Пункт"
-                        name: "item"
-                        widget: "string"
+                    summary: "{{fields}}"
+                    allow_add: true
                   - label: "Текст кнопки"
                     name: "btn_text"
                     widget: "string"
@@ -369,7 +366,7 @@ collections:
                 widget: "string"
                 default: "© 2025 КРИСТИНА.AI — Оазис будущего"
 
-          # === CUSTOM CODE SECTIONS (как на Тильде) ===
+          # === CUSTOM CODE SECTIONS (ИСПРАВЛЕНО: виджет code заменён на text) ===
           - label: "💻 Кастомный код (HTML/JS/CSS)"
             name: "custom_code"
             widget: "object"
@@ -378,13 +375,9 @@ collections:
             fields:
               - label: "Код в <head> (метатеги, стили, скрипты аналитики)"
                 name: "head_code"
-                widget: "code"
-                default_language: "html"
-                output_code_only: false
+                widget: "text"
                 hint: "Например: Яндекс.Метрика, Google Analytics, кастомные стили"
               - label: "Код перед </body> (скрипты, виджеты)"
                 name: "footer_code"
-                widget: "code"
-                default_language: "javascript"
-                output_code_only: false
+                widget: "text"
                 hint: "Например: чат-виджеты, пиксели, кастомные скрипты"
