@@ -5,83 +5,148 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>КРИСТИНА.AI — Админ-панель</title>
   <style>
-    body { margin: 0; padding: 0; font-family: sans-serif; background: #0a0e17; color: #00F0FF; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-    .container { text-align: center; padding: 40px; max-width: 500px; }
-    h1 { margin-bottom: 20px; }
-    .input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #00F0FF; border-radius: 8px; background: #1a2332; color: #00F0FF; font-size: 14px; }
-    .btn { padding: 12px 24px; background: #00F0FF; color: #000; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      background: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%); 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #00F0FF;
+    }
+    .container { 
+      text-align: center; 
+      padding: 40px; 
+      max-width: 600px;
+    }
+    h1 { margin-bottom: 20px; font-size: 2rem; }
+    .info { 
+      background: rgba(0,240,255,0.1); 
+      padding: 20px; 
+      border-radius: 12px; 
+      margin: 20px 0; 
+      text-align: left; 
+      font-size: 14px;
+      border-left: 4px solid #00F0FF;
+    }
+    .info a { color: #00F0FF; }
+    .input { 
+      width: 100%; 
+      padding: 14px; 
+      margin: 15px 0; 
+      border: 2px solid #00F0FF; 
+      border-radius: 8px; 
+      background: #1a2332; 
+      color: #00F0FF; 
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .btn { 
+      padding: 14px 28px; 
+      background: #00F0FF; 
+      color: #0a0e17; 
+      border: none; 
+      border-radius: 8px; 
+      font-size: 16px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      margin-top: 10px;
+    }
     .btn:hover { opacity: 0.9; }
-    .info { background: rgba(0,240,255,0.1); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; font-size: 14px; }
     .hidden { display: none; }
+    .loading { margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🔐 Вход в админ-панель</h1>
-    
-    <div id="login-form">
+    <div id="login-screen">
+      <h1>🔐 Вход в админ-панель</h1>
+      
       <div class="info">
         <strong>Как получить токен:</strong><br>
-        1. Перейди: <a href="https://github.com/settings/tokens" target="_blank" style="color:#00F0FF">github.com/settings/tokens</a><br>
+        1. Перейди: <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
         2. Нажми <strong>Generate new token (classic)</strong><br>
-        3. Выбери право: <strong>repo</strong> (полный доступ)<br>
-        4. Скопируй токен и вставь ниже
+        3. Введи название: <code>КРИСТИНА.AI CMS</code><br>
+        4. Поставь галочку: <strong>repo</strong> (полный доступ)<br>
+        5. Нажми <strong>Generate token</strong><br>
+        6. Скопируй токен (начинается на <code>ghp_...</code>) и вставь ниже
       </div>
       
-      <input type="password" id="token-input" class="input" placeholder="Вставь GitHub Personal Access Token">
-      <button class="btn" onclick="login()">Войти</button>
+      <input type="password" id="token-input" class="input" placeholder="Вставь GitHub Personal Access Token (ghp_...)">
+      <button class="btn" onclick="login()">Войти в админку</button>
+      <p id="error-msg" style="color: #ff6b6b; margin-top: 15px; display: none;"></p>
     </div>
     
-    <div id="loading" class="hidden">
-      <p>Загрузка админ-панели...</p>
+    <div id="loading-screen" class="hidden">
+      <h1>⏳ Загрузка...</h1>
+      <p>Проверяю токен и загружаю админ-панель</p>
     </div>
   </div>
 
   <script>
     const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
     
-    // Проверяем, есть ли сохраненный токен
-    const savedToken = localStorage.getItem('github-token');
+    // Проверяем сохраненный токен
+    const savedToken = localStorage.getItem('kristina-cms-token');
     if (savedToken) {
-      initCMS(savedToken);
+      showLoading();
+      verifyAndInit(savedToken);
     }
     
     function login() {
       const token = document.getElementById('token-input').value.trim();
       if (!token) {
-        alert('Введите токен!');
+        showError('Введите токен!');
+        return;
+      }
+      if (!token.startsWith('ghp_')) {
+        showError('Токен должен начинаться с ghp_');
         return;
       }
       
-      // Сохраняем токен
-      localStorage.setItem('github-token', token);
-      
-      // Показываем загрузку
-      document.getElementById('login-form').classList.add('hidden');
-      document.getElementById('loading').classList.remove('hidden');
-      
-      // Инициализируем CMS
-      initCMS(token);
+      localStorage.setItem('kristina-cms-token', token);
+      showLoading();
+      verifyAndInit(token);
     }
     
-    function initCMS(token) {
+    function showLoading() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('loading-screen').classList.remove('hidden');
+    }
+    
+    function showError(msg) {
+      const errorEl = document.getElementById('error-msg');
+      errorEl.textContent = msg;
+      errorEl.style.display = 'block';
+    }
+    
+    function verifyAndInit(token) {
       // Проверяем токен
       fetch('https://api.github.com/user', {
-        headers: { 'Authorization': `token ${token}` }
+        headers: { 
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
       })
       .then(res => {
         if (res.ok) {
-          loadDecapCMS(token);
+          return res.json();
         } else {
-          alert('Неверный токен! Попробуйте снова.');
-          localStorage.removeItem('github-token');
-          location.reload();
+          throw new Error('Неверный токен');
         }
       })
-      .catch(() => {
-        alert('Ошибка сети. Попробуйте снова.');
-        localStorage.removeItem('github-token');
-        location.reload();
+      .then(user => {
+        console.log('Авторизован как:', user.login);
+        loadDecapCMS(token);
+      })
+      .catch(err => {
+        console.error(err);
+        localStorage.removeItem('kristina-cms-token');
+        document.getElementById('login-screen').classList.remove('hidden');
+        document.getElementById('loading-screen').classList.add('hidden');
+        showError('Неверный токен или ошибка сети. Попробуйте снова.');
       });
     }
     
@@ -89,6 +154,7 @@
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
       script.onload = () => {
+        console.log('Decap CMS загружен');
         CMS.init({
           backend: {
             name: 'github',
@@ -97,8 +163,13 @@
             token: token
           },
           load_config_file: true,
-          config_path: 'admin/config.yml'
+          config_path: 'admin/config.yml',
+          media_folder: 'assets',
+          public_folder: '/assets'
         });
+      };
+      script.onerror = () => {
+        showError('Ошибка загрузки CMS. Обновите страницу.');
       };
       document.head.appendChild(script);
     }
