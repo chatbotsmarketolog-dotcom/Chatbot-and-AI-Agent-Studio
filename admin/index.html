@@ -54,59 +54,84 @@
 </head>
 <body>
   <div class="container">
-    <h1>🔐 Вход</h1>
+    <h1>🔐 Вход в админ-панель</h1>
     <div class="info">
+      <strong>Как получить токен:</strong><br>
       1. <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
       2. Generate new token (classic)<br>
-      3. Галочка: <strong>repo</strong><br>
-      4. Generate token<br>
-      5. Скопируй (ghp_...)
+      3. Название: <code>КРИСТИНА.AI CMS</code><br>
+      4. Галочка: <strong>repo</strong><br>
+      5. Generate token<br>
+      6. Скопируй (начинается на <code>ghp_...</code>)
     </div>
-    <input type="password" id="token" class="input" placeholder="ghp_...">
-    <button class="btn" onclick="login()">Войти</button>
+    <input type="password" id="token" class="input" placeholder="Вставь токен (ghp_...)">
+    <button class="btn" onclick="doLogin()">Войти</button>
     <div id="error" class="error"></div>
   </div>
 
   <script>
-    function login() {
+    function doLogin() {
       const t = document.getElementById('token').value.trim();
       if (!t || !t.startsWith('ghp_')) {
-        document.getElementById('error').style.display = 'block';
-        document.getElementById('error').textContent = 'Введите токен';
+        const err = document.getElementById('error');
+        err.textContent = 'Введите корректный токен (ghp_...)';
+        err.style.display = 'block';
         return;
       }
-      localStorage.setItem('cms_token', t);
-      location.reload();
+      
+      // Проверяем токен
+      fetch('https://api.github.com/user', {
+        headers: { 'Authorization': 'token ' + t }
+      })
+      .then(r => {
+        if (!r.ok) throw new Error('Invalid token');
+        return r.json();
+      })
+      .then(user => {
+        console.log('✓ Auth:', user.login);
+        localStorage.setItem('cms_token', t);
+        // ПОЛНАЯ ЗАМЕНА ДОКУМЕНТА
+        loadCMS(t);
+      })
+      .catch(() => {
+        const err = document.getElementById('error');
+        err.textContent = 'Неверный токен';
+        err.style.display = 'block';
+      });
     }
     
+    function loadCMS(token) {
+      // Полностью заменяем документ на новый с CMS
+      document.open();
+      document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Loading CMS...</title></head><body><div style="position:fixed;inset:0;background:linear-gradient(135deg,#0a0e17,#1a2332);display:flex;align-items:center;justify-content:center;color:#00F0FF;font-family:sans-serif;font-size:1.5rem">Загрузка админ-панели...</div></body></html>');
+      document.close();
+      
+      // Загружаем CMS скрипт
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+      s.onload = function() {
+        CMS.init({
+          backend: {
+            name: 'github',
+            repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
+            branch: 'main',
+            token: token
+          },
+          load_config_file: true,
+          config_path: 'admin/config.yml'
+        });
+      };
+      document.head.appendChild(s);
+    }
+    
+    // Проверяем сохраненный токен при загрузке
     const saved = localStorage.getItem('cms_token');
     if (saved) {
       fetch('https://api.github.com/user', {
         headers: { 'Authorization': 'token ' + saved }
       })
-      .then(r => {
-        if (!r.ok) {
-          localStorage.removeItem('cms_token');
-          location.reload();
-        } else {
-          document.body.innerHTML = '<div id="cms"></div>';
-          const s = document.createElement('script');
-          s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-          s.onload = () => {
-            CMS.init({
-              backend: {
-                name: 'github',
-                repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
-                branch: 'main',
-                token: saved
-              },
-              load_config_file: true,
-              config_path: 'admin/config.yml'
-            });
-          };
-          document.head.appendChild(s);
-        }
-      });
+      .then(r => r.ok ? loadCMS(saved) : localStorage.removeItem('cms_token'))
+      .catch(() => localStorage.removeItem('cms_token'));
     }
   </script>
 </body>
