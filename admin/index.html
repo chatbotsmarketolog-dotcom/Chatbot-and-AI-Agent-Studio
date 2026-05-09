@@ -14,32 +14,55 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .loading {
       color: #00F0FF;
-      font-size: 1.5rem;
-      text-align: center;
     }
+    .container { text-align: center; }
+    h1 { margin-bottom: 20px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #00F0FF;
+      color: #0a0e17;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { opacity: 0.9; }
   </style>
 </head>
 <body>
-  <div class="loading">Загрузка админ-панели...</div>
-  
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
+  <div class="container">
+    <h1>🔐 Вход в админ-панель</h1>
+    <p>Нажми кнопку ниже для авторизации через GitHub</p>
+    <button class="btn" onclick="loginWithGitHub()"> Войти через GitHub</button>
+    <div id="status" style="margin-top: 20px;"></div>
+  </div>
+
   <script>
-    // Инициализация Decap CMS с GitHub OAuth
-    CMS.init({
-      backend: {
-        name: 'github',
-        repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
-        branch: 'main',
-        auth_scope: 'repo',
-        open_authoring: false
-      },
-      load_config_file: true,
-      config_path: 'admin/config.yml'
-    });
+    // Конфигурация
+    const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
+    const REDIRECT_URI = window.location.origin + window.location.pathname;
+    const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
+    
+    // Проверка хэша URL (после авторизации)
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      const params = new URLSearchParams(hash.substring(1));
+      const token = params.get('access_token');
+      if (token) {
+        localStorage.setItem('decap-cms-user', JSON.stringify({ token, repo: REPO }));
+        window.location.href = window.location.origin + window.location.pathname + '#/';
+      }
+    }
+    
+    // Функция входа
+    function loginWithGitHub() {
+      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=repo`;
+      window.location.href = authUrl;
+    }
   </script>
 </body>
 </html>
