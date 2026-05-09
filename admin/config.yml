@@ -2,9 +2,6 @@ backend:
   name: github
   repo: chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio
   branch: main
-  auth_endpoint: oauth
-  client_id: Ov23liMNKPrvdqhLkAqK
-  client_secret: c481cbd56a5adae0998360cb8824cdd658b10683
 
 media_folder: "assets"
 public_folder: "/assets"
