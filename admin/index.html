@@ -6,99 +6,86 @@
   <title>КРИСТИНА.AI — Админ-панель</title>
   <style>
     body { margin: 0; padding: 0; font-family: sans-serif; background: #0a0e17; color: #00F0FF; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-    .container { text-align: center; }
+    .container { text-align: center; padding: 40px; max-width: 500px; }
     h1 { margin-bottom: 20px; }
-    .btn { padding: 12px 24px; background: #00F0FF; color: #000; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
-    .loading { display: none; margin-top: 20px; }
+    .input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #00F0FF; border-radius: 8px; background: #1a2332; color: #00F0FF; font-size: 14px; }
+    .btn { padding: 12px 24px; background: #00F0FF; color: #000; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    .btn:hover { opacity: 0.9; }
+    .info { background: rgba(0,240,255,0.1); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; font-size: 14px; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🔐 Вход в админ-панель</h1>
-    <p id="status-text">Нажми кнопку ниже для авторизации через GitHub</p>
-    <button id="login-btn" class="btn" onclick="startLogin()">Войти через GitHub</button>
-    <div class="loading" id="loading">Обмен токеном... Пожалуйста, подождите.</div>
+    
+    <div id="login-form">
+      <div class="info">
+        <strong>Как получить токен:</strong><br>
+        1. Перейди: <a href="https://github.com/settings/tokens" target="_blank" style="color:#00F0FF">github.com/settings/tokens</a><br>
+        2. Нажми <strong>Generate new token (classic)</strong><br>
+        3. Выбери право: <strong>repo</strong> (полный доступ)<br>
+        4. Скопируй токен и вставь ниже
+      </div>
+      
+      <input type="password" id="token-input" class="input" placeholder="Вставь GitHub Personal Access Token">
+      <button class="btn" onclick="login()">Войти</button>
+    </div>
+    
+    <div id="loading" class="hidden">
+      <p>Загрузка админ-панели...</p>
+    </div>
   </div>
 
   <script>
-    // ТВОИ ДАННЫЕ
-    const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
-    const CLIENT_SECRET = 'c481cbd56a5adae0998360cb8824cdd658b10683';
     const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
     
-    const loginBtn = document.getElementById('login-btn');
-    const loading = document.getElementById('loading');
-    const statusText = document.getElementById('status-text');
-
-    // 1. Проверяем, есть ли код возврата от GitHub
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-
-    if (code) {
-      // Если код есть — скрываем кнопку, показываем загрузку
-      loginBtn.style.display = 'none';
-      loading.style.display = 'block';
-      statusText.innerText = 'Связываемся с GitHub...';
-      
-      exchangeCodeForToken(code);
-    } else {
-      // Если токена нет в памяти — показываем кнопку
-      const storedUser = localStorage.getItem('decap-cms-user');
-      if (storedUser) {
-         initCMS(JSON.parse(storedUser));
+    // Проверяем, есть ли сохраненный токен
+    const savedToken = localStorage.getItem('github-token');
+    if (savedToken) {
+      initCMS(savedToken);
+    }
+    
+    function login() {
+      const token = document.getElementById('token-input').value.trim();
+      if (!token) {
+        alert('Введите токен!');
+        return;
       }
+      
+      // Сохраняем токен
+      localStorage.setItem('github-token', token);
+      
+      // Показываем загрузку
+      document.getElementById('login-form').classList.add('hidden');
+      document.getElementById('loading').classList.remove('hidden');
+      
+      // Инициализируем CMS
+      initCMS(token);
     }
-
-    // 2. Функция начала входа
-    function startLogin() {
-      const redirectUri = window.location.origin + window.location.pathname;
-      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
-      window.location.href = authUrl;
-    }
-
-    // 3. Функция обмена кода на токен
-    async function exchangeCodeForToken(code) {
-      try {
-        const response = await fetch('https://github.com/login/oauth/access_token', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new URLSearchParams({
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
-            code: code
-          })
-        });
-        
-        const data = await response.json();
-        
-        if (data.access_token) {
-          statusText.innerText = 'Успешно! Загружаем админку...';
-          // Сохраняем токен
-          const user = { token: data.access_token, repo: REPO, backend: 'github' };
-          localStorage.setItem('decap-cms-user', JSON.stringify(user));
-          
-          // Очищаем URL от ?code=...
-          window.history.replaceState(null, '', window.location.pathname);
-          
-          // Запускаем CMS
-          initCMS(user);
+    
+    function initCMS(token) {
+      // Проверяем токен
+      fetch('https://api.github.com/user', {
+        headers: { 'Authorization': `token ${token}` }
+      })
+      .then(res => {
+        if (res.ok) {
+          loadDecapCMS(token);
         } else {
-          statusText.innerText = 'Ошибка: ' + (data.error_description || data.message);
-          loginBtn.style.display = 'inline-block';
-          loading.style.display = 'none';
+          alert('Неверный токен! Попробуйте снова.');
+          localStorage.removeItem('github-token');
+          location.reload();
         }
-      } catch (error) {
-        statusText.innerText = 'Ошибка сети. Попробуй позже.';
-        console.error(error);
-      }
+      })
+      .catch(() => {
+        alert('Ошибка сети. Попробуйте снова.');
+        localStorage.removeItem('github-token');
+        location.reload();
+      });
     }
-
-    // 4. Инициализация CMS
-    function initCMS(user) {
-      loginBtn.style.display = 'none';
-      loading.style.display = 'block';
-      loading.innerText = 'Загрузка интерфейса...';
-      
+    
+    function loadDecapCMS(token) {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
       script.onload = () => {
@@ -106,7 +93,8 @@
           backend: {
             name: 'github',
             repo: REPO,
-            branch: 'main'
+            branch: 'main',
+            token: token
           },
           load_config_file: true,
           config_path: 'admin/config.yml'
