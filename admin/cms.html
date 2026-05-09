@@ -7,27 +7,56 @@
 </head>
 <body>
   <script>
+    // Конфигурация
+    const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
+    const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
+    
+    // Проверяем хэш URL (после OAuth)
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      const params = new URLSearchParams(hash.substring(1));
+      const token = params.get('access_token');
+      
+      if (token) {
+        localStorage.setItem('cms_token', token);
+        window.location.href = window.location.pathname;
+      }
+    }
+    
     const token = localStorage.getItem('cms_token');
     
     if (!token) {
-      window.location.href = 'index.html';
+      // Показываем кнопку входа
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:linear-gradient(135deg,#0a0e17,#1a2332);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#00F0FF;font-family:sans-serif">
+          <h1 style="margin-bottom:20px">🔐 Вход в админ-панель</h1>
+          <button onclick="login()" style="padding:14px 28px;background:#00F0FF;color:#0a0e17;border:none;border-radius:8px;font-size:16px;cursor:pointer;font-weight:bold;margin:10px">Войти через GitHub</button>
+          <p style="margin-top:20px;font-size:14px;opacity:0.7">Или <a href="index.html" style="color:#00F0FF">войти с токеном</a></p>
+        </div>
+      `;
+      
+      window.login = function() {
+        const redirectUri = window.location.origin + window.location.pathname;
+        const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
+        window.location.href = authUrl;
+      };
     } else {
-      // Проверяем токен
-      fetch('https://api.github.com/user', {
-        headers: { 'Authorization': 'token ' + token }
-      })
-      .then(r => {
-        if (!r.ok) {
-          localStorage.removeItem('cms_token');
-          window.location.href = 'index.html';
-        }
-      })
-      .then(() => {
-        // Загружаем CMS напрямую — БЕЗ loading screen!
-        const s = document.createElement('script');
-        s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-        document.head.appendChild(s);
-      });
+      // Загружаем CMS
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+      s.onload = () => {
+        CMS.init({
+          backend: {
+            name: 'github',
+            repo: REPO,
+            branch: 'main',
+            token: token
+          },
+          load_config_file: true,
+          config_path: 'admin/config.yml'
+        });
+      };
+      document.head.appendChild(s);
     }
   </script>
 </body>
