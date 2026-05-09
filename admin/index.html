@@ -32,24 +32,28 @@
       transition: transform 0.2s;
     }
     .btn:hover { transform: translateY(-2px); }
-    .loading { display: none; margin-top: 20px; }
+    .loading { display: none; margin-top: 20px; color: #00F0FF; }
+    #cms-container { display: none; width: 100%; height: 100vh; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="login-container">
     <h1>🔐 Вход в админ-панель</h1>
     <p>Нажми кнопку ниже для авторизации через GitHub</p>
-    <button class="btn" onclick="loginWithGitHub()">Войти через GitHub</button>
+    <button class="btn" onclick="window.loginWithGitHub()">Войти через GitHub</button>
     <div class="loading" id="loading">Загрузка...</div>
   </div>
-
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
+  <div id="cms-container"></div>
+
   <script>
-    // Конфигурация OAuth
-    const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
-    const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
-    const BRANCH = 'main';
+    // Глобальная функция для входа
+    window.loginWithGitHub = function() {
+      const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
+      const redirectUri = window.location.origin + window.location.pathname;
+      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
+      window.location.href = authUrl;
+    };
     
     // Обработка callback после авторизации
     const hash = window.location.hash;
@@ -58,37 +62,41 @@
       const token = params.get('access_token');
       
       if (token) {
+        // Показываем загрузку
+        document.getElementById('loading').style.display = 'block';
+        document.querySelector('.btn').style.display = 'none';
+        
         // Сохраняем токен
         localStorage.setItem('decap-cms-user', JSON.stringify({
           token: token,
-          repo: REPO,
+          repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
           backend: 'github'
         }));
         
-        // Показываем загрузку
-        document.querySelector('.loading').style.display = 'block';
-        document.querySelector('button').style.display = 'none';
+        // Очищаем URL от токена
+        window.history.replaceState(null, '', window.location.pathname);
         
-        // Инициализируем CMS
-        setTimeout(() => {
-          CMS.init({
-            backend: {
-              name: 'github',
-              repo: REPO,
-              branch: BRANCH
-            },
-            load_config_file: true,
-            config_path: 'admin/config.yml'
-          });
-        }, 500);
+        // Загружаем Decap CMS
+        loadDecapCMS();
       }
     }
     
-    // Функция входа
-    function loginWithGitHub() {
-      const redirectUri = window.location.origin + window.location.pathname;
-      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
-      window.location.href = authUrl;
+    // Функция загрузки CMS
+    function loadDecapCMS() {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+      script.onload = function() {
+        CMS.init({
+          backend: {
+            name: 'github',
+            repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
+            branch: 'main'
+          },
+          load_config_file: true,
+          config_path: 'admin/config.yml'
+        });
+      };
+      document.head.appendChild(script);
     }
   </script>
 </body>
