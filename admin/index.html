@@ -14,10 +14,9 @@
       align-items: center;
       justify-content: center;
       color: #00F0FF;
-      padding: 20px;
     }
-    .container { text-align: center; max-width: 600px; width: 100%; }
-    h1 { margin-bottom: 20px; font-size: 2rem; }
+    .container { text-align: center; padding: 40px; max-width: 600px; width: 100%; }
+    h1 { margin-bottom: 20px; }
     .info {
       background: rgba(0,240,255,0.1);
       padding: 20px;
@@ -48,23 +47,19 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .btn:hover { opacity: 0.9; }
     .error { color: #ff6b6b; margin-top: 15px; display: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🔐 Вход в админ-панель</h1>
+  <div id="login" class="container">
+    <h1>🔐 Вход</h1>
     <div class="info">
-      <strong>Как получить токен:</strong><br>
       1. <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a><br>
       2. Generate new token (classic)<br>
-      3. Название: <code>КРИСТИНА.AI CMS</code><br>
-      4. Галочка: <strong>repo</strong><br>
-      5. Generate token<br>
-      6. Скопируй (начинается на <code>ghp_...</code>)
+      3. Галочка: <strong>repo</strong><br>
+      4. Скопируй (ghp_...)
     </div>
-    <input type="password" id="token" class="input" placeholder="Вставь токен (ghp_...)">
+    <input type="password" id="token" class="input" placeholder="ghp_...">
     <button class="btn" onclick="doLogin()">Войти</button>
     <div id="error" class="error"></div>
   </div>
@@ -73,66 +68,55 @@
     function doLogin() {
       const t = document.getElementById('token').value.trim();
       if (!t || !t.startsWith('ghp_')) {
-        const err = document.getElementById('error');
-        err.textContent = 'Введите корректный токен (ghp_...)';
-        err.style.display = 'block';
+        const e = document.getElementById('error');
+        e.textContent = 'Введите токен';
+        e.style.display = 'block';
         return;
       }
-      
-      // Проверяем токен
+      localStorage.setItem('cms_token', t);
+      initCMS(t);
+    }
+    
+    function initCMS(token) {
       fetch('https://api.github.com/user', {
-        headers: { 'Authorization': 'token ' + t }
+        headers: { 'Authorization': 'token ' + token }
       })
-      .then(r => {
-        if (!r.ok) throw new Error('Invalid token');
-        return r.json();
-      })
+      .then(r => r.ok ? r.json() : Promise.reject())
       .then(user => {
         console.log('✓ Auth:', user.login);
-        localStorage.setItem('cms_token', t);
-        // ПОЛНАЯ ЗАМЕНА ДОКУМЕНТА
-        loadCMS(t);
+        // Полная очистка
+        document.body.innerHTML = '<div style="position:fixed;inset:0;background:linear-gradient(135deg,#0a0e17,#1a2332);display:flex;align-items:center;justify-content:center;color:#00F0FF;font-family:sans-serif;font-size:1.5rem">Загрузка...</div>';
+        
+        // Даём браузеру время на очистку
+        setTimeout(() => {
+          const s = document.createElement('script');
+          s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+          s.onload = () => {
+            CMS.init({
+              backend: {
+                name: 'github',
+                repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
+                branch: 'main',
+                token: token
+              },
+              load_config_file: true,
+              config_path: 'admin/config.yml'
+            });
+          };
+          document.head.appendChild(s);
+        }, 100);
       })
       .catch(() => {
-        const err = document.getElementById('error');
-        err.textContent = 'Неверный токен';
-        err.style.display = 'block';
+        localStorage.removeItem('cms_token');
+        const e = document.getElementById('error');
+        e.textContent = 'Неверный токен';
+        e.style.display = 'block';
       });
     }
     
-    function loadCMS(token) {
-      // Полностью заменяем документ на новый с CMS
-      document.open();
-      document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Loading CMS...</title></head><body><div style="position:fixed;inset:0;background:linear-gradient(135deg,#0a0e17,#1a2332);display:flex;align-items:center;justify-content:center;color:#00F0FF;font-family:sans-serif;font-size:1.5rem">Загрузка админ-панели...</div></body></html>');
-      document.close();
-      
-      // Загружаем CMS скрипт
-      const s = document.createElement('script');
-      s.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
-      s.onload = function() {
-        CMS.init({
-          backend: {
-            name: 'github',
-            repo: 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio',
-            branch: 'main',
-            token: token
-          },
-          load_config_file: true,
-          config_path: 'admin/config.yml'
-        });
-      };
-      document.head.appendChild(s);
-    }
-    
-    // Проверяем сохраненный токен при загрузке
+    // Авто-вход
     const saved = localStorage.getItem('cms_token');
-    if (saved) {
-      fetch('https://api.github.com/user', {
-        headers: { 'Authorization': 'token ' + saved }
-      })
-      .then(r => r.ok ? loadCMS(saved) : localStorage.removeItem('cms_token'))
-      .catch(() => localStorage.removeItem('cms_token'));
-    }
+    if (saved) initCMS(saved);
   </script>
 </body>
 </html>
