@@ -16,51 +16,78 @@
       justify-content: center;
       color: #00F0FF;
     }
-    .container { text-align: center; }
-    h1 { margin-bottom: 20px; }
+    .container { text-align: center; padding: 40px; }
+    h1 { margin-bottom: 20px; font-size: 2rem; }
     .btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 14px 28px;
       background: #00F0FF;
       color: #0a0e17;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
-      margin: 10px;
       cursor: pointer;
       border: none;
+      font-size: 1rem;
+      transition: transform 0.2s;
     }
-    .btn:hover { opacity: 0.9; }
+    .btn:hover { transform: translateY(-2px); }
+    .loading { display: none; margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🔐 Вход в админ-панель</h1>
     <p>Нажми кнопку ниже для авторизации через GitHub</p>
-    <button class="btn" onclick="loginWithGitHub()"> Войти через GitHub</button>
-    <div id="status" style="margin-top: 20px;"></div>
+    <button class="btn" onclick="loginWithGitHub()">Войти через GitHub</button>
+    <div class="loading" id="loading">Загрузка...</div>
   </div>
 
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
   <script>
-    // Конфигурация
+    // Конфигурация OAuth
     const CLIENT_ID = 'Ov23liMNKPrvdqhLkAqK';
-    const REDIRECT_URI = window.location.origin + window.location.pathname;
     const REPO = 'chatbotsmarketolog-dotcom/Chatbot-and-AI-Agent-Studio';
+    const BRANCH = 'main';
     
-    // Проверка хэша URL (после авторизации)
+    // Обработка callback после авторизации
     const hash = window.location.hash;
     if (hash && hash.includes('access_token')) {
       const params = new URLSearchParams(hash.substring(1));
       const token = params.get('access_token');
+      
       if (token) {
-        localStorage.setItem('decap-cms-user', JSON.stringify({ token, repo: REPO }));
-        window.location.href = window.location.origin + window.location.pathname + '#/';
+        // Сохраняем токен
+        localStorage.setItem('decap-cms-user', JSON.stringify({
+          token: token,
+          repo: REPO,
+          backend: 'github'
+        }));
+        
+        // Показываем загрузку
+        document.querySelector('.loading').style.display = 'block';
+        document.querySelector('button').style.display = 'none';
+        
+        // Инициализируем CMS
+        setTimeout(() => {
+          CMS.init({
+            backend: {
+              name: 'github',
+              repo: REPO,
+              branch: BRANCH
+            },
+            load_config_file: true,
+            config_path: 'admin/config.yml'
+          });
+        }, 500);
       }
     }
     
     // Функция входа
     function loginWithGitHub() {
-      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=repo`;
+      const redirectUri = window.location.origin + window.location.pathname;
+      const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo`;
       window.location.href = authUrl;
     }
   </script>
