@@ -188,7 +188,6 @@
         .reviews-cta { text-align: center; padding: 24px; background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); border-radius: 16px; }
         .reviews-cta p { color: var(--text-secondary); margin-bottom: 12px; }
 
-        /* Объединённая секция контактов + заявки */
         .contact-section { padding: 100px 0; }
         .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
         .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 12px; }
@@ -205,7 +204,6 @@
         .contact-highlight p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
         .contact-highlight strong { color: var(--cyan); }
 
-        /* Форма в секции контактов */
         .application-card {
           background: var(--bg-card);
           border: 1px solid var(--border);
@@ -213,16 +211,8 @@
           padding: 36px;
           text-align: left;
         }
-        .application-card .form-group {
-          margin-bottom: 20px;
-        }
-        .application-card .form-group label {
-          display: block;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: var(--text-secondary);
-          margin-bottom: 8px;
-        }
+        .application-card .form-group { margin-bottom: 20px; }
+        .application-card .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
         .application-card input,
         .application-card select,
         .application-card textarea {
@@ -239,13 +229,8 @@
         }
         .application-card input:focus,
         .application-card select:focus,
-        .application-card textarea:focus {
-          border-color: var(--cyan);
-        }
-        .application-card textarea {
-          resize: vertical;
-          min-height: 100px;
-        }
+        .application-card textarea:focus { border-color: var(--cyan); }
+        .application-card textarea { resize: vertical; min-height: 100px; }
         .application-card select {
           cursor: pointer;
           appearance: none;
@@ -254,40 +239,14 @@
           background-position: right 16px center;
         }
 
-        .lead-buttons {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-          margin-top: 24px;
-          flex-wrap: wrap;
-        }
+        .lead-buttons { display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
         .btn-lead {
-          flex: 1;
-          min-width: 180px;
-          padding: 16px 20px;
-          border: none;
-          border-radius: 14px;
-          font-size: 1rem;
-          font-weight: 700;
-          color: #fff;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-family: inherit;
-          letter-spacing: 0.3px;
+          flex: 1; min-width: 180px; padding: 16px 20px; border: none; border-radius: 14px; font-size: 1rem; font-weight: 700;
+          color: #fff; cursor: pointer; transition: all 0.3s ease; font-family: inherit; letter-spacing: 0.3px;
         }
-        .btn-lead.vk {
-          background: #0077FF;
-          box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25);
-        }
-        .btn-lead.tg {
-          background: #2AABEE;
-          box-shadow: 0 8px 20px rgba(42, 171, 238, 0.25);
-        }
-        .btn-lead:hover {
-          transform: translateY(-3px);
-          filter: brightness(1.1);
-          box-shadow: 0 12px 28px rgba(0, 240, 255, 0.3);
-        }
+        .btn-lead.vk { background: #0077FF; box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25); }
+        .btn-lead.tg { background: #2AABEE; box-shadow: 0 8px 20px rgba(42, 171, 238, 0.25); }
+        .btn-lead:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 12px 28px rgba(0, 240, 255, 0.3); }
 
         .about-section { padding: 100px 0; }
         .about-inner { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; }
@@ -354,7 +313,6 @@
         ::-webkit-scrollbar-thumb { background: var(--bg-card-hover); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dark); }
 
-        /* Мобильная адаптация */
         @media (max-width: 1024px) {
             .hero-inner, .crm-inner, .about-inner, .contact-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-text { margin: 0 auto 36px; } .hero-buttons { justify-content: center; } .hero-triggers { justify-content: center; } .hero-visual { order: -1; } .phone-mockup { width: 260px; height: 500px; }
@@ -557,7 +515,6 @@
 
     <div class="glow-line"></div>
 
-    <!-- ===== ОБЪЕДИНЁННАЯ СЕКЦИЯ: КОНТАКТЫ + ФОРМА ===== -->
     <section class="contact-section" id="contact">
         <div class="container">
             <h2 class="section-title reveal" style="text-align:center;">Свяжитесь <span>со мной</span></h2>
@@ -579,7 +536,6 @@
                             <label>Ваше имя</label>
                             <input type="text" id="user-name" placeholder="Иван Иванов" required>
                         </div>
-                        <!-- Поле для контакта Telegram / VK -->
                         <div class="form-group">
                             <label>Ваш Telegram или VK</label>
                             <input type="text" id="user-contact" placeholder="@username или ссылка" required>
@@ -669,8 +625,7 @@
             <h2>Политика конфиденциальности</h2>
             <p><strong>Дата публикации:</strong> 01.05.2026</p>
             <h3>1. Общие положения</h3><p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта КРИСТИНА.AI.</p>
-            <h3>2. Какие данные мы собираем</h3>
-            <p>Контактные данные (имя, Telegram/VK username), описание задачи, выбранная услуга, технические данные.</p>
+            <h3>2. Какие данные мы собираем</h3><p>Контактные данные (имя, Telegram/VK username), описание задачи, выбранная услуга, технические данные.</p>
             <h3>3. Цели обработки</h3><p>Обработка заявок, связь с вами, улучшение сервиса, исполнение договоров.</p>
             <h3>4. Хранение и защита</h3><p>Данные защищены и не передаются третьим лицам.</p>
             <h3>5. Условия оплаты и возврата</h3>
@@ -681,7 +636,6 @@
     </div>
 
     <script>
-        // === Particles ===
         (function() {
             const container = document.getElementById('particles');
             const count = 30;
@@ -786,7 +740,7 @@
             const payload = { leadId, name, contact, service, task, platform: platform };
             
             try {
-                const res = await fetch('https://kristina-leads.workers.dev/api/leads', {
+                const res = await fetch('https://kristina-leads.chatbotsmarketolog.workers.dev/api/leads', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
