@@ -188,39 +188,6 @@
         .reviews-cta { text-align: center; padding: 24px; background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); border-radius: 16px; }
         .reviews-cta p { color: var(--text-secondary); margin-bottom: 12px; }
 
-        .contact-section { padding: 100px 0; }
-        .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-        .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 12px; }
-        .contact-info h2 span { color: var(--cyan); }
-        .contact-info > p { color: var(--text-secondary); margin-bottom: 36px; font-size: 1.05rem; }
-        .contact-methods { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-        .contact-method { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; transition: all 0.3s ease; flex-wrap: wrap; }
-        .contact-method:hover { border-color: var(--border-cyan); transform: translateX(5px); }
-        .contact-method-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
-        .contact-method-icon.tg { background: rgba(0, 136, 204, 0.15); } .contact-method-icon.vk { background: rgba(39, 135, 245, 0.15); } .contact-method-icon.ig { background: rgba(228, 64, 95, 0.15); } .contact-method-icon.clock { background: rgba(0, 240, 255, 0.15); }
-        .contact-method-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-        .contact-method-info p { font-size: 0.85rem; color: var(--text-muted); }
-        .contact-highlight { padding: 20px; background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); border-radius: 14px; }
-        .contact-highlight p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
-        .contact-highlight strong { color: var(--cyan); }
-
-        .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
-        .contact-form h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-        .contact-form > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 14px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; color: var(--text-primary); font-size: 0.95rem; font-family: inherit; transition: border-color 0.3s ease; outline: none; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--cyan); }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A0A0B8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
-        .form-submit { width: 100%; padding: 16px; background: var(--cyan); color: var(--bg-primary); border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
-        .form-submit:hover { box-shadow: 0 0 40px var(--cyan-glow); transform: translateY(-2px); }
-        .form-success { display: none; text-align: center; padding: 40px 20px; }
-        .form-success.show { display: block; }
-        .form-success .success-icon { font-size: 3rem; margin-bottom: 16px; }
-        .form-success h3 { color: var(--cyan); margin-bottom: 8px; }
-        .form-success p { color: var(--text-secondary); }
-
         .about-section { padding: 100px 0; }
         .about-inner { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; }
         .about-photo { position: relative; }
@@ -287,7 +254,6 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dark); }
 
         /* ========== НОВЫЕ СТИЛИ (ДОПОЛНЕНИЕ) ========== */
-        /* 1. FULL PAGE SCROLL */
         html {
           scroll-behavior: smooth;
           scroll-padding-top: 100px;
@@ -301,23 +267,106 @@
           border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* 2. ПОДСВЕТКА МЕНЮ */
         nav a {
           color: #8892b0;
           transition: color 0.3s;
           padding: 5px 0;
           border-bottom: 2px solid transparent;
         }
-        nav a:hover {
-          color: var(--accent);
-        }
+        nav a:hover { color: var(--accent); }
         nav a.active {
           color: var(--accent);
           font-weight: bold;
           border-bottom: 2px solid var(--accent);
         }
 
-        /* 3. ВИДЕО */
+        /* Карточка заявки */
+        .application-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          padding: 40px 36px;
+          max-width: 600px;
+          margin: 40px auto 0;
+          text-align: left;
+        }
+        .application-card .form-group {
+          margin-bottom: 20px;
+        }
+        .application-card .form-group label {
+          display: block;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          margin-bottom: 8px;
+        }
+        .application-card input,
+        .application-card select,
+        .application-card textarea {
+          width: 100%;
+          padding: 14px 16px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          color: var(--text-primary);
+          font-size: 0.95rem;
+          font-family: inherit;
+          transition: border-color 0.3s ease;
+          outline: none;
+        }
+        .application-card input:focus,
+        .application-card select:focus,
+        .application-card textarea:focus {
+          border-color: var(--cyan);
+        }
+        .application-card textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+        .application-card select {
+          cursor: pointer;
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A0A0B8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 16px center;
+        }
+
+        .lead-buttons {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          margin-top: 24px;
+          flex-wrap: wrap;
+        }
+        .btn-lead {
+          flex: 1;
+          min-width: 180px;
+          padding: 16px 20px;
+          border: none;
+          border-radius: 14px;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #fff;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-family: inherit;
+          letter-spacing: 0.3px;
+        }
+        .btn-lead.vk {
+          background: #0077FF;
+          box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25);
+        }
+        .btn-lead.tg {
+          background: #2AABEE;
+          box-shadow: 0 8px 20px rgba(42, 171, 238, 0.25);
+        }
+        .btn-lead:hover {
+          transform: translateY(-3px);
+          filter: brightness(1.1);
+          box-shadow: 0 12px 28px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Видео (пустой блок с возможностью добавления) */
         .video-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -349,9 +398,9 @@
           font-weight: bold;
         }
 
-        /* Мобильная адаптация CRM и других элементов */
+        /* Мобильная адаптация */
         @media (max-width: 1024px) {
-            .hero-inner, .crm-inner, .contact-inner, .about-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-inner, .crm-inner, .about-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-text { margin: 0 auto 36px; } .hero-buttons { justify-content: center; } .hero-triggers { justify-content: center; } .hero-visual { order: -1; } .phone-mockup { width: 260px; height: 500px; }
             .pain-grid, .services-grid, .reviews-grid { grid-template-columns: 1fr; }
             .demo-grid { grid-template-columns: repeat(2, 1fr); }
@@ -367,15 +416,13 @@
             .crm-inner { padding: 20px; }
             .crm-feature { flex-direction: column; align-items: flex-start; gap: 8px; }
             .crm-status { justify-content: center; text-align: center; }
-            .contact-method { flex-direction: column; text-align: center; }
-            .contact-method-icon { margin: 0 auto; }
+            .lead-buttons { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 480px) {
             .hero-buttons, .hero-triggers { flex-direction: column; align-items: center; }
             .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-            .phone-mockup { width: 240px; height: 460px; } .contact-form { padding: 24px; }
-            .crm-row { flex-direction: column; align-items: flex-start; }
-            .crm-badge { align-self: flex-start; }
+            .phone-mockup { width: 240px; height: 460px; }
+            .application-card { padding: 24px; }
         }
     </style>
 </head>
@@ -535,7 +582,7 @@
         </div>
     </section>
 
-    <!-- ===== НОВАЯ СЕКЦИЯ: ВИДЕО ===== -->
+    <!-- ===== ВИДЕО СЕКЦИЯ (ПУСТАЯ, ПОДДЕРЖИВАЕТ YOUTUBE/RUTUBE/VK) ===== -->
     <div id="video-section-container"></div>
 
     <div class="glow-line"></div>
@@ -556,52 +603,48 @@
 
     <div class="glow-line"></div>
 
-    <!-- ===== НОВЫЙ БЛОК ЗАЯВКИ ===== -->
+    <!-- ===== НОВЫЙ БЛОК ЗАЯВКИ С КАРТОЧКОЙ ===== -->
     <section id="applications">
       <div class="container" style="text-align:center; padding: 80px 20px;">
         <h2 class="section-title">Оставить заявку</h2>
-        <p style="color:#8892b0; max-width:600px; margin:0 auto 40px;">
+        <p class="section-subtitle" style="color:#A0A0B8; max-width:600px; margin:0 auto 40px;">
           Выберите удобный способ связи. Техна (AI-менеджер) свяжется с вами мгновенно.
         </p>
         
-        <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; max-width:600px; margin:0 auto;">
-          
-          <button onclick="submitLead('vk')" 
-            style="flex:1; min-width:200px; padding:20px; background:#0077FF; color:#fff; border:none; border-radius:12px; font-size:1.1rem; font-weight:700; cursor:pointer;">
-            📩 Заявка для ВК
-          </button>
+        <div class="application-card">
+          <form id="lead-form">
+            <div class="form-group">
+              <label>Ваше имя</label>
+              <input type="text" id="user-name" placeholder="Иван Иванов" required>
+            </div>
+            
+            <div class="form-group">
+              <label>Что вас интересует?</label>
+              <select id="user-service" required>
+                <option value="" disabled selected>Выберите услугу</option>
+                <option value="chatbot">🤖 Чат-бот</option>
+                <option value="ai-agent">🧠 AI-агент</option>
+                <option value="complex">✨ Комплексная автоматизация</option>
+                <option value="consultation">💬 Консультация</option>
+              </select>
+            </div>
 
-          <button onclick="submitLead('tg')" 
-            style="flex:1; min-width:200px; padding:20px; background:#2AABEE; color:#fff; border:none; border-radius:12px; font-size:1.1rem; font-weight:700; cursor:pointer;">
-             Заявка в Telegram
-          </button>
-          
+            <div class="form-group">
+              <label>Кратко опишите задачу</label>
+              <textarea id="user-task" placeholder="Например: нужно автоматизировать ответы клиентам в Telegram..." required rows="3"></textarea>
+            </div>
+
+            <div class="lead-buttons">
+              <button type="button" onclick="submitLead('vk')" class="btn-lead vk">
+                📩 Заявка для ВК
+              </button>
+              <button type="button" onclick="submitLead('tg')" class="btn-lead tg">
+                ✈️ Заявка в Telegram
+              </button>
+            </div>
+          </form>
+          <div id="form-message" style="margin-top:20px; padding:16px; border-radius:12px; display:none;"></div>
         </div>
-
-        <form id="lead-form" style="max-width:500px; margin:30px auto 0; text-align:left;">
-          <div style="margin-bottom:15px;">
-            <input type="text" id="user-name" placeholder="Ваше имя" required 
-              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);">
-          </div>
-          
-          <div style="margin-bottom:15px;">
-            <select id="user-service" required 
-              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);">
-              <option value="" disabled selected>Что вас интересует?</option>
-              <option value="chatbot">🤖 Чат-бот</option>
-              <option value="ai-agent">🧠 AI-агент</option>
-              <option value="complex">✨ Комплексная автоматизация</option>
-              <option value="consultation"> Консультация</option>
-            </select>
-          </div>
-
-          <div style="margin-bottom:20px;">
-            <textarea id="user-task" placeholder="Кратко опишите задачу..." required rows="3"
-              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);"></textarea>
-          </div>
-        </form>
-        
-        <div id="form-message" style="margin-top:20px; padding:16px; border-radius:8px; display:none;"></div>
       </div>
     </section>
 
@@ -749,7 +792,7 @@
             }
         }
 
-        // === НОВАЯ ФУНКЦИЯ ОТПРАВКИ ЛИДА ===
+        // === Отправка лида ===
         async function submitLead(platform) {
           const name = document.getElementById('user-name').value.trim();
           const service = document.getElementById('user-service').value;
@@ -810,12 +853,9 @@
             });
         });
 
-        // ========== НОВЫЙ JS-КОД (ДОПОЛНЕНИЕ) ==========
-
-        // 1. Поддержка видео ссылок (YouTube, Rutube, VK)
+        // ========== ВИДЕО И ПОДСВЕТКА МЕНЮ ==========
         function getVideoEmbed(platform, url) {
           if (!url) return '';
-          
           try {
             if (platform === 'youtube') {
               let videoId = '';
@@ -829,7 +869,6 @@
                 videoId = url;
               }
               return `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
-            
             } else if (platform === 'rutube') {
               let videoId = '';
               if (url.includes('/video/')) {
@@ -838,7 +877,6 @@
                  videoId = url;
               }
               return `<iframe src="https://rutube.ru/play/embed/${videoId}" allowfullscreen allow="clipboard-write"></iframe>`;
-            
             } else if (platform === 'vk') {
               if (url.includes('vk.com/video_ext.php')) {
                  return `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
@@ -851,40 +889,27 @@
           return '';
         }
 
-        // 2. Подсветка активного пункта меню при скролле (IntersectionObserver)
         function initScrollSpy() {
           const navLinks = document.querySelectorAll('nav a[href^="#"]');
           const sections = document.querySelectorAll('section[id]');
-
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
                 navLinks.forEach(link => link.classList.remove('active'));
                 const id = entry.target.getAttribute('id');
                 const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-                if (activeLink) {
-                  activeLink.classList.add('active');
-                }
+                if (activeLink) activeLink.classList.add('active');
               }
             });
-          }, { 
-            rootMargin: '-50% 0px -50% 0px'
-          });
-
+          }, { rootMargin: '-50% 0px -50% 0px' });
           sections.forEach(section => observer.observe(section));
         }
 
-        // 3. Генерация видео-секции (статическое наполнение, можно заменить данные)
         function renderVideoSection() {
           const container = document.getElementById('video-section-container');
           if (!container) return;
-
-          const videos = [
-            { platform: 'youtube', video_id: 'LXb3EKWsInQ', title: 'Как AI-агенты меняют бизнес' },
-            { platform: 'youtube', video_id: 'dQw4w9WgXcQ', title: 'Пример работы чат-бота' },
-            { platform: 'rutube', video_id: '06fa1f2bce0e4c42b6e8c1c3b5e8f7a4', title: 'Обзор CRM AgentFlow (Rutube)' }
-          ];
-
+          // Пустой массив — видео можно добавить позже в формате { platform, video_id, title }
+          const videos = [];
           const videosHtml = videos.map(v => `
             <div class="video-card">
               <div class="video-wrapper">
@@ -898,18 +923,16 @@
             <section id="video-demo">
               <div class="container">
                 <h2 class="section-title">Видео <span>примеры работ</span></h2>
-                <p class="section-subtitle">Смотрите, как технологии работают в реальных кейсах</p>
+                <p class="section-subtitle">Смотрите, как технологии работают в реальных кейсах (добавьте свои видео)</p>
                 <div class="video-grid">
-                  ${videosHtml}
+                  ${videosHtml || '<p style="text-align:center;color:var(--text-muted);">Видео пока нет, но скоро появятся</p>'}
                 </div>
               </div>
             </section>
           `;
-
           container.innerHTML = videoSectionHtml;
         }
 
-        // Запускаем всё после загрузки DOM
         document.addEventListener('DOMContentLoaded', function() {
           initScrollSpy();
           renderVideoSection();
