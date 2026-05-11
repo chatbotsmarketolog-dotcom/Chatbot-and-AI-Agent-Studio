@@ -21,16 +21,17 @@
             --cyan: #00F0FF;
             --cyan-dark: #00B8C4;
             --cyan-glow: rgba(0, 240, 255, 0.3);
-            --bg-primary: #0C0C11;
-            --bg-secondary: #14141C;
-            --bg-card: #1C1C28;
-            --bg-card-hover: #242430;
+            /* осветлённый фон (~15% светлее) */
+            --bg-primary: #1C1C26;
+            --bg-secondary: #24242E;
+            --bg-card: #2A2A35;
+            --bg-card-hover: #30303D;
             --text-primary: #FFFFFF;
-            --text-secondary: #A0A0B8;
-            --text-muted: #6B6B80;
+            --text-secondary: #B0B0C8;
+            --text-muted: #7A7A90;
             --border: rgba(255, 255, 255, 0.08);
             --border-cyan: rgba(0, 240, 255, 0.3);
-            --glass: rgba(12, 12, 17, 0.8);
+            --glass: rgba(28, 28, 38, 0.8);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -48,7 +49,7 @@
         @keyframes floatParticle { 0% { opacity: 0; transform: translateY(100vh) scale(0); } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateY(-10vh) scale(1); } }
 
         .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 12px 0; transition: all 0.4s ease; backdrop-filter: blur(0px); }
-        .header.scrolled { backdrop-filter: blur(20px); background: rgba(12, 12, 17, 0.85); border-bottom: 1px solid var(--border); padding: 8px 0; }
+        .header.scrolled { backdrop-filter: blur(20px); background: rgba(28, 28, 38, 0.85); border-bottom: 1px solid var(--border); padding: 8px 0; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
         .logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, var(--cyan), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .nav { display: flex; align-items: center; gap: 32px; }
@@ -65,7 +66,7 @@
         .burger.active span:nth-child(2) { opacity: 0; }
         .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(12, 12, 17, 0.97); backdrop-filter: blur(20px); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(28, 28, 38, 0.97); backdrop-filter: blur(20px); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
         .mobile-menu.active { display: flex; }
         .mobile-menu a { font-size: 1.5rem; font-weight: 600; color: var(--text-secondary); transition: color 0.3s ease; }
         .mobile-menu a:hover { color: var(--cyan); }
@@ -188,8 +189,9 @@
         .reviews-cta { text-align: center; padding: 24px; background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); border-radius: 16px; }
         .reviews-cta p { color: var(--text-secondary); margin-bottom: 12px; }
 
+        /* Объединённая секция контактов + заявки */
         .contact-section { padding: 100px 0; }
-        .contact-inner { max-width: 600px; margin: 0 auto; text-align: left; }
+        .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
         .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 12px; }
         .contact-info h2 span { color: var(--cyan); }
         .contact-info > p { color: var(--text-secondary); margin-bottom: 36px; font-size: 1.05rem; }
@@ -203,6 +205,90 @@
         .contact-highlight { padding: 20px; background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); border-radius: 14px; }
         .contact-highlight p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
         .contact-highlight strong { color: var(--cyan); }
+
+        /* Форма в секции контактов */
+        .application-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          padding: 36px;
+          text-align: left;
+        }
+        .application-card .form-group {
+          margin-bottom: 20px;
+        }
+        .application-card .form-group label {
+          display: block;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+          margin-bottom: 8px;
+        }
+        .application-card input,
+        .application-card select,
+        .application-card textarea {
+          width: 100%;
+          padding: 14px 16px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          color: var(--text-primary);
+          font-size: 0.95rem;
+          font-family: inherit;
+          transition: border-color 0.3s ease;
+          outline: none;
+        }
+        .application-card input:focus,
+        .application-card select:focus,
+        .application-card textarea:focus {
+          border-color: var(--cyan);
+        }
+        .application-card textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+        .application-card select {
+          cursor: pointer;
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23B0B0C8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 16px center;
+        }
+
+        .lead-buttons {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          margin-top: 24px;
+          flex-wrap: wrap;
+        }
+        .btn-lead {
+          flex: 1;
+          min-width: 180px;
+          padding: 16px 20px;
+          border: none;
+          border-radius: 14px;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #fff;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-family: inherit;
+          letter-spacing: 0.3px;
+        }
+        .btn-lead.vk {
+          background: #0077FF;
+          box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25);
+        }
+        .btn-lead.tg {
+          background: #2AABEE;
+          box-shadow: 0 8px 20px rgba(42, 171, 238, 0.25);
+        }
+        .btn-lead:hover {
+          transform: translateY(-3px);
+          filter: brightness(1.1);
+          box-shadow: 0 12px 28px rgba(0, 240, 255, 0.3);
+        }
 
         .about-section { padding: 100px 0; }
         .about-inner { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; }
@@ -269,154 +355,9 @@
         ::-webkit-scrollbar-thumb { background: var(--bg-card-hover); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dark); }
 
-        /* ========== НОВЫЕ СТИЛИ (ДОПОЛНЕНИЕ) ========== */
-        html {
-          scroll-behavior: smooth;
-          scroll-padding-top: 100px;
-        }
-        section {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 80px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        nav a {
-          color: #8892b0;
-          transition: color 0.3s;
-          padding: 5px 0;
-          border-bottom: 2px solid transparent;
-        }
-        nav a:hover { color: var(--accent); }
-        nav a.active {
-          color: var(--accent);
-          font-weight: bold;
-          border-bottom: 2px solid var(--accent);
-        }
-
-        /* Карточка заявки */
-        .application-card {
-          background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 20px;
-          padding: 40px 36px;
-          max-width: 600px;
-          margin: 40px auto 0;
-          text-align: left;
-        }
-        .application-card .form-group {
-          margin-bottom: 20px;
-        }
-        .application-card .form-group label {
-          display: block;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: var(--text-secondary);
-          margin-bottom: 8px;
-        }
-        .application-card input,
-        .application-card select,
-        .application-card textarea {
-          width: 100%;
-          padding: 14px 16px;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          color: var(--text-primary);
-          font-size: 0.95rem;
-          font-family: inherit;
-          transition: border-color 0.3s ease;
-          outline: none;
-        }
-        .application-card input:focus,
-        .application-card select:focus,
-        .application-card textarea:focus {
-          border-color: var(--cyan);
-        }
-        .application-card textarea {
-          resize: vertical;
-          min-height: 100px;
-        }
-        .application-card select {
-          cursor: pointer;
-          appearance: none;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A0A0B8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: right 16px center;
-        }
-
-        .lead-buttons {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-          margin-top: 24px;
-          flex-wrap: wrap;
-        }
-        .btn-lead {
-          flex: 1;
-          min-width: 180px;
-          padding: 16px 20px;
-          border: none;
-          border-radius: 14px;
-          font-size: 1rem;
-          font-weight: 700;
-          color: #fff;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-family: inherit;
-          letter-spacing: 0.3px;
-        }
-        .btn-lead.vk {
-          background: #0077FF;
-          box-shadow: 0 8px 20px rgba(0, 119, 255, 0.25);
-        }
-        .btn-lead.tg {
-          background: #2AABEE;
-          box-shadow: 0 8px 20px rgba(42, 171, 238, 0.25);
-        }
-        .btn-lead:hover {
-          transform: translateY(-3px);
-          filter: brightness(1.1);
-          box-shadow: 0 12px 28px rgba(0, 240, 255, 0.3);
-        }
-
-        /* Видео (пустой блок с возможностью добавления) */
-        .video-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-          margin-top: 40px;
-        }
-        .video-card {
-          background: var(--bg-card);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          overflow: hidden;
-        }
-        .video-wrapper {
-          position: relative;
-          padding-bottom: 56.25%;
-          height: 0;
-        }
-        .video-wrapper iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: none;
-        }
-        .video-title {
-          padding: 15px;
-          font-size: 1.1rem;
-          font-weight: bold;
-        }
-
         /* Мобильная адаптация */
         @media (max-width: 1024px) {
-            .hero-inner, .crm-inner, .about-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-inner, .crm-inner, .about-inner, .contact-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-text { margin: 0 auto 36px; } .hero-buttons { justify-content: center; } .hero-triggers { justify-content: center; } .hero-visual { order: -1; } .phone-mockup { width: 260px; height: 500px; }
             .pain-grid, .services-grid, .reviews-grid { grid-template-columns: 1fr; }
             .demo-grid { grid-template-columns: repeat(2, 1fr); }
@@ -432,6 +373,8 @@
             .crm-inner { padding: 20px; }
             .crm-feature { flex-direction: column; align-items: flex-start; gap: 8px; }
             .crm-status { justify-content: center; text-align: center; }
+            .contact-method { flex-direction: column; text-align: center; }
+            .contact-method-icon { margin: 0 auto; }
             .lead-buttons { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 480px) {
@@ -456,7 +399,7 @@
                 <a href="#demo">Демо</a>
                 <a href="#reviews">Отзывы</a>
                 <a href="#contact">Контакты</a>
-                <a href="#applications" class="nav-btn">🚀 Заявка</a>
+                <a href="#contact" class="nav-btn">🚀 Заявка</a>
             </nav>
             <div class="burger" id="burger"><span></span><span></span><span></span></div>
         </div>
@@ -468,9 +411,8 @@
         <a href="#pricing" onclick="closeMobile()">💰 Стоимость</a>
         <a href="#demo" onclick="closeMobile()">🎮 Демо</a>
         <a href="#reviews" onclick="closeMobile()">⭐ Отзывы</a>
-        <a href="#contact" onclick="closeMobile()">Контакты</a>
         <a href="#about" onclick="closeMobile()">Обо мне</a>
-        <a href="#applications" class="nav-btn" onclick="closeMobile()" style="margin-top:16px;">Оставить заявку</a>
+        <a href="#contact" onclick="closeMobile()">Контакты</a>
     </div>
 
     <section class="hero" id="hero">
@@ -481,7 +423,7 @@
                     <h1>Ваш бренд будет <span>работать самостоятельно</span></h1>
                     <p class="hero-text">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия. Добро пожаловать в будущее.</p>
                     <div class="hero-buttons">
-                        <a href="#applications" class="btn-primary">🚀 Оставить заявку</a>
+                        <a href="#contact" class="btn-primary">🚀 Оставить заявку</a>
                         <a href="#services" class="btn-secondary">Узнать больше →</a>
                     </div>
                     <div class="hero-triggers">
@@ -540,10 +482,10 @@
             <h2 class="section-title reveal">Выберите <span>уровень автономности</span></h2>
             <p class="section-subtitle reveal">Два направления, которые трансформируют ваш бизнес в автономную систему</p>
             <div class="services-grid">
-                <div class="service-card reveal"><div class="service-emoji">🤖</div><h3>Сценарный Чат-Бот</h3><p class="subtitle">Старт · Точка входа в ваш бизнес</p><div class="service-price">4 500 ₽ <small>/ базовый</small></div><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов и антиспам</li><li>Автостатусы и воронки продаж</li><li>Сбор отзывов</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать бота</button><p class="service-note">Любое усложнение +500 ₽ к базовой стоимости</p></div>
-                <div class="service-card reveal"><div class="service-emoji">💻</div><h3>Сайт на чистом коде</h3><p class="subtitle">База · Уникальный адаптивный дизайн</p><div class="service-price">15 000 ₽ <small>/ фиксировано</small></div><ul class="service-features"><li>Полностью адаптивный дизайн</li><li>HTML/CSS/JS — без конструкторов</li><li>Анимации и микро-взаимодействия</li><li>Интеграция с чат-ботами и AI</li><li>Оптимизация скорости загрузки</li><li>Чистый код для доработки</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать сайт</button><p class="service-note">Условия: 100% предоплата при заключении договора</p></div>
-                <div class="service-card reveal"><div class="service-emoji">🧩</div><h3>Сайт на Tilda</h3><p class="subtitle">Альтернатива · Управление в конструкторе</p><div class="service-price">12 000 ₽</div><ul class="service-features"><li>Сборка лендинга под ключ</li><li>Адаптивный дизайн</li><li>Базовые настройки и SEO</li><li>Интеграция форм и заявок</li><li>Вы можете управлять сами</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать Tilda</button><p class="service-note">Условия: 100% предоплата при заключении договора</p></div>
-                <div class="service-card popular reveal" id="pricing"><div class="service-emoji">🧠</div><h3>AI-Агент «Бессценарный»</h3><p class="subtitle">Полная автономность · Цифровой двойник</p><div class="service-price">от 25 000 ₽ <small>· Скидка 5%</small></div><ul class="service-features"><li>Обучение на базе ваших знаний</li><li>Свободный диалог без сценария</li><li>Работа в Telegram и на сайте</li><li>Поддержка на 5 языках</li><li>Замена маркетолога, копирайтера, аналитика</li><li>Независимые от мессенджеров решения</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать AI-агента</button><p class="service-note">Скидка 20% при заказе бота + агента. 100% предоплата при заключении договора</p></div>
+                <div class="service-card reveal"><div class="service-emoji">🤖</div><h3>Сценарный Чат-Бот</h3><p class="subtitle">Старт · Точка входа в ваш бизнес</p><div class="service-price">4 500 ₽ <small>/ базовый</small></div><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов и антиспам</li><li>Автостатусы и воронки продаж</li><li>Сбор отзывов</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать бота</button><p class="service-note">Любое усложнение +500 ₽ к базовой стоимости</p></div>
+                <div class="service-card reveal"><div class="service-emoji">💻</div><h3>Сайт на чистом коде</h3><p class="subtitle">База · Уникальный адаптивный дизайн</p><div class="service-price">15 000 ₽ <small>/ фиксировано</small></div><ul class="service-features"><li>Полностью адаптивный дизайн</li><li>HTML/CSS/JS — без конструкторов</li><li>Анимации и микро-взаимодействия</li><li>Интеграция с чат-ботами и AI</li><li>Оптимизация скорости загрузки</li><li>Чистый код для доработки</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать сайт</button><p class="service-note">Условия: 100% предоплата при заключении договора</p></div>
+                <div class="service-card reveal"><div class="service-emoji">🧩</div><h3>Сайт на Tilda</h3><p class="subtitle">Альтернатива · Управление в конструкторе</p><div class="service-price">12 000 ₽</div><ul class="service-features"><li>Сборка лендинга под ключ</li><li>Адаптивный дизайн</li><li>Базовые настройки и SEO</li><li>Интеграция форм и заявок</li><li>Вы можете управлять сами</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать Tilda</button><p class="service-note">Условия: 100% предоплата при заключении договора</p></div>
+                <div class="service-card popular reveal" id="pricing"><div class="service-emoji">🧠</div><h3>AI-Агент «Бессценарный»</h3><p class="subtitle">Полная автономность · Цифровой двойник</p><div class="service-price">от 25 000 ₽ <small>· Скидка 5%</small></div><ul class="service-features"><li>Обучение на базе ваших знаний</li><li>Свободный диалог без сценария</li><li>Работа в Telegram и на сайте</li><li>Поддержка на 5 языках</li><li>Замена маркетолога, копирайтера, аналитика</li><li>Независимые от мессенджеров решения</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать AI-агента</button><p class="service-note">Скидка 20% при заказе бота + агента. 100% предоплата при заключении договора</p></div>
             </div>
         </div>
     </section>
@@ -598,8 +540,6 @@
         </div>
     </section>
 
-    <!-- Видео секция скрыта (контейнер удалён) -->
-
     <div class="glow-line"></div>
 
     <section class="reviews-section" id="reviews">
@@ -618,13 +558,14 @@
 
     <div class="glow-line"></div>
 
-    <!-- ===== КОНТАКТЫ ===== -->
+    <!-- ===== ОБЪЕДИНЁННАЯ СЕКЦИЯ: КОНТАКТЫ + ФОРМА ===== -->
     <section class="contact-section" id="contact">
         <div class="container">
+            <h2 class="section-title reveal" style="text-align:center;">Свяжитесь <span>со мной</span></h2>
+            <p class="section-subtitle reveal" style="text-align:center; color:var(--text-secondary);">Любым удобным способом. Или оставьте заявку прямо сейчас.</p>
             <div class="contact-inner">
+                <!-- Левая колонка: контакты -->
                 <div class="contact-info reveal">
-                    <h2>Свяжитесь <span>со мной</span></h2>
-                    <p>Любым удобным способом. Я отвечаю быстро и с удовольствием обсуждаю проекты.</p>
                     <div class="contact-methods">
                         <a href="https://t.me/marketologdizayner" target="_blank" class="contact-method"><div class="contact-method-icon tg">💬</div><div class="contact-method-info"><h4>Telegram</h4><p>@marketologdizayner</p></div></a>
                         <a href="https://vk.ru/kristinavcifre" target="_blank" class="contact-method"><div class="contact-method-icon vk">🔵</div><div class="contact-method-info"><h4>ВКонтакте</h4><p>@kristinavcifre</p></div></a>
@@ -633,57 +574,39 @@
                     </div>
                     <div class="contact-highlight"><p><strong>AI-агенты работают 24/7 🤖</strong><br>Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите.</p></div>
                 </div>
+
+                <!-- Правая колонка: форма заявки -->
+                <div class="application-card reveal">
+                    <form id="lead-form">
+                        <div class="form-group">
+                            <label>Ваше имя</label>
+                            <input type="text" id="user-name" placeholder="Иван Иванов" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Что вас интересует?</label>
+                            <select id="user-service" required>
+                                <option value="" disabled selected>Выберите услугу</option>
+                                <option value="chatbot">🤖 Чат-бот</option>
+                                <option value="ai-agent">🧠 AI-агент</option>
+                                <option value="site-code">💻 Сайт на чистом коде</option>
+                                <option value="site-tilda">🧩 Сайт на Tilda</option>
+                                <option value="chatbot-ai-code">🤖+🧠 Чат-бот и AI агент на коде</option>
+                                <option value="consultation">💬 Консультация</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Кратко опишите задачу</label>
+                            <textarea id="user-task" placeholder="Например: нужно автоматизировать ответы клиентам в Telegram..." required rows="3"></textarea>
+                        </div>
+                        <div class="lead-buttons">
+                            <button type="button" onclick="submitLead('vk')" class="btn-lead vk">📩 Заявка для ВК</button>
+                            <button type="button" onclick="submitLead('tg')" class="btn-lead tg">✈️ Заявка в Telegram</button>
+                        </div>
+                    </form>
+                    <div id="form-message" style="margin-top:20px; padding:16px; border-radius:12px; display:none;"></div>
+                </div>
             </div>
         </div>
-    </section>
-
-    <div class="glow-line"></div>
-
-    <!-- ===== НОВЫЙ БЛОК ЗАЯВКИ С КАРТОЧКОЙ ===== -->
-    <section id="applications">
-      <div class="container" style="text-align:center; padding: 80px 20px;">
-        <h2 class="section-title">Оставить заявку</h2>
-        <p class="section-subtitle" style="color:#A0A0B8; max-width:600px; margin:0 auto 40px;">
-          Выберите удобный способ связи. Техна (AI-менеджер) свяжется с вами мгновенно.
-        </p>
-        
-        <div class="application-card">
-          <form id="lead-form">
-            <div class="form-group">
-              <label>Ваше имя</label>
-              <input type="text" id="user-name" placeholder="Иван Иванов" required>
-            </div>
-            
-            <div class="form-group">
-              <label>Что вас интересует?</label>
-              <select id="user-service" required>
-                <option value="" disabled selected>Выберите услугу</option>
-                <option value="chatbot">🤖 Чат-бот</option>
-                <option value="ai-agent">🧠 AI-агент</option>
-                <option value="site-code">💻 Сайт на чистом коде</option>
-                <option value="site-tilda">🧩 Сайт на Tilda</option>
-                <option value="chatbot-ai-code">🤖+🧠 Чат-бот и AI агент на коде</option>
-                <option value="consultation">💬 Консультация</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Кратко опишите задачу</label>
-              <textarea id="user-task" placeholder="Например: нужно автоматизировать ответы клиентам в Telegram..." required rows="3"></textarea>
-            </div>
-
-            <div class="lead-buttons">
-              <button type="button" onclick="submitLead('vk')" class="btn-lead vk">
-                📩 Заявка для ВК
-              </button>
-              <button type="button" onclick="submitLead('tg')" class="btn-lead tg">
-                ✈️ Заявка в Telegram
-              </button>
-            </div>
-          </form>
-          <div id="form-message" style="margin-top:20px; padding:16px; border-radius:12px; display:none;"></div>
-        </div>
-      </div>
     </section>
 
     <div class="glow-line"></div>
@@ -738,34 +661,38 @@
         </div>
     </footer>
 
+    <!-- Модальное окно Политики конфиденциальности (обновлённая) -->
     <div class="modal-overlay" id="privacyModal">
         <div class="modal">
             <button class="modal-close" onclick="closePrivacy()">✕</button>
             <h2>Политика конфиденциальности</h2>
-            <p><strong>Дата публикации:</strong> 01.04.2026</p>
-            <h3>1. Общие положения</h3><p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта КРИСТИНА.AI (далее — «Сайт»), расположенного по адресу: https://chatbotsmarketolog-dotcom.github.io/Chatbot-and-AI-Agent-Studio/</p>
-            <p>Используя Сайт, вы соглашаетесь с условиями данной Политики. Если вы не согласны, пожалуйста, прекратите использование Сайта.</p>
-            <h3>2. Какие данные мы собираем</h3><p>Мы собираем следующие категории данных:</p><ul><li><strong>Контактные данные:</strong> имя, Telegram/VK username, email (если предоставлены через форму заявки)</li><li><strong>Данные обращения:</strong> описание задачи, выбранная услуга, дополнительные пожелания</li><li><strong>Технические данные:</strong> IP-адрес, тип браузера, операционная система, время посещения (автоматически)</li></ul>
-            <h3>3. Цели обработки данных</h3><p>Ваши персональные данные используются исключительно для:</p><ul><li>Обработки заявок и связи с вами по вопросам услуг</li><li>Предоставления информации об услугах и проектах</li><li>Улучшения качества работы Сайта и пользовательского опыта</li><li>Выполнения обязательств по договорам</li></ul>
-            <h3>4. Хранение и защита данных</h3><p>Мы принимаем все необходимые технические и организационные меры для защиты ваших персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения. Данные хранятся в защищённых системах и не передаются третьим лицам без вашего согласия.</p>
-            <h3>5. Права пользователя</h3><p>Вы имеете право запросить информацию о хранящихся данных, потребовать исправления или удаления, а также отозвать согласие на обработку данных.</p>
-            <h3>6. Контакты</h3><p>По вопросам, связанным с обработкой персональных данных: <a href="https://t.me/marketologdizayner" target="_blank" style="color:var(--cyan);">@marketologdizayner</a></p>
+            <p><strong>Дата публикации:</strong> 01.05.2026</p>
+            <h3>1. Общие положения</h3>
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта КРИСТИНА.AI.</p>
+            <h3>2. Какие данные мы собираем</h3>
+            <p>Мы собираем следующие категории данных:</p>
+            <ul>
+                <li><strong>Контактные данные:</strong> имя, Telegram/VK username, email (если предоставлены через форму заявки)</li>
+                <li><strong>Данные обращения:</strong> описание задачи, выбранная услуга, дополнительные пожелания</li>
+                <li><strong>Технические данные:</strong> IP-адрес, тип браузера, операционная система, время посещения (автоматически)</li>
+            </ul>
+            <h3>3. Цели обработки данных</h3>
+            <ul>
+                <li>Обработка заявок и связь с вами по вопросам услуг</li>
+                <li>Предоставление информации об услугах и проектах</li>
+                <li>Улучшение качества работы Сайта</li>
+                <li>Выполнение обязательств по договорам</li>
+            </ul>
+            <h3>4. Хранение и защита данных</h3>
+            <p>Мы принимаем все необходимые меры для защиты ваших данных. Данные не передаются третьим лицам без вашего согласия.</p>
+            <h3>5. Условия оплаты и возврата</h3>
+            <p>Все услуги предоставляются на условиях <strong>100% предоплаты</strong>. Перед началом работ заключается формальный договор, в котором фиксируются: конкретная услуга, её состав, полная стоимость, обязанности сторон, а также условия возврата. Возврат 50% от уплаченной суммы возможен исключительно в случаях, прямо предусмотренных договором (например, невозможность оказания услуги по нашей вине).</p>
+            <h3>6. Права пользователя</h3>
+            <p>Вы имеете право запросить информацию о хранящихся данных, потребовать исправления или удаления, а также отозвать согласие на обработку данных.</p>
+            <h3>7. Контакты</h3>
+            <p>По вопросам: <a href="https://t.me/marketologdizayner" target="_blank" style="color:var(--cyan);">@marketologdizayner</a></p>
         </div>
     </div>
-
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
 
     <script>
         // === Particles ===
@@ -830,52 +757,74 @@
             }
         }
 
+        // === Popup для ВК ===
+        function showVKPopup() {
+            const userName = document.getElementById('user-name').value;
+            const popupHTML = `
+                <div id="vk-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;animation:fadeIn 0.3s;">
+                    <div style="background:white;padding:40px;border-radius:16px;max-width:500px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.3s;">
+                        <div style="font-size:60px;margin-bottom:20px;">🎉</div>
+                        <h2 style="color:#0077FF;margin:0 0 15px;font-size:24px;">Заявка принята!</h2>
+                        <p style="color:#333;font-size:16px;line-height:1.6;margin-bottom:25px;">
+                            <b>${userName}</b>, благодарю за заявку!<br><br>
+                            Она уже отправлена эксперту. С вами свяжутся в самое ближайшее время.<br><br>
+                            А пока ожидаете, предлагаю подписаться на сообщество эксперта, где найдёте больше полезной информации! 🚀
+                        </p>
+                        <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+                            <a href="https://vk.ru/vk_prodvizenie_kristina" target="_blank" style="background:#0077FF;color:white;padding:15px 30px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <span>📩</span> Подписаться на ВК
+                            </a>
+                            <button onclick="closeVKPopup()" style="background:#f0f0f0;color:#333;padding:15px 30px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#e0e0e0'" onmouseout="this.style.background='#f0f0f0'">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                </style>
+            `;
+            document.body.insertAdjacentHTML('beforeend', popupHTML);
+        }
+
+        function closeVKPopup() {
+            const popup = document.getElementById('vk-popup');
+            if (popup) popup.remove();
+        }
+
         // === Отправка лида ===
         async function submitLead(platform) {
-          const name = document.getElementById('user-name').value.trim();
-          const service = document.getElementById('user-service').value;
-          const task = document.getElementById('user-task').value.trim();
-          
-          if (!name || !service || !task) {
-            alert('Пожалуйста, заполните все поля!');
-            return;
-          }
-
-          const leadId = 'lead_' + Date.now().toString(36);
-          const payload = { leadId, name, service, task, platform: platform };
-          
-          const msgDiv = document.getElementById('form-message');
-          
-          try {
-            msgDiv.style.display = 'block';
-            msgDiv.style.color = 'var(--cyan)';
-            msgDiv.innerHTML = 'Отправка...';
-
-            const res = await fetch('https://kristina-leads.workers.dev/api/leads', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
+            const name = document.getElementById('user-name').value.trim();
+            const service = document.getElementById('user-service').value;
+            const task = document.getElementById('user-task').value.trim();
             
-            if (res.ok) {
-              if (platform === 'vk') {
-                 msgDiv.style.background = 'rgba(0,119,255,0.1)';
-                 msgDiv.style.border = '1px solid #0077FF';
-                 msgDiv.innerHTML = `✅ <b>Заявка для ВК принята!</b><br>Эксперт свяжется с вами в ближайшее время.`;
-              } else {
-                 window.open(`https://t.me/kristina_ai_lead_bot?start=${leadId}`, '_blank');
-                 msgDiv.style.background = 'rgba(42,171,238,0.1)';
-                 msgDiv.style.border = '1px solid #2AABEE';
-                 msgDiv.innerHTML = `✅ <b>Переходим в Telegram...</b><br>Нажмите /start в открывшемся окне.`;
-              }
-              document.getElementById('lead-form').reset();
-            } else {
-              throw new Error('Error');
+            if (!name || !service || !task) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
             }
-          } catch (e) {
-            msgDiv.style.color = 'red';
-            msgDiv.innerHTML = 'Ошибка отправки.';
-          }
+
+            const leadId = 'lead_' + Date.now().toString(36);
+            const payload = { leadId, name, service, task, platform: platform };
+            
+            try {
+                const res = await fetch('https://kristina-leads.workers.dev/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (res.ok) {
+                    if (platform === 'vk') {
+                        showVKPopup();
+                    } else {
+                        window.open(`https://t.me/kristina_ai_lead_bot?start=${leadId}`, '_blank');
+                    }
+                    document.getElementById('lead-form').reset();
+                } else {
+                    alert('Ошибка при отправке. Попробуйте ещё раз.');
+                }
+            } catch (e) {
+                alert('Ошибка соединения. Проверьте интернет.');
+            }
         }
 
         // === Privacy Modal ===
@@ -891,60 +840,61 @@
             });
         });
 
-        // ========== ПОДДЕРЖКА ВИДЕО (YouTube, Rutube, VK) И ПОДСВЕТКА МЕНЮ ==========
+        // === Video support (YouTube, Rutube, VK) - готово к использованию ===
         function getVideoEmbed(platform, url) {
-          if (!url) return '';
-          try {
-            if (platform === 'youtube') {
-              let videoId = '';
-              if (url.includes('youtu.be/')) {
-                videoId = url.split('youtu.be/')[1].split('?')[0];
-              } else if (url.includes('v=')) {
-                videoId = url.split('v=')[1].split('&')[0];
-              } else if (url.includes('/embed/')) {
-                return `<iframe src="${url}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
-              } else {
-                videoId = url;
-              }
-              return `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
-            } else if (platform === 'rutube') {
-              let videoId = '';
-              if (url.includes('/video/')) {
-                 videoId = url.split('/video/')[1].split('/')[0];
-              } else {
-                 videoId = url;
-              }
-              return `<iframe src="https://rutube.ru/play/embed/${videoId}" allowfullscreen allow="clipboard-write"></iframe>`;
-            } else if (platform === 'vk') {
-              if (url.includes('vk.com/video_ext.php')) {
-                 return `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
-              }
-              return `<div style="padding:20px;text-align:center;color:#8892b0">Вставьте ссылку вида vk.com/video_ext.php?oid=... для VK Видео</div>`;
+            if (!url) return '';
+            try {
+                if (platform === 'youtube') {
+                    let videoId = '';
+                    if (url.includes('youtu.be/')) {
+                        videoId = url.split('youtu.be/')[1].split('?')[0];
+                    } else if (url.includes('v=')) {
+                        videoId = url.split('v=')[1].split('&')[0];
+                    } else if (url.includes('/embed/')) {
+                        return `<iframe src="${url}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+                    } else {
+                        videoId = url;
+                    }
+                    return `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+                } else if (platform === 'rutube') {
+                    let videoId = '';
+                    if (url.includes('/video/')) {
+                        videoId = url.split('/video/')[1].split('/')[0];
+                    } else {
+                        videoId = url;
+                    }
+                    return `<iframe src="https://rutube.ru/play/embed/${videoId}" allowfullscreen allow="clipboard-write"></iframe>`;
+                } else if (platform === 'vk') {
+                    if (url.includes('vk.com/video_ext.php')) {
+                        return `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+                    }
+                    return '<div style="padding:20px;text-align:center;color:#8892b0">Вставьте ссылку вида vk.com/video_ext.php?oid=... для VK Видео</div>';
+                }
+            } catch (e) {
+                console.error("Ошибка видео:", e);
             }
-          } catch (e) {
-            console.error("Ошибка видео:", e);
-          }
-          return '';
+            return '';
         }
 
+        // === ScrollSpy (подсветка меню) ===
         function initScrollSpy() {
-          const navLinks = document.querySelectorAll('nav a[href^="#"]');
-          const sections = document.querySelectorAll('section[id]');
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                const id = entry.target.getAttribute('id');
-                const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-                if (activeLink) activeLink.classList.add('active');
-              }
-            });
-          }, { rootMargin: '-50% 0px -50% 0px' });
-          sections.forEach(section => observer.observe(section));
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(section => observer.observe(section));
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-          initScrollSpy();
+            initScrollSpy();
         });
     </script>
 </body>
