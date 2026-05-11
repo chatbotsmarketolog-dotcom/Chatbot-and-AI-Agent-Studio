@@ -286,6 +286,69 @@
         ::-webkit-scrollbar-thumb { background: var(--bg-card-hover); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dark); }
 
+        /* ========== НОВЫЕ СТИЛИ (ДОПОЛНЕНИЕ) ========== */
+        /* 1. FULL PAGE SCROLL */
+        html {
+          scroll-behavior: smooth;
+          scroll-padding-top: 100px;
+        }
+        section {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 80px 0;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* 2. ПОДСВЕТКА МЕНЮ */
+        nav a {
+          color: #8892b0;
+          transition: color 0.3s;
+          padding: 5px 0;
+          border-bottom: 2px solid transparent;
+        }
+        nav a:hover {
+          color: var(--accent);
+        }
+        nav a.active {
+          color: var(--accent);
+          font-weight: bold;
+          border-bottom: 2px solid var(--accent);
+        }
+
+        /* 3. ВИДЕО */
+        .video-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+        .video-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        .video-wrapper {
+          position: relative;
+          padding-bottom: 56.25%;
+          height: 0;
+        }
+        .video-wrapper iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+        .video-title {
+          padding: 15px;
+          font-size: 1.1rem;
+          font-weight: bold;
+        }
+
         /* Мобильная адаптация CRM и других элементов */
         @media (max-width: 1024px) {
             .hero-inner, .crm-inner, .contact-inner, .about-inner { grid-template-columns: 1fr; text-align: center; }
@@ -330,7 +393,7 @@
                 <a href="#demo">Демо</a>
                 <a href="#reviews">Отзывы</a>
                 <a href="#contact">Контакты</a>
-                <a href="#contact" class="nav-btn">🚀 Заявка</a>
+                <a href="#applications" class="nav-btn">🚀 Заявка</a>
             </nav>
             <div class="burger" id="burger"><span></span><span></span><span></span></div>
         </div>
@@ -344,7 +407,7 @@
         <a href="#reviews" onclick="closeMobile()">⭐ Отзывы</a>
         <a href="#about" onclick="closeMobile()">Обо мне</a>
         <a href="#contact" onclick="closeMobile()">Контакты</a>
-        <a href="#contact" class="nav-btn" onclick="closeMobile()" style="margin-top:16px;">Оставить заявку</a>
+        <a href="#applications" class="nav-btn" onclick="closeMobile()" style="margin-top:16px;">Оставить заявку</a>
     </div>
 
     <section class="hero" id="hero">
@@ -355,7 +418,7 @@
                     <h1>Ваш бренд будет <span>работать самостоятельно</span></h1>
                     <p class="hero-text">Создаю чат-ботов и AI-агентов, которые работают вместо вас 24/7, говорят вашим голосом и закрывают вопросы без вашего участия. Добро пожаловать в будущее.</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn-primary">🚀 Оставить заявку</a>
+                        <a href="#applications" class="btn-primary">🚀 Оставить заявку</a>
                         <a href="#services" class="btn-secondary">Узнать больше →</a>
                     </div>
                     <div class="hero-triggers">
@@ -414,10 +477,10 @@
             <h2 class="section-title reveal">Выберите <span>уровень автономности</span></h2>
             <p class="section-subtitle reveal">Два направления, которые трансформируют ваш бизнес в автономную систему</p>
             <div class="services-grid">
-                <div class="service-card reveal"><div class="service-emoji">🤖</div><h3>Сценарный Чат-Бот</h3><p class="subtitle">Старт · Точка входа в ваш бизнес</p><div class="service-price">4 500 ₽ <small>/ базовый</small></div><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов и антиспам</li><li>Автостатусы и воронки продаж</li><li>Сбор отзывов</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать бота</button><p class="service-note">Любое усложнение +500 ₽ к базовой стоимости</p></div>
-                <div class="service-card reveal"><div class="service-emoji">💻</div><h3>Сайт на чистом коде</h3><p class="subtitle">База · Уникальный адаптивный дизайн</p><div class="service-price">15 000 ₽ <small>/ фиксировано</small></div><ul class="service-features"><li>Полностью адаптивный дизайн</li><li>HTML/CSS/JS — без конструкторов</li><li>Анимации и микро-взаимодействия</li><li>Интеграция с чат-ботами и AI</li><li>Оптимизация скорости загрузки</li><li>Чистый код для доработки</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать сайт</button><p class="service-note">Условия: 50% старт / 50% сдача</p></div>
-                <div class="service-card reveal"><div class="service-emoji">🧩</div><h3>Сайт на Tilda</h3><p class="subtitle">Альтернатива · Управление в конструкторе</p><div class="service-price">12 000 ₽</div><ul class="service-features"><li>Сборка лендинга под ключ</li><li>Адаптивный дизайн</li><li>Базовые настройки и SEO</li><li>Интеграция форм и заявок</li><li>Вы можете управлять сами</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать Tilda</button><p class="service-note">Условия: 50% старт / 50% сдача</p></div>
-                <div class="service-card popular reveal" id="pricing"><div class="service-emoji">🧠</div><h3>AI-Агент «Бессценарный»</h3><p class="subtitle">Полная автономность · Цифровой двойник</p><div class="service-price">от 25 000 ₽ <small>· Скидка 5%</small></div><ul class="service-features"><li>Обучение на базе ваших знаний</li><li>Свободный диалог без сценария</li><li>Работа в Telegram и на сайте</li><li>Поддержка на 5 языках</li><li>Замена маркетолога, копирайтера, аналитика</li><li>Независимые от мессенджеров решения</li></ul><button class="btn-service" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Заказать AI-агента</button><p class="service-note">Скидка 20% при заказе бота + агента</p></div>
+                <div class="service-card reveal"><div class="service-emoji">🤖</div><h3>Сценарный Чат-Бот</h3><p class="subtitle">Старт · Точка входа в ваш бизнес</p><div class="service-price">4 500 ₽ <small>/ базовый</small></div><ul class="service-features"><li>Приветствие и выдача PDF-материалов</li><li>Запись на консультации и вебинары</li><li>Анкетирование и сбор данных клиентов</li><li>Модерирование чатов и антиспам</li><li>Автостатусы и воронки продаж</li><li>Сбор отзывов</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать бота</button><p class="service-note">Любое усложнение +500 ₽ к базовой стоимости</p></div>
+                <div class="service-card reveal"><div class="service-emoji">💻</div><h3>Сайт на чистом коде</h3><p class="subtitle">База · Уникальный адаптивный дизайн</p><div class="service-price">15 000 ₽ <small>/ фиксировано</small></div><ul class="service-features"><li>Полностью адаптивный дизайн</li><li>HTML/CSS/JS — без конструкторов</li><li>Анимации и микро-взаимодействия</li><li>Интеграция с чат-ботами и AI</li><li>Оптимизация скорости загрузки</li><li>Чистый код для доработки</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать сайт</button><p class="service-note">Условия: 50% старт / 50% сдача</p></div>
+                <div class="service-card reveal"><div class="service-emoji">🧩</div><h3>Сайт на Tilda</h3><p class="subtitle">Альтернатива · Управление в конструкторе</p><div class="service-price">12 000 ₽</div><ul class="service-features"><li>Сборка лендинга под ключ</li><li>Адаптивный дизайн</li><li>Базовые настройки и SEO</li><li>Интеграция форм и заявок</li><li>Вы можете управлять сами</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать Tilda</button><p class="service-note">Условия: 50% старт / 50% сдача</p></div>
+                <div class="service-card popular reveal" id="pricing"><div class="service-emoji">🧠</div><h3>AI-Агент «Бессценарный»</h3><p class="subtitle">Полная автономность · Цифровой двойник</p><div class="service-price">от 25 000 ₽ <small>· Скидка 5%</small></div><ul class="service-features"><li>Обучение на базе ваших знаний</li><li>Свободный диалог без сценария</li><li>Работа в Telegram и на сайте</li><li>Поддержка на 5 языках</li><li>Замена маркетолога, копирайтера, аналитика</li><li>Независимые от мессенджеров решения</li></ul><button class="btn-service" onclick="document.getElementById('applications').scrollIntoView({behavior:'smooth'})">Заказать AI-агента</button><p class="service-note">Скидка 20% при заказе бота + агента</p></div>
             </div>
         </div>
     </section>
@@ -472,6 +535,9 @@
         </div>
     </section>
 
+    <!-- ===== НОВАЯ СЕКЦИЯ: ВИДЕО ===== -->
+    <div id="video-section-container"></div>
+
     <div class="glow-line"></div>
 
     <section class="reviews-section" id="reviews">
@@ -490,34 +556,53 @@
 
     <div class="glow-line"></div>
 
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="contact-inner">
-                <div class="contact-info reveal">
-                    <h2>Свяжитесь <span>со мной</span></h2>
-                    <p>Любым удобным способом. Я отвечаю быстро и с удовольствием обсуждаю проекты.</p>
-                    <div class="contact-methods">
-                        <a href="https://t.me/marketologdizayner" target="_blank" class="contact-method"><div class="contact-method-icon tg">💬</div><div class="contact-method-info"><h4>Telegram</h4><p>@marketologdizayner</p></div></a>
-                        <a href="https://vk.ru/kristinavcifre" target="_blank" class="contact-method"><div class="contact-method-icon vk">🔵</div><div class="contact-method-info"><h4>ВКонтакте</h4><p>@kristinavcifre</p></div></a>
-                        <a href="https://www.instagram.com/gap_____ova_kristina/" target="_blank" class="contact-method"><div class="contact-method-icon ig">📸</div><div class="contact-method-info"><h4>Instagram</h4><p>@gap_____ova_kristina</p></div></a>
-                        <div class="contact-method"><div class="contact-method-icon clock">⏰</div><div class="contact-method-info"><h4>Режим работы</h4><p>Пн–Пт: 10:00–19:00 (МСК)</p></div></div>
-                    </div>
-                    <div class="contact-highlight"><p><strong>AI-агенты работают 24/7 🤖</strong><br>Если вы готовы выйти из операционки и построить бренд, который работает сам — пишите.</p></div>
-                </div>
-                <div class="contact-form reveal" id="contactForm">
-                    <h3>🚀 Оставить заявку</h3>
-                    <p>Заполните форму, данные попадут напрямую в мою CRM</p>
-                    <form id="formEl" onsubmit="handleSubmit(event)">
-                        <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Как вас зовут?" required></div>
-                        <div class="form-group"><label>Telegram / VK</label><input type="text" name="contact" placeholder="@username или ссылка" required></div>
-                        <div class="form-group"><label>Что вас интересует?</label><select name="service" required><option value="" disabled selected>Выберите услугу</option><option value="bot">🤖 Сценарный чат-бот (4 500 ₽)</option><option value="site-code">💻 Сайт на чистом коде (15 000 ₽)</option><option value="site-tilda">🧩 Сайт на Tilda (12 000 ₽)</option><option value="ai-agent">🧠 AI-Агент (от 25 000 ₽)</option><option value="crm">📊 CRM AgentFlow</option><option value="other">📋 Другое</option></select></div>
-                        <div class="form-group"><label>Расскажите о задаче</label><textarea name="message" placeholder="Опишите вашу задачу или вопрос..." rows="4"></textarea></div>
-                        <button type="submit" class="form-submit">🚀 Отправить заявку</button>
-                    </form>
-                    <div class="form-success" id="formSuccess"><div class="success-icon">✅</div><h3>Заявка отправлена!</h3><p>Кристина свяжется с вами в ближайшее время. Обычно отвечаю в течение часа 🤖</p></div>
-                </div>
-            </div>
+    <!-- ===== НОВЫЙ БЛОК ЗАЯВКИ ===== -->
+    <section id="applications">
+      <div class="container" style="text-align:center; padding: 80px 20px;">
+        <h2 class="section-title">Оставить заявку</h2>
+        <p style="color:#8892b0; max-width:600px; margin:0 auto 40px;">
+          Выберите удобный способ связи. Техна (AI-менеджер) свяжется с вами мгновенно.
+        </p>
+        
+        <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap; max-width:600px; margin:0 auto;">
+          
+          <button onclick="submitLead('vk')" 
+            style="flex:1; min-width:200px; padding:20px; background:#0077FF; color:#fff; border:none; border-radius:12px; font-size:1.1rem; font-weight:700; cursor:pointer;">
+            📩 Заявка для ВК
+          </button>
+
+          <button onclick="submitLead('tg')" 
+            style="flex:1; min-width:200px; padding:20px; background:#2AABEE; color:#fff; border:none; border-radius:12px; font-size:1.1rem; font-weight:700; cursor:pointer;">
+             Заявка в Telegram
+          </button>
+          
         </div>
+
+        <form id="lead-form" style="max-width:500px; margin:30px auto 0; text-align:left;">
+          <div style="margin-bottom:15px;">
+            <input type="text" id="user-name" placeholder="Ваше имя" required 
+              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);">
+          </div>
+          
+          <div style="margin-bottom:15px;">
+            <select id="user-service" required 
+              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);">
+              <option value="" disabled selected>Что вас интересует?</option>
+              <option value="chatbot">🤖 Чат-бот</option>
+              <option value="ai-agent">🧠 AI-агент</option>
+              <option value="complex">✨ Комплексная автоматизация</option>
+              <option value="consultation"> Консультация</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:20px;">
+            <textarea id="user-task" placeholder="Кратко опишите задачу..." required rows="3"
+              style="width:100%; padding:14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; color:var(--text-primary);"></textarea>
+          </div>
+        </form>
+        
+        <div id="form-message" style="margin-top:20px; padding:16px; border-radius:8px; display:none;"></div>
+      </div>
     </section>
 
     <div class="glow-line"></div>
@@ -664,63 +749,52 @@
             }
         }
 
-        // === Отправка формы в Telegram ===
-        const TELEGRAM_BOT_TOKEN = '8614360839:AAHGI8_TbLpVntEI-f4dkh1OUZgeQ6wRJiY';
-        const TELEGRAM_CHAT_ID = '6300678737';
+        // === НОВАЯ ФУНКЦИЯ ОТПРАВКИ ЛИДА ===
+        async function submitLead(platform) {
+          const name = document.getElementById('user-name').value.trim();
+          const service = document.getElementById('user-service').value;
+          const task = document.getElementById('user-task').value.trim();
+          
+          if (!name || !service || !task) {
+            alert('Пожалуйста, заполните все поля!');
+            return;
+          }
 
-        async function sendToTelegram(data) {
-            const message = `🟢 *Новая заявка с сайта*\n\n👤 *Имя:* ${data.name}\n📱 *Контакт:* ${data.contact}\n📦 *Услуга:* ${data.service}\n📝 *Сообщение:* ${data.message || '—'}\n⏰ *Время:* ${data.timestamp}`;
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-                return response.ok;
-            } catch (err) {
-                console.error('Ошибка отправки в Telegram:', err);
-                return false;
-            }
-        }
+          const leadId = 'lead_' + Date.now().toString(36);
+          const payload = { leadId, name, service, task, platform: platform };
+          
+          const msgDiv = document.getElementById('form-message');
+          
+          try {
+            msgDiv.style.display = 'block';
+            msgDiv.style.color = 'var(--cyan)';
+            msgDiv.innerHTML = 'Отправка...';
 
-        async function handleSubmit(e) {
-            e.preventDefault();
-            const form = document.getElementById('formEl');
-            const btn = form.querySelector('.form-submit');
-            const success = document.getElementById('formSuccess');
-            const formData = new FormData(form);
-
-            if (!formData.get('name').trim() || !formData.get('contact').trim() || !formData.get('service')) {
-                alert('Пожалуйста, заполните все обязательные поля');
-                return;
-            }
-
-            btn.textContent = '⏳ Отправка...';
-            btn.disabled = true;
-
-            const payload = {
-                name: formData.get('name'),
-                contact: formData.get('contact'),
-                service: formData.get('service'),
-                message: formData.get('message') || '',
-                timestamp: new Date().toLocaleString('ru-RU'),
-                source: window.location.href
-            };
-
-            const sent = await sendToTelegram(payload);
-            if (sent) {
-                form.style.display = 'none';
-                success.classList.add('show');
+            const res = await fetch('https://kristina-leads.workers.dev/api/leads', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            
+            if (res.ok) {
+              if (platform === 'vk') {
+                 msgDiv.style.background = 'rgba(0,119,255,0.1)';
+                 msgDiv.style.border = '1px solid #0077FF';
+                 msgDiv.innerHTML = `✅ <b>Заявка для ВК принята!</b><br>Эксперт свяжется с вами в ближайшее время.`;
+              } else {
+                 window.open(`https://t.me/kristina_ai_lead_bot?start=${leadId}`, '_blank');
+                 msgDiv.style.background = 'rgba(42,171,238,0.1)';
+                 msgDiv.style.border = '1px solid #2AABEE';
+                 msgDiv.innerHTML = `✅ <b>Переходим в Telegram...</b><br>Нажмите /start в открывшемся окне.`;
+              }
+              document.getElementById('lead-form').reset();
             } else {
-                alert('Произошла ошибка при отправке. Попробуйте позже или свяжитесь в Telegram.');
-                btn.textContent = '🚀 Отправить заявку';
-                btn.disabled = false;
+              throw new Error('Error');
             }
+          } catch (e) {
+            msgDiv.style.color = 'red';
+            msgDiv.innerHTML = 'Ошибка отправки.';
+          }
         }
 
         // === Privacy Modal ===
@@ -734,6 +808,111 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
             });
+        });
+
+        // ========== НОВЫЙ JS-КОД (ДОПОЛНЕНИЕ) ==========
+
+        // 1. Поддержка видео ссылок (YouTube, Rutube, VK)
+        function getVideoEmbed(platform, url) {
+          if (!url) return '';
+          
+          try {
+            if (platform === 'youtube') {
+              let videoId = '';
+              if (url.includes('youtu.be/')) {
+                videoId = url.split('youtu.be/')[1].split('?')[0];
+              } else if (url.includes('v=')) {
+                videoId = url.split('v=')[1].split('&')[0];
+              } else if (url.includes('/embed/')) {
+                return `<iframe src="${url}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+              } else {
+                videoId = url;
+              }
+              return `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+            
+            } else if (platform === 'rutube') {
+              let videoId = '';
+              if (url.includes('/video/')) {
+                 videoId = url.split('/video/')[1].split('/')[0];
+              } else {
+                 videoId = url;
+              }
+              return `<iframe src="https://rutube.ru/play/embed/${videoId}" allowfullscreen allow="clipboard-write"></iframe>`;
+            
+            } else if (platform === 'vk') {
+              if (url.includes('vk.com/video_ext.php')) {
+                 return `<iframe src="${url}" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+              }
+              return `<div style="padding:20px;text-align:center;color:#8892b0">Вставьте ссылку вида vk.com/video_ext.php?oid=... для VK Видео</div>`;
+            }
+          } catch (e) {
+            console.error("Ошибка видео:", e);
+          }
+          return '';
+        }
+
+        // 2. Подсветка активного пункта меню при скролле (IntersectionObserver)
+        function initScrollSpy() {
+          const navLinks = document.querySelectorAll('nav a[href^="#"]');
+          const sections = document.querySelectorAll('section[id]');
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const id = entry.target.getAttribute('id');
+                const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+                if (activeLink) {
+                  activeLink.classList.add('active');
+                }
+              }
+            });
+          }, { 
+            rootMargin: '-50% 0px -50% 0px'
+          });
+
+          sections.forEach(section => observer.observe(section));
+        }
+
+        // 3. Генерация видео-секции (статическое наполнение, можно заменить данные)
+        function renderVideoSection() {
+          const container = document.getElementById('video-section-container');
+          if (!container) return;
+
+          const videos = [
+            { platform: 'youtube', video_id: 'LXb3EKWsInQ', title: 'Как AI-агенты меняют бизнес' },
+            { platform: 'youtube', video_id: 'dQw4w9WgXcQ', title: 'Пример работы чат-бота' },
+            { platform: 'rutube', video_id: '06fa1f2bce0e4c42b6e8c1c3b5e8f7a4', title: 'Обзор CRM AgentFlow (Rutube)' }
+          ];
+
+          const videosHtml = videos.map(v => `
+            <div class="video-card">
+              <div class="video-wrapper">
+                ${getVideoEmbed(v.platform, v.video_id)}
+              </div>
+              <div class="video-title">${v.title || ''}</div>
+            </div>
+          `).join('');
+
+          const videoSectionHtml = `
+            <section id="video-demo">
+              <div class="container">
+                <h2 class="section-title">Видео <span>примеры работ</span></h2>
+                <p class="section-subtitle">Смотрите, как технологии работают в реальных кейсах</p>
+                <div class="video-grid">
+                  ${videosHtml}
+                </div>
+              </div>
+            </section>
+          `;
+
+          container.innerHTML = videoSectionHtml;
+        }
+
+        // Запускаем всё после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+          initScrollSpy();
+          renderVideoSection();
         });
     </script>
 </body>
