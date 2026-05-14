@@ -619,25 +619,26 @@
         </div>
     </footer>
 
-    <!-- ПОПАП VK -->
+    <!-- ПОПАП ДЛЯ VK -->
     <div id="vkPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
-      <div style="background:#1C1C26;border:2px solid #0077FF;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:center;">
+      <div style="background:#1C1C26;border:2px solid #0077FF;padding:30px;border-radius:16px;max-width:450px;width:90%;text-align:center;box-shadow:0 10px 40px rgba(0,119,255,0.3);">
         <div style="font-size:40px;margin-bottom:15px;">🔵</div>
-        <h3 style="color:#fff;margin:0 0 15px;">Заявка принята!</h3>
-        <p style="color:#B0B0C8;margin:0 0 20px;">Подпишитесь на сообщество, пока ожидаете связи:</p>
-        <!-- В ссылку добавляем параметр ref с ID заявки -->
-        <a id="vkPopupLink" href="#" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в сообщество</a>
+        <h3 style="color:#fff;margin:0 0 15px;font-size:18px;">Заявка принята!</h3>
+        <div id="vkPopupData" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-bottom:15px;text-align:left;"></div>
+        <p style="color:#B0B0C8;margin:0 0 20px;line-height:1.5;font-size:14px;">Ваша заявка принята и отправлена к эксперту.<br>Пока ожидаете связь с экспертом, можете подписаться на сообщество:</p>
+        <a href="https://vk.ru/vk_prodvizenie_kristina" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">🔵 Перейти в сообщество</a>
         <button onclick="closePopup('vkPopup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;padding:8px 16px;">Закрыть</button>
       </div>
     </div>
 
-    <!-- ПОПАП TG -->
+    <!-- ПОПАП ДЛЯ TG -->
     <div id="tgPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
-      <div style="background:#1C1C26;border:2px solid #2AABEE;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:center;">
+      <div style="background:#1C1C26;border:2px solid #2AABEE;padding:30px;border-radius:16px;max-width:450px;width:90%;text-align:center;box-shadow:0 10px 40px rgba(42,171,238,0.3);">
         <div style="font-size:40px;margin-bottom:15px;">✈️</div>
-        <h3 style="color:#fff;margin:0 0 15px;">Заявка принята!</h3>
-        <p style="color:#B0B0C8;margin:0 0 20px;">Подпишитесь на канал, пока ожидаете связи:</p>
-        <a href="https://t.me/fullstack_razrabotka" target="_blank" style="display:block;background:#2AABEE;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в канал</a>
+        <h3 style="color:#fff;margin:0 0 15px;font-size:18px;">Заявка принята!</h3>
+        <div id="tgPopupData" style="background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;margin-bottom:15px;text-align:left;"></div>
+        <p style="color:#B0B0C8;margin:0 0 20px;line-height:1.5;font-size:14px;">Ваша заявка принята и отправлена к эксперту.<br>Пока ожидаете связь с экспертом, можете подписаться на канал:</p>
+        <a href="https://t.me/fullstack_razrabotka" target="_blank" style="display:block;background:#2AABEE;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">✈️ Перейти в канал</a>
         <button onclick="closePopup('tgPopup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;padding:8px 16px;">Закрыть</button>
       </div>
     </div>
@@ -744,13 +745,16 @@
             });
 
             if (res.ok) {
-              if (platform === 'vk') {
-                // Обновляем ссылку в VK-попапе
-                document.getElementById('vkPopupLink').href = `https://vk.ru/vk_prodvizenie_kristina?ref=${leadId}`;
-                document.getElementById('vkPopup').style.display = 'flex';
-              } else {
-                document.getElementById('tgPopup').style.display = 'flex';
-              }
+              // Заполняем данные в попапе
+              const popupData = document.getElementById(platform === 'vk' ? 'vkPopupData' : 'tgPopupData');
+              popupData.innerHTML = `
+                <p style="margin:5px 0;color:#fff;"><b>Имя:</b> ${name}</p>
+                <p style="margin:5px 0;color:#fff;"><b>Услуга:</b> ${service}</p>
+                <p style="margin:5px 0;color:#fff;"><b>Задача:</b> ${task}</p>
+              `;
+              
+              // Показываем попап
+              document.getElementById(platform === 'vk' ? 'vkPopup' : 'tgPopup').style.display = 'flex';
               document.getElementById('lead-form').reset();
             } else {
               alert('Ошибка при отправке. Попробуйте ещё раз.');
@@ -777,10 +781,12 @@
             });
         });
 
-        // Убираем хеш при загрузке страницы, если он есть
-        if (window.location.hash) {
-            history.replaceState(null, null, window.location.pathname + window.location.search);
-        }
+        // Убираем хеш при загрузке страницы
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+        });
 
         function getVideoEmbed(platform, url) {
             if (!url) return '';
