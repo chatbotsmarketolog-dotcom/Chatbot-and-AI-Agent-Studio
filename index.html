@@ -619,6 +619,28 @@
         </div>
     </footer>
 
+    <!-- ПОПАП VK -->
+    <div id="vkPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
+      <div style="background:#1C1C26;border:2px solid #0077FF;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:center;">
+        <div style="font-size:40px;margin-bottom:15px;">🔵</div>
+        <h3 style="color:#fff;margin:0 0 15px;">Заявка принята!</h3>
+        <p style="color:#B0B0C8;margin:0 0 20px;">Подпишитесь на сообщество, пока ожидаете связи:</p>
+        <a href="https://vk.ru/vk_prodvizenie_kristina" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в сообщество</a>
+        <button onclick="closePopup('vkPopup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;padding:8px 16px;">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- ПОПАП TG -->
+    <div id="tgPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;">
+      <div style="background:#1C1C26;border:2px solid #2AABEE;padding:30px;border-radius:16px;max-width:400px;width:90%;text-align:center;">
+        <div style="font-size:40px;margin-bottom:15px;">✈️</div>
+        <h3 style="color:#fff;margin:0 0 15px;">Заявка принята!</h3>
+        <p style="color:#B0B0C8;margin:0 0 20px;">Подпишитесь на канал, пока ожидаете связи:</p>
+        <a href="https://t.me/fullstack_razrabotka" target="_blank" style="display:block;background:#2AABEE;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в канал</a>
+        <button onclick="closePopup('tgPopup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;padding:8px 16px;">Закрыть</button>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="privacyModal">
         <div class="modal">
             <button class="modal-close" onclick="closePrivacy()">✕</button>
@@ -693,79 +715,42 @@
             }
         }
 
-        // === ПОПАП ДЛЯ VK ===
-        function showVKLeadPopup(name) {
-          const popup = document.createElement('div');
-          popup.id = 'vk-popup';
-          popup.innerHTML = `
-            <div style="background:#1C1C26;border:2px solid #0077FF;padding:30px;border-radius:16px;max-width:400px;text-align:center;box-shadow:0 10px 40px rgba(0,119,255,0.3);">
-              <div style="font-size:40px;margin-bottom:15px;">🔵</div>
-              <h3 style="color:#fff;margin:0 0 15px;font-size:18px;">${name}, заявка принята!</h3>
-              <p style="color:#B0B0C8;margin:0 0 20px;line-height:1.5;">Подпишитесь на сообщество, пока ожидаете связи:</p>
-              <a href="https://vk.ru/vk_prodvizenie_kristina" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Подписаться на сообщество</a>
-              <button onclick="closePopup('vk-popup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;">Закрыть</button>
-            </div>
-          `;
-          popup.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;';
-          document.body.appendChild(popup);
+        function closePopup(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(e) {
+          if (e.target.id === 'vkPopup') closePopup('vkPopup');
+          if (e.target.id === 'tgPopup') closePopup('tgPopup');
         }
 
-        // === ПОПАП ДЛЯ TG ===
-        function showTGLeadPopup(name) {
-          const popup = document.createElement('div');
-          popup.id = 'tg-popup';
-          popup.innerHTML = `
-            <div style="background:#1C1C26;border:2px solid #2AABEE;padding:30px;border-radius:16px;max-width:400px;text-align:center;box-shadow:0 10px 40px rgba(42,171,238,0.3);">
-              <div style="font-size:40px;margin-bottom:15px;">✈️</div>
-              <h3 style="color:#fff;margin:0 0 15px;font-size:18px;">${name}, заявка принята!</h3>
-              <p style="color:#B0B0C8;margin:0 0 20px;line-height:1.5;">Подпишитесь на канал, пока ожидаете связи:</p>
-              <a href="https://t.me/fullstack_razrabotka" target="_blank" style="display:block;background:#2AABEE;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Подписаться на канал</a>
-              <button onclick="closePopup('tg-popup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;">Закрыть</button>
-            </div>
-          `;
-          popup.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;';
-          document.body.appendChild(popup);
-        }
-
-        // === ЗАКРЫТИЕ ПОПАПА ===
-        function closePopup(id) {
-          const popup = document.getElementById(id);
-          if (popup) popup.remove();
-        }
-
-        // === ОТПРАВКА ЗАЯВКИ ===
         async function submitLead(platform) {
           const name = document.getElementById('user-name').value.trim();
           const contact = document.getElementById('user-contact').value.trim();
           const service = document.getElementById('user-service').value;
           const task = document.getElementById('user-task').value.trim();
-          
+
           if (!name || !contact || !service || !task) {
-            alert('Заполните все поля!');
+            alert('Пожалуйста, заполните все поля!');
             return;
           }
 
           const leadId = 'lead_' + Date.now().toString(36);
-          
+          const payload = { leadId, name, contact, service, task, platform };
+
           try {
             const res = await fetch('https://kristina-leads.chatbotsmarketolog.workers.dev/api/leads', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ leadId, name, contact, service, task, platform })
+              body: JSON.stringify(payload)
             });
-            
+
             if (res.ok) {
-              if (platform === 'vk') {
-                showVKLeadPopup(name);
-              } else {
-                showTGLeadPopup(name);
-              }
+              document.getElementById(platform === 'vk' ? 'vkPopup' : 'tgPopup').style.display = 'flex';
               document.getElementById('lead-form').reset();
             } else {
-              alert('Ошибка отправки');
+              alert('Ошибка при отправке. Попробуйте ещё раз.');
             }
           } catch (e) {
-            alert('Ошибка соединения');
+            alert('Ошибка соединения. Проверьте интернет.');
+            console.error(e);
           }
         }
 
@@ -773,6 +758,7 @@
         function closePrivacy() { document.getElementById('privacyModal').classList.remove('active'); document.body.style.overflow = ''; }
         document.getElementById('privacyModal').addEventListener('click', function(e) { if (e.target === this) closePrivacy(); });
 
+        // Убираем # из URL при клике на якорные ссылки и при загрузке страницы
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
@@ -783,6 +769,11 @@
                 }
             });
         });
+
+        // Убираем хеш при загрузке страницы, если он есть
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
 
         function getVideoEmbed(platform, url) {
             if (!url) return '';
