@@ -625,7 +625,8 @@
         <div style="font-size:40px;margin-bottom:15px;">🔵</div>
         <h3 style="color:#fff;margin:0 0 15px;">Заявка принята!</h3>
         <p style="color:#B0B0C8;margin:0 0 20px;">Подпишитесь на сообщество, пока ожидаете связи:</p>
-        <a href="https://vk.ru/vk_prodvizenie_kristina" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в сообщество</a>
+        <!-- В ссылку добавляем параметр ref с ID заявки -->
+        <a id="vkPopupLink" href="#" target="_blank" style="display:block;background:#0077FF;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;font-weight:600;margin-bottom:15px;">Перейти в сообщество</a>
         <button onclick="closePopup('vkPopup')" style="background:none;border:none;color:#7A7A90;cursor:pointer;padding:8px 16px;">Закрыть</button>
       </div>
     </div>
@@ -743,7 +744,13 @@
             });
 
             if (res.ok) {
-              document.getElementById(platform === 'vk' ? 'vkPopup' : 'tgPopup').style.display = 'flex';
+              if (platform === 'vk') {
+                // Обновляем ссылку в VK-попапе
+                document.getElementById('vkPopupLink').href = `https://vk.ru/vk_prodvizenie_kristina?ref=${leadId}`;
+                document.getElementById('vkPopup').style.display = 'flex';
+              } else {
+                document.getElementById('tgPopup').style.display = 'flex';
+              }
               document.getElementById('lead-form').reset();
             } else {
               alert('Ошибка при отправке. Попробуйте ещё раз.');
